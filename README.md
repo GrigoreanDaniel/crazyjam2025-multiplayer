@@ -1,7 +1,7 @@
-#📁 Project Repository Guidelines
+📁 Project Repository Guidelines
 
-##Welcome to the project repository!
-##⚠️ Important Team Guidelines
+Welcome to the project repository!
+⚠️ Important Team Guidelines
 
 ###To ensure smooth collaboration and avoid conflicts, please follow these rules strictly:
 📢 Report Every Action
