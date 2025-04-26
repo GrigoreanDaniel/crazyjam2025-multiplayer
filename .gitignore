@@ -2,6 +2,12 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+# FMOD local working folders (ignore only user-specific editor files)
+/fmod_project_by_vort6/crazy_jam2025_project/.cache/
+/fmod_project_by_vort6/crazy_jam2025_project/.unsaved/
+/fmod_project_by_vort6/crazy_jam2025_project/.user/
+
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
