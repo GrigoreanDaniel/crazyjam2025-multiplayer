@@ -8,7 +8,7 @@ public class FirstPersonLook : MonoBehaviour {
     [SerializeField] private Transform playerBody;
 
     [Header("Settings")]
-    [SerializeField] private float mouseSensitivity = 100f;
+    [SerializeField] private float mouseSensitivity = 700f;
 
     private float xRotation = 0f;
 
