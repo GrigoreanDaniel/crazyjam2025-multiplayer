@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7556881974247105612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/music/ui/mus_theme
+  m_EditorClassIdentifier: 
+  Path: event:/music/ui/mus_theme
+  Guid:
+    Data1: -1258555040
+    Data2: 1314172698
+    Data3: 252967558
+    Data4: 1762151293
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6225507708479854523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/music/gameplay/mus_gameplay
+  m_EditorClassIdentifier: 
+  Path: event:/music/gameplay/mus_gameplay
+  Guid:
+    Data1: 998452894
+    Data2: 1140384720
+    Data3: 804699050
+    Data4: 1434052039
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5248947867077304495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_start_game
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_start_game
+  Guid:
+    Data1: -1163210088
+    Data2: 1250378737
+    Data3: 2005723582
+    Data4: 1135845100
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-3811897225350537130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: fmod_project_by_vort6/crazy_jam2025_project/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638812620958176313
+  FileSizes:
+  - Name: Desktop
+    Value: 1244
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -3811897225350537130}
+  - {fileID: 2301505079155918846}
+  EditorEvents:
+  - {fileID: 8717529303499345219}
+  - {fileID: 8095330083466543801}
+  - {fileID: -7556881974247105612}
+  - {fileID: 3996879353541840001}
+  - {fileID: -5248947867077304495}
+  - {fileID: -6225507708479854523}
+  - {fileID: 4970891812434635876}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 2301505079155918846}
+  StringsBanks:
+  - {fileID: -3811897225350537130}
+  cacheTime: 638812620958176313
+  cacheVersion: 131624
+--- !u!114 &2301505079155918846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: fmod_project_by_vort6/crazy_jam2025_project/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638812620958176313
+  FileSizes:
+  - Name: Desktop
+    Value: 6054
+  Exists: 1
+--- !u!114 &3996879353541840001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_back
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_back
+  Guid:
+    Data1: -1150451855
+    Data2: 1214484287
+    Data3: 1250144698
+    Data4: 2023551196
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4970891812434635876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_select
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_select
+  Guid:
+    Data1: -2049318183
+    Data2: 1205139559
+    Data3: -264067664
+    Data4: 685068930
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8095330083466543801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_navigation
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_navigation
+  Guid:
+    Data1: -2005290950
+    Data2: 1323366219
+    Data3: -1921302111
+    Data4: -854209963
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8717529303499345219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/gameplay_normal
+  m_EditorClassIdentifier: 
+  Path: snapshot:/gameplay_normal
+  Guid:
+    Data1: 1239151384
+    Data2: 1298707487
+    Data3: -127899464
+    Data4: -611589755
+  Banks:
+  - {fileID: 2301505079155918846}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
