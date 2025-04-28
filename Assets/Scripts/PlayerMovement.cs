@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour{
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
-    [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float rotationSpeed = 20f;
 
     [SerializeField] private Transform cameraTransform;
 
