@@ -14,7 +14,9 @@ public enum PlayerInput
 
 public struct NetworkInputData : INetworkInput
 {
-    public NetworkButtons Buttons;
-    public Vector2 direction;
+    public NetworkBool isJumpPressed;
+    public Vector2 movementInput;
+    public float rotationInput;
+
 }
 
