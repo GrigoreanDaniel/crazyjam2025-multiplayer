@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CharacterInputHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Vector2 moveInputVector = Vector2.zero;
 
     // Update is called once per frame
     void Update()
     {
-        
+        moveInputVector.x = Input.GetAxis("Horizontal");
+        moveInputVector.y = Input.GetAxis("Vertical");
     }
+
+    public NetworkInputData GetNetworkInputData()
+    {
+        NetworkInputData networkInputData = new NetworkInputData();
+        networkInputData.movementInput = moveInputVector;
+        networkInputData.isJumpPressed = Input.GetButton("Jump");
+        return networkInputData;
+    }
+
 }

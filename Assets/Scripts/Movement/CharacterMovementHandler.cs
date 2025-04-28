@@ -21,9 +21,6 @@ public class CharacterMovementHandler : NetworkBehaviour
 
             characterController.Move(moveDirection);
             //* 5f * Runner.DeltaTime
-
         }
     }
-
-
 }
