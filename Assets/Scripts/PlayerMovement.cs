@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour{
     [SerializeField] private float rotationSpeed = 10f;
 
     [SerializeField] private Transform cameraTransform;
-
+    // Random ass comment
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
