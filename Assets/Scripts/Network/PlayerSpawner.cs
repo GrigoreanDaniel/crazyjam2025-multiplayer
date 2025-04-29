@@ -9,6 +9,7 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
 
     [SerializeField] private NetworkPrefabRef playerPrefab;
+    CharacterInputHandler characterInputHandler;
     //[Networked, Capacity(6)] private NetworkDictionary<PlayerRef, Player> Players => default; // Dictionary to store players
 
     void INetworkRunnerCallbacks.OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -63,6 +64,17 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
     }*/
     void INetworkRunnerCallbacks.OnInput(NetworkRunner runner, NetworkInput input)
     {
+        if (characterInputHandler == null && NetworkPlayer.LocalPlayer != null)
+        {
+            // Get the CharacterInputHandler component from the player object
+            characterInputHandler = NetworkPlayer.LocalPlayer.GetComponent<CharacterInputHandler>();
+        }
+
+        if (characterInputHandler != null)
+        {
+            // Get the input data from the CharacterInputHandler and set it to the NetworkInput
+            input.Set(characterInputHandler.GetNetworkInputData());
+        }
 
     }
 
