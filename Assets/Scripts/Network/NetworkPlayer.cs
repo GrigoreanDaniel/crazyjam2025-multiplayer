@@ -11,11 +11,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
-    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
 
-    private bool isJumpPressed = false;
-    //[SerializeField] private Transform cameraTransform;
-    private CinemachineVirtualCamera cineMachinevirtualCamera;
+    private GameObject cam;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -41,14 +40,19 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
         else
         {
+            cam = Camera.main.gameObject;
+
             LocalPlayer = this;
-            cineMachinevirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
             if (cineMachinevirtualCamera != null)
             {
+                cineMachinevirtualCamera.Priority = 100;
                 cineMachinevirtualCamera.Follow = transform;
                 cineMachinevirtualCamera.LookAt = transform;
             }
+
+
+
             Debug.Log("spawned local Player.");
         }
 
@@ -72,13 +76,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             // Handle horizontal movement
             inputDirection = networkInputData.movementInput.normalized;
 
-            isJumpPressed = networkInputData.isJumpPressed;
-        }
-
-        if (Object.HasStateAuthority)
-        {
-            isGrounded = controller.isGrounded;
-
             if (isGrounded && velocity.y < 0)
             {
                 velocity.y = -2f;
@@ -86,9 +83,27 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             if (inputDirection.magnitude != 0f)
             {
+                // Handle jumping
+                if (isGrounded && networkInputData.isJumpPressed)
+                {
+                    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                }
+
+                // Apply gravity
+                velocity.y += gravity * Runner.DeltaTime;
+                controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
+            }
+        }
+
+        if (Object.HasStateAuthority)
+        {
+            isGrounded = controller.isGrounded;
+
+            if (inputDirection.magnitude != 0f)
+            {
                 //Get camera forward/right projected to horizontal plane
-                Vector3 camForward = cineMachinevirtualCamera.transform.forward;
-                Vector3 camRight = cineMachinevirtualCamera.transform.right;
+                Vector3 camForward = cam.transform.forward;
+                Vector3 camRight = cam.transform.right;
 
                 camForward.y = 0f;
                 camRight.y = 0f;
@@ -98,15 +113,9 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 Vector3 moveDirection = camForward * networkInputData.movementInput.y + camRight * networkInputData.movementInput.x;
                 controller.Move(moveDirection * moveSpeed * Runner.DeltaTime);
 
-                // Handle jumping
-                if (isGrounded && isJumpPressed)
-                {
-                    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                }
-
-                // Apply gravity
-                velocity.y += gravity * Time.deltaTime;
-                controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
+                // Smoothly rotate toward movement
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Runner.DeltaTime);
             }
         }
     }

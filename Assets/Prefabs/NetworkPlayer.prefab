@@ -185,8 +185,9 @@ GameObject:
   - component: {fileID: 8402087459724550308}
   - component: {fileID: 427490093180962254}
   - component: {fileID: -6730681433537860000}
+  - component: {fileID: 2149662246910894683}
   m_Layer: 0
-  m_Name: PlayerPrefab
+  m_Name: NetworkPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,6 +257,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 427490093180962254}
+  - {fileID: 2149662246910894683}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &427490093180962254
 MonoBehaviour:
@@ -272,8 +274,8 @@ MonoBehaviour:
   moveSpeed: 6
   gravity: -9.81
   jumpHeight: 1.5
-  rotationSpeed: 20
-  cameraTransform: {fileID: 0}
+  rotationSpeed: 5
+  cineMachinevirtualCamera: {fileID: 2453109892710991329}
 --- !u!114 &-6730681433537860000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +291,23 @@ MonoBehaviour:
   moveInputVector: {x: 0, y: 0}
   isJumpPressed:
     _value: 0
+--- !u!114 &2149662246910894683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583425924211564122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &6364935096698897492
 GameObject:
   m_ObjectHideFlags: 0
