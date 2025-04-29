@@ -12,6 +12,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float rotationSpeed = 20f;
+
+    private bool isJumpPressed = false;
     //[SerializeField] private Transform cameraTransform;
     private CinemachineVirtualCamera cineMachinevirtualCamera;
 
@@ -63,51 +65,48 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void FixedUpdateNetwork()
     {
+        Vector3 inputDirection = Vector3.zero;
+
+        if (GetInput(out NetworkInputData networkInputData))
+        {
+            // Handle horizontal movement
+            inputDirection = networkInputData.movementInput.normalized;
+
+            isJumpPressed = networkInputData.isJumpPressed;
+        }
+
         if (Object.HasStateAuthority)
         {
             isGrounded = controller.isGrounded;
 
             if (isGrounded && velocity.y < 0)
             {
-
                 velocity.y = -2f;
             }
-        }
 
-        if (GetInput(out NetworkInputData networkInputData))
-        {
-            // Handle horizontal movement
-
-            Vector3 inputDirection = networkInputData.movementInput.normalized;
-
-            if (inputDirection.magnitude >= 0.1f)
+            if (inputDirection.magnitude != 0f)
             {
-                /*// Get camera forward/right projected to horizontal plane
-                Vector3 camForward = Camera.main.transform.forward;
-                Vector3 camRight = Camera.main.transform.right;
+                //Get camera forward/right projected to horizontal plane
+                Vector3 camForward = cineMachinevirtualCamera.transform.forward;
+                Vector3 camRight = cineMachinevirtualCamera.transform.right;
 
                 camForward.y = 0f;
                 camRight.y = 0f;
                 camForward.Normalize();
-                camRight.Normalize();*/
+                camRight.Normalize();
 
-                Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x; ;
-                moveDirection.Normalize();
+                Vector3 moveDirection = camForward * networkInputData.movementInput.y + camRight * networkInputData.movementInput.x;
                 controller.Move(moveDirection * moveSpeed * Runner.DeltaTime);
 
-                // Smoothly rotate toward movement
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Runner.DeltaTime * rotationSpeed);
                 // Handle jumping
-                if (networkInputData.isJumpPressed && isGrounded)
+                if (isGrounded && isJumpPressed)
                 {
                     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 }
 
                 // Apply gravity
-                velocity.y += gravity * Runner.DeltaTime;
-                controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
-
+                velocity.y += gravity * Time.deltaTime;
+                controller.Move(new Vector3(0, velocity.y, 0) * Time.deltaTime);
             }
         }
     }
