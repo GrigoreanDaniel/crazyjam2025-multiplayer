@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
+
 
 public class CharacterInputHandler : MonoBehaviour
 {
-    Vector2 moveInputVector = Vector2.zero;
+    public Vector2 moveInputVector;
+    public NetworkBool isJumpPressed;
 
     // Update is called once per frame
     void Update()
@@ -16,9 +19,10 @@ public class CharacterInputHandler : MonoBehaviour
     public NetworkInputData GetNetworkInputData()
     {
         NetworkInputData networkInputData = new NetworkInputData();
+
         networkInputData.movementInput = moveInputVector;
         networkInputData.isJumpPressed = Input.GetButton("Jump");
+
         return networkInputData;
     }
-
 }

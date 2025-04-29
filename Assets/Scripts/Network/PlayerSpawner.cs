@@ -5,14 +5,13 @@ using Fusion.Sockets;
 using UnityEngine;
 
 
-public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
+public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
 {
-
     [SerializeField] private NetworkPrefabRef playerPrefab;
-    CharacterInputHandler characterInputHandler;
+    private CharacterInputHandler characterInputHandler;
     //[Networked, Capacity(6)] private NetworkDictionary<PlayerRef, Player> Players => default; // Dictionary to store players
 
-    void INetworkRunnerCallbacks.OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (runner.IsServer)
         {
@@ -26,19 +25,15 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    void INetworkRunnerCallbacks.OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         if (!runner.IsServer)
         {
             return;
         }
 
-        // Clean up the player object when they leave
-        //CleanupPlayer(runner, player);
+
     }
-
-
-
     /// <summary>
     /// Method to spawn a player prefab
     /// </summary>
@@ -52,17 +47,7 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
         var playerObject = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
         //Players.Add(player, playerObject.GetComponent<Player>()); // Add the player to the dictionary
     }
-
-    // Method to clean up a player when they leave
-    /*private void CleanupPlayer(NetworkRunner runner, PlayerRef player)
-    {
-        if (Players.TryGet(player, out Player playerBehaviour))
-        {
-            Players.Remove(player);
-            runner.Despawn(playerBehaviour.Object); // Despawn the player's object
-        }
-    }*/
-    void INetworkRunnerCallbacks.OnInput(NetworkRunner runner, NetworkInput input)
+    public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         if (characterInputHandler == null && NetworkPlayer.LocalPlayer != null)
         {
@@ -75,16 +60,12 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
             // Get the input data from the CharacterInputHandler and set it to the NetworkInput
             input.Set(characterInputHandler.GetNetworkInputData());
         }
-
     }
-
-
 
     void INetworkRunnerCallbacks.OnConnectedToServer(NetworkRunner runner)
     {
         Debug.Log("Connected to server.");
     }
-
 
     void INetworkRunnerCallbacks.OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
     {

@@ -19,8 +19,8 @@ public class CharacterMovementHandler : NetworkBehaviour
             Vector3 moveDirection = transform.forward * networkInputData.movementInput.y + transform.right * networkInputData.movementInput.x;
             moveDirection.Normalize();
 
-            characterController.Move(moveDirection);
-            //* 5f * Runner.DeltaTime
+            characterController.Move(moveDirection * 5f * Runner.DeltaTime);
+
         }
     }
 }
