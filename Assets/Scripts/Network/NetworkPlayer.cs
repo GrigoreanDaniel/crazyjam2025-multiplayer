@@ -73,11 +73,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             // Handle horizontal movement
             inputDirection = networkInputData.movementInput.normalized;
 
-            if (isGrounded && velocity.y < 0)
-            {
-                velocity.y = -2f;
-            }
-
             if (inputDirection.magnitude != 0f)
             {
                 // Handle jumping
@@ -85,16 +80,17 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 {
                     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 }
-
-                // Apply gravity
-                velocity.y += gravity * Runner.DeltaTime;
-                controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
             }
         }
 
         if (Object.HasStateAuthority)
         {
             isGrounded = controller.isGrounded;
+
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
 
             if (inputDirection.magnitude != 0f)
             {
@@ -114,6 +110,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Runner.DeltaTime);
             }
+
+            // Apply gravity
+            velocity.y += gravity * Runner.DeltaTime;
+            controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
         }
     }
 }
