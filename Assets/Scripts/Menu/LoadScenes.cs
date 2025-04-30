@@ -9,25 +9,13 @@ public static class LoadScenes
     {
         MainMenu,
         Lobby,
-        Game,
         Loading,
-        CharacterSelection,
+        Game,
     }
 
     private static Scene targetScene;
 
     public static void ChangeScene(Scene targetScene)
-    {
-        SceneManager.LoadScene(targetScene.ToString());
-    }
-
-    //method to load a scene
-    public static void LoadTagetScene(Scene targetScene)
-    {
-        //SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
-    }
-
-    public static void LoaderCallback()
     {
         SceneManager.LoadScene(targetScene.ToString());
     }

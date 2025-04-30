@@ -21,7 +21,7 @@ public class NetworkRunnerHandler : MonoBehaviour
         if (networkRunner == null)
         {
             networkRunner = Instantiate(networkRunnerPrefab);
-            networkRunner.name = "NetworkRunner"; // Set the name of the NetworkRunner
+            networkRunner.name = "Network Runner"; // Set the name of the NetworkRunner
         }
 
         var clientTask = InitializeNetworkRunner(

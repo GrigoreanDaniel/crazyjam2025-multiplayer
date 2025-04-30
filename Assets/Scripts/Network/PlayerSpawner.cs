@@ -8,8 +8,9 @@ using UnityEngine;
 public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef playerPrefab;
+    [Networked, Capacity(6)] private NetworkDictionary<PlayerRef, NetworkPlayer> PlayersConnected => default; // Dictionary to store players
     private CharacterInputHandler characterInputHandler;
-    //[Networked, Capacity(6)] private NetworkDictionary<PlayerRef, Player> Players => default; // Dictionary to store players
+
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
@@ -31,6 +32,9 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
         {
             return;
         }
+        {
+            PlayersConnected.Remove(player);
+        }
 
 
     }
@@ -45,7 +49,7 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
         var spawnRotation = Quaternion.identity; // Set spawn rotation as needed
 
         var playerObject = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
-        //Players.Add(player, playerObject.GetComponent<Player>()); // Add the player to the dictionary
+        PlayersConnected.Add(player, playerObject.GetComponent<NetworkPlayer>()); // Add the player to the dictionary
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {

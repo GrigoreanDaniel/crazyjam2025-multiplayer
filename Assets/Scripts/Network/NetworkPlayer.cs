@@ -7,12 +7,13 @@ using UnityEngine;
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
     public static NetworkPlayer LocalPlayer { get; private set; }
-
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
+
+    CinemachineBrain cinemachineBrain;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -40,6 +41,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         {
 
             LocalPlayer = this;
+
+            cinemachineBrain = FindObjectOfType<CinemachineBrain>();
 
             if (cineMachinevirtualCamera != null)
             {
@@ -114,6 +117,15 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             // Apply gravity
             velocity.y += gravity * Runner.DeltaTime;
             controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
+        }
+    }
+
+    public override void Render()
+    {
+        if (Object.HasInputAuthority)
+        {
+            cinemachineBrain.ManualUpdate();
+            cineMachinevirtualCamera.UpdateCameraState(Vector3.up, Runner.LocalAlpha);
         }
     }
 }
