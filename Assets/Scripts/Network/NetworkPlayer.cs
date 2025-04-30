@@ -14,8 +14,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
 
-    private GameObject cam;
-
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
@@ -40,7 +38,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
         else
         {
-            cam = Camera.main.gameObject;
 
             LocalPlayer = this;
 
@@ -102,8 +99,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             if (inputDirection.magnitude != 0f)
             {
                 //Get camera forward/right projected to horizontal plane
-                Vector3 camForward = cam.transform.forward;
-                Vector3 camRight = cam.transform.right;
+                Vector3 camForward = cineMachinevirtualCamera.transform.forward;
+                Vector3 camRight = cineMachinevirtualCamera.transform.right;
 
                 camForward.y = 0f;
                 camRight.y = 0f;
