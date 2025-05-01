@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   digDuration: 5
-  cooldownDuration: 2
+  cooldownDuration: 10
   digKey: 114
   digVisuals: {fileID: 4244433785899383204}
 --- !u!114 &4244433785899383204
