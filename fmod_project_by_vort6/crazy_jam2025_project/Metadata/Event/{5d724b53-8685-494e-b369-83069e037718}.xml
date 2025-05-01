@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{5d724b53-8685-494e-b369-83069e037718}">
 		<property name="color">
-			<value>Green</value>
+			<value>Purple</value>
 		</property>
 		<property name="name">
 			<value>sfx_silent_glide</value>

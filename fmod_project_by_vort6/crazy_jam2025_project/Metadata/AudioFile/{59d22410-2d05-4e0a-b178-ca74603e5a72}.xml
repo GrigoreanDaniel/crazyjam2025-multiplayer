@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{59d22410-2d05-4e0a-b178-ca74603e5a72}">
+		<property name="assetPath">
+			<value>01_mus_gp_tension_2_2.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>144</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bea99459-23e2-448a-a816-8d8bdf6a79c6}</destination>
+		</relationship>
+	</object>
+</objects>
