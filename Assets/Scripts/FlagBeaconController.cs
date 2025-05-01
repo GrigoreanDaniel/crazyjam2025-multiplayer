@@ -53,4 +53,10 @@ public class FlagBeaconController : MonoBehaviour {
                 runtimeMat.SetColor("_EmissionColor", color * 2f); // Optional glow
         }
     }
+
+    public void DisableBeacon() {
+        if (beaconVisual != null)
+            beaconVisual.SetActive(false);
+    }
+
 }

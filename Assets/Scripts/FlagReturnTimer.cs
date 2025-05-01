@@ -43,7 +43,9 @@ public class FlagReturnTimer : MonoBehaviour {
 
         if (beaconController != null) {
             beaconController.DetachFromCarrier(spawnPosition);
+            beaconController.DisableBeacon();
         }
+
 
         FindObjectOfType<FlagUIFeedbackManager>()?.ShowMessage("Flag Returned to Base");
         // Reset local state if needed (optional)
