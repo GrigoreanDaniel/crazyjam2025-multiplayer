@@ -8,6 +8,7 @@ public class JailUIManager : MonoBehaviour{
     [Header("UI Elements")]
     [SerializeField] private GameObject jailMessagePanel; // Parent object or just the "You are Jailed!" text
     [SerializeField] private TMP_Text jailTimerText;
+    [SerializeField] private TMP_Text jailReasonText;
 
     private bool isJailed = false;
     private float jailTimeRemaining = 0f;
@@ -26,24 +27,28 @@ public class JailUIManager : MonoBehaviour{
         UpdateJailTimerText();
     }
 
-    public void ShowJailUI(float duration){
-
+    public void ShowJailUI(float duration, string reason) {
         isJailed = true;
         jailTimeRemaining = duration;
 
         if (jailMessagePanel != null) jailMessagePanel.SetActive(true);
         if (jailTimerText != null) jailTimerText.gameObject.SetActive(true);
+        if (jailReasonText != null) {
+            jailReasonText.gameObject.SetActive(true);
+            jailReasonText.text = (reason == "Trap") ? "Bear Trap!" : "Jail Time!";
+        }
 
         UpdateJailTimerText();
     }
 
-    public void HideJailUI(){
-
+    public void HideJailUI() {
         isJailed = false;
 
         if (jailMessagePanel != null) jailMessagePanel.SetActive(false);
         if (jailTimerText != null) jailTimerText.gameObject.SetActive(false);
+        if (jailReasonText != null) jailReasonText.gameObject.SetActive(false);
     }
+
 
     private void UpdateJailTimerText(){
 

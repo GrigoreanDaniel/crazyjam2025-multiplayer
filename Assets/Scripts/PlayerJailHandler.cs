@@ -10,6 +10,7 @@ public class PlayerJailHandler : MonoBehaviour{
 
     private bool isJailed = false;
     private float jailTimer = 0f;
+    private string jailReason = "Jail"; // default
 
     private PlayerMovement playerMovement; // No SerializeField, handled automatically
 
@@ -38,29 +39,21 @@ public class PlayerJailHandler : MonoBehaviour{
         }
     }
 
-    public void TriggerJail(){
-
+    public void TriggerJail(string reason = "Jail") {
         if (isJailed) return;
 
+        jailReason = reason;
         isJailed = true;
         jailTimer = jailDuration;
         playerMovement.enabled = false;
 
-        // Drop flag if holding one
-        if (flagPickupHandler != null) {
-            Debug.Log("Jail: flagPickupHandler is on object: " + flagPickupHandler.gameObject.name);
+        if (flagPickupHandler != null)
             flagPickupHandler.DropFlag(transform.position);
-        } else {
-            Debug.LogWarning("Jail: No FlagPickupHandler assigned!");
-        }
 
-
-
-        if (jailUIManager != null){
-
-            jailUIManager.ShowJailUI(jailDuration);
-        }
+        if (jailUIManager != null)
+            jailUIManager.ShowJailUI(jailDuration, jailReason);
     }
+
 
     private void ReleaseFromJail(){
 
