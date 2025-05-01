@@ -6,6 +6,7 @@ public class PlayerJailHandler : MonoBehaviour{
 
     [SerializeField] private JailUIManager jailUIManager;
     [SerializeField] private float jailDuration = 10f;
+    [SerializeField] private FlagPickupHandler flagPickupHandler;
 
     private bool isJailed = false;
     private float jailTimer = 0f;
@@ -44,6 +45,16 @@ public class PlayerJailHandler : MonoBehaviour{
         isJailed = true;
         jailTimer = jailDuration;
         playerMovement.enabled = false;
+
+        // Drop flag if holding one
+        if (flagPickupHandler != null) {
+            Debug.Log("Jail: flagPickupHandler is on object: " + flagPickupHandler.gameObject.name);
+            flagPickupHandler.DropFlag(transform.position);
+        } else {
+            Debug.LogWarning("Jail: No FlagPickupHandler assigned!");
+        }
+
+
 
         if (jailUIManager != null){
 

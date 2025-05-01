@@ -1,14 +1,18 @@
 using UnityEngine;
 using System;
 
-public class FlagPickupHandler : MonoBehaviour{
-
+public class FlagPickupHandler : MonoBehaviour {
     [Header("Flag Settings")]
     [SerializeField] private GameObject crownObject; // The flame/crown visual
     [SerializeField] private float pickupCooldown = 5f;
 
     [Header("Mount Point")]
     [SerializeField] private Transform crownMountPoint; // Where to attach crown
+
+    [Header("Beacon Control")]
+    [SerializeField] private FlagBeaconController beaconController;
+
+    [SerializeField] private FlagReturnTimer returnTimer;
 
     [Header("Optional Events")]
     public Action OnFlagPickedUp;
@@ -18,48 +22,82 @@ public class FlagPickupHandler : MonoBehaviour{
     private bool isPickupAvailable = true;
     private float cooldownTimer = 0f;
 
-    private void Update(){
-
-        if (!isPickupAvailable){
-
+    private void Update() {
+        if (!isPickupAvailable) {
             cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0f){
-
+            if (cooldownTimer <= 0f) {
                 isPickupAvailable = true;
                 OnFlagAvailable?.Invoke();
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other){
-
+    private void OnTriggerEnter(Collider other) {
         if (!isPickupAvailable || isFlagHeld) return;
 
-        if (other.CompareTag("Player")){
-
+        if (other.CompareTag("Player")) {
             AttachCrownToPlayer(other.transform);
         }
     }
 
-    private void AttachCrownToPlayer(Transform player){
-
+    private void AttachCrownToPlayer(Transform player) {
         // Look for mount point inside player
         Transform mount = player.Find("Crown Mount Point");
-        if (mount == null){
-
+        if (mount == null) {
             Debug.LogWarning("Player is missing a Crown Mount Point.");
             return;
         }
 
+        // Move crown to player
         crownObject.transform.SetParent(mount);
         crownObject.transform.localPosition = Vector3.zero;
         crownObject.transform.localRotation = Quaternion.identity;
+
+        // Beacon follows the player
+        if (beaconController != null) {
+            beaconController.AttachToCarrier(player);
+        }
+
+        FindObjectOfType<FlagUIFeedbackManager>()?.ShowMessage("Flag Picked Up!");
+
+        Debug.Log("ATTACHING crown to player: " + player.name);
 
         isFlagHeld = true;
         isPickupAvailable = false;
         cooldownTimer = pickupCooldown;
 
         OnFlagPickedUp?.Invoke();
-        //gameObject.SetActive(false); // Disable pickup trigger
+
+        // Cancel return timer when picked up
+        FindObjectOfType<FlagReturnTimer>()?.CancelReturnCountdown();
     }
+
+    public void DropFlag(Vector3 dropPosition) {
+        if (!isFlagHeld) {
+            Debug.LogWarning("Tried to drop flag, but isFlagHeld == false");
+            return;
+        }
+
+        Debug.Log("Dropping flag at: " + dropPosition);
+
+        // Unparent the crown
+        crownObject.transform.SetParent(null);
+        crownObject.transform.position = dropPosition;
+
+        if (beaconController != null) {
+            beaconController.DetachFromCarrier(dropPosition);
+        }
+
+        isFlagHeld = false;
+        isPickupAvailable = false;
+        cooldownTimer = pickupCooldown;
+
+        OnFlagAvailable?.Invoke();
+
+        // Start return timer
+        FindObjectOfType<FlagReturnTimer>()?.StartReturnCountdown();
+
+    }
+
+
 }
