@@ -382,6 +382,11 @@ GameObject:
   - component: {fileID: 9030981003190412246}
   - component: {fileID: 4949405763148907206}
   - component: {fileID: 6278906443290626181}
+  - component: {fileID: 7048398331537378554}
+  - component: {fileID: 7690177162308604073}
+  - component: {fileID: 4008696304496982083}
+  - component: {fileID: 3104722026497805059}
+  - component: {fileID: 4244433785899383204}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -426,6 +431,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   rotationSpeed: 10
   cameraTransform: {fileID: 2437908312619655547}
+  moleDigAbility: {fileID: 3104722026497805059}
 --- !u!114 &4949405763148907206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +472,94 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7048398331537378554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772102346019820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290ea6e803c0082409167334e463b88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sonarRadius: 20
+  revealDuration: 3
+  cooldownDuration: 10
+  activateKey: 113
+  pulseGizmoColor: {r: 0, g: 1, b: 1, a: 0.25}
+--- !u!114 &7690177162308604073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772102346019820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5954ba45f9f15a645a0dca0c4ec09ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decoyWalkerPrefab: {fileID: 1985590811032793982, guid: 40ce8b93c0423554ca66b0080410e3b8,
+    type: 3}
+  activateKey: 101
+  cooldownDuration: 6
+  spawnOffset: {x: 0, y: 0, z: 1.5}
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &4008696304496982083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772102346019820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e799ae828b24e34b9bb435973bf896b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepPrefab: {fileID: 2463887390924914423, guid: 416d809160542cf418fdbdbf164dd410,
+    type: 3}
+  stepInterval: 0.4
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &3104722026497805059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772102346019820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86ed6dc63844214bb3899c31111860a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  digDuration: 5
+  cooldownDuration: 2
+  digKey: 114
+  digVisuals: {fileID: 4244433785899383204}
+--- !u!114 &4244433785899383204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2772102346019820400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a5a0ec5a7789c4eb57b4a1acaeb04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMesh: {fileID: 1745351327728029498}
+  footsteps: {fileID: 2463887390924914423, guid: 416d809160542cf418fdbdbf164dd410,
+    type: 3}
+  digFX: {fileID: 0}
+  digAudio: {fileID: 0}
+  sonarComponent: {fileID: 7048398331537378554}
 --- !u!1 &4116236943440198071
 GameObject:
   m_ObjectHideFlags: 3

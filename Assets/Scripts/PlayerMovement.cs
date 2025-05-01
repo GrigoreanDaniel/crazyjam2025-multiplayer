@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour{
     [SerializeField] private float rotationSpeed = 20f;
 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private MoleDigAbility moleDigAbility;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour{
         }
 
         // Handle jumping
-        if (Input.GetButtonDown("Jump") && isGrounded){
+        if (Input.GetButtonDown("Jump") && isGrounded && !moleDigAbility.IsDigging) {
 
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
