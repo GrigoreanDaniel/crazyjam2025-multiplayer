@@ -71,4 +71,9 @@ public class PlayerJailHandler : MonoBehaviour{
             jailUIManager.HideJailUI();
         }
     }
+
+    public void AssignFlagReference(FlagPickupHandler handler) {
+        flagPickupHandler = handler;
+    }
+
 }

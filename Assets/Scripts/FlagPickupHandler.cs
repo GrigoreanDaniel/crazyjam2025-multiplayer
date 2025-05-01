@@ -22,6 +22,12 @@ public class FlagPickupHandler : MonoBehaviour {
     private bool isPickupAvailable = true;
     private float cooldownTimer = 0f;
 
+    private Vector3 spawnPosition;
+
+    private void Start() {
+        spawnPosition = transform.position;
+    }
+
     private void Update() {
         if (!isPickupAvailable) {
             cooldownTimer -= Time.deltaTime;
@@ -68,6 +74,17 @@ public class FlagPickupHandler : MonoBehaviour {
 
         OnFlagPickedUp?.Invoke();
 
+        PlayerFlagInput input = player.GetComponent<PlayerFlagInput>();
+        if (input != null) {
+            input.AssignFlagReference(this); // `this` = this instance of FlagPickupHandler
+        }
+
+        PlayerJailHandler jail = player.GetComponent<PlayerJailHandler>();
+        if (jail != null) {
+            jail.AssignFlagReference(this);
+        }
+
+
         // Cancel return timer when picked up
         FindObjectOfType<FlagReturnTimer>()?.CancelReturnCountdown();
     }
@@ -99,5 +116,12 @@ public class FlagPickupHandler : MonoBehaviour {
 
     }
 
+    public bool IsFlagHeld() {
+        return isFlagHeld;
+    }
+
+    public Vector3 GetSpawnPosition() {
+        return spawnPosition; // You may need to define this
+    }
 
 }
