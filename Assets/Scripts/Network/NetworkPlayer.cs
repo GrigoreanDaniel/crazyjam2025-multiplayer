@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
 using Fusion;
+using Fusion.Sockets;
+using System;
 using UnityEngine;
+using TMPro;
+using Cinemachine;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
+    [SerializeField] TextMeshProUGUI playerNameText;
     public static NetworkPlayer LocalPlayer { get; private set; }
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
@@ -16,6 +18,9 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+
+    [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
+    public NetworkString<_16> playerNickName { get; set; }
 
     // Start is called before the first frame update
     void Awake()
@@ -46,6 +51,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 cineMachinevirtualCamera.LookAt = transform;
             }
 
+            RPC_SetPlayerName(PlayerPrefs.GetString("PlayerName"));
             Debug.Log("spawned local Player.");
         }
         transform.name = $"P_{Object.Id}";
@@ -118,5 +124,18 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             cinemachineBrain.ManualUpdate();
             cineMachinevirtualCamera.UpdateCameraState(Vector3.up, Runner.LocalAlpha);
         }
+    }
+
+    private void OnPlayerNameChanged()
+    {
+        Debug.Log($"Player name changed to {playerNickName} for player {gameObject.name}");
+        playerNameText.text = playerNickName.ToString();
+    }
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    public void RPC_SetPlayerName(string playerName, RpcInfo info = default)
+    {
+        playerNickName = playerName;
+        Debug.Log($"[RPC] set nickname {playerNickName}");
     }
 }
