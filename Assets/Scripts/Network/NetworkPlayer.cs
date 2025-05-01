@@ -12,9 +12,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
-
     CinemachineBrain cinemachineBrain;
-
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
@@ -29,7 +27,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         controller = GetComponent<CharacterController>();
     }
 
-
     public override void Spawned()
     {
         if (!Object.HasInputAuthority)
@@ -39,9 +36,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
         else
         {
-
             LocalPlayer = this;
-
             cinemachineBrain = FindObjectOfType<CinemachineBrain>();
 
             if (cineMachinevirtualCamera != null)
@@ -51,11 +46,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 cineMachinevirtualCamera.LookAt = transform;
             }
 
-
-
             Debug.Log("spawned local Player.");
         }
-
         transform.name = $"P_{Object.Id}";
     }
 
@@ -113,7 +105,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Runner.DeltaTime);
             }
-
             // Apply gravity
             velocity.y += gravity * Runner.DeltaTime;
             controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
