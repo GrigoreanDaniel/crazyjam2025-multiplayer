@@ -3,8 +3,9 @@ using UnityEngine;
 public class FlagBeaconController : MonoBehaviour {
     [Header("Beacon Settings")]
     [SerializeField] private GameObject beaconVisual;
-    [SerializeField] private Color teamColor = Color.white;
     [SerializeField] private float followYOffset = 2.5f;
+
+    [SerializeField] private bool showBeaconWhenDropped = true;
 
     [Header("Tracking")]
     [SerializeField] private bool followCarrier = false;
@@ -12,8 +13,7 @@ public class FlagBeaconController : MonoBehaviour {
 
     private void Start() {
         if (beaconVisual != null) {
-            SetBeaconColor(teamColor);
-            // beaconVisual.SetActive(true);
+            beaconVisual.SetActive(false); // Beacon hidden by default
         }
     }
 
@@ -38,13 +38,19 @@ public class FlagBeaconController : MonoBehaviour {
         transform.position = flagGroundPosition;
 
         if (beaconVisual != null)
-            beaconVisual.SetActive(true); // Still visible on ground
+            beaconVisual.SetActive(showBeaconWhenDropped);
     }
 
-
-    private void SetBeaconColor(Color color) {
+    public void SetBeaconColor(Color color) {
         if (beaconVisual.TryGetComponent<Renderer>(out Renderer renderer)) {
-            renderer.material.color = color;
+            Material runtimeMat = renderer.material; // Make sure it's a unique instance
+
+            // Set for URP Lit Shader
+            if (runtimeMat.HasProperty("_BaseColor"))
+                runtimeMat.SetColor("_BaseColor", color);
+
+            if (runtimeMat.HasProperty("_EmissionColor"))
+                runtimeMat.SetColor("_EmissionColor", color * 2f); // Optional glow
         }
     }
 }

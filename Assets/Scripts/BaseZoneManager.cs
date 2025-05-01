@@ -79,6 +79,11 @@ public class BaseZoneManager : MonoBehaviour {
             if (flag != null) {
                 flag.InitializeFlag(teamTag, teamFlagMat);
             }
+
+            FlagBeaconController beacon = spawnedFlag.GetComponentInChildren<FlagBeaconController>();
+            if (beacon != null) {
+                beacon.SetBeaconColor(teamMat.color);
+            }
         }
 
         baseRef = spawnedBase;
