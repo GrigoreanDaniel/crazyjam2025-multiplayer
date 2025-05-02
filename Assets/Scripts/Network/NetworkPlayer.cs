@@ -1,10 +1,7 @@
 using Fusion;
-using Fusion.Sockets;
-using System;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
-using ExitGames.Client.Photon.StructWrapping;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
@@ -22,9 +19,8 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
     [SerializeField] public NetworkString<_16> PlayerNickName { get; set; }
-    //private ChangeDetector _changeDetector;
 
-
+    [Networked] public int PlayerToken { get; set; }
 
     // Start is called before the first frame update
     void Awake()
@@ -42,7 +38,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         {
             LocalPlayer = this;
             cinemachineBrain = FindObjectOfType<CinemachineBrain>();
-            //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+
 
             if (cineMachinevirtualCamera != null)
             {
@@ -130,11 +126,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             cinemachineBrain.ManualUpdate();
             cineMachinevirtualCamera.UpdateCameraState(Vector3.up, Runner.LocalAlpha);
         }
-    }
-
-    static void OnPlayerNameChanged(ChangeDetector changed)
-    {
-        changed.Get<NetworkPlayer>().OnPlayerNameChanged();
     }
 
     private void OnPlayerNameChanged()

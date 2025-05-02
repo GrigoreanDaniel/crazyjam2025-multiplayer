@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: -6730681433537860000}
   - component: {fileID: 2149662246910894683}
   m_Layer: 0
-  m_Name: backup
+  m_Name: Backup
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 531059921
+  SortKey: 1253401172
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []

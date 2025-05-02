@@ -5,12 +5,34 @@ using Fusion.Sockets;
 using UnityEngine;
 
 
-public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
+public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    [SerializeField] private NetworkPrefabRef playerPrefab;
-    //[Networked, Capacity(6)] private NetworkDictionary<PlayerRef, NetworkPlayer> PlayersConnected => default; // Dictionary to store players
+    [SerializeField] private NetworkPlayer playerPrefab;
+    private readonly Dictionary<int, NetworkPlayer> mapTokenIdWithNetworkPlayer = new Dictionary<int, NetworkPlayer>(); // Dictionary to store players
     private CharacterInputHandler characterInputHandler;
 
+    private int GetPlayerToken(NetworkRunner runner, PlayerRef player)
+    {
+        if (runner.LocalPlayer == player)
+        {
+            return ConnectionTokenUtils.HashToken(GameManager.Instance.GetPlayerConnectionToken());
+        }
+        else
+        {
+            var token = runner.GetPlayerConnectionToken(player);
+
+            if (token != null)
+                return ConnectionTokenUtils.HashToken(token);
+
+            Debug.LogError("Player token is null for player: " + player);
+            return 0; // Return an invalid token if null
+        }
+    }
+
+    public void SetConnectionTokenMapping(int token, NetworkPlayer player)
+    {
+        mapTokenIdWithNetworkPlayer.Add(token, player); // Add the player to the dictionary
+    }
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
@@ -35,8 +57,6 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
         {
             //PlayersConnected.Remove(player);
         }
-
-
     }
     /// <summary>
     /// Method to spawn a player prefab
@@ -45,11 +65,26 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
     /// <param name="player"></param>
     private void SpawnPlayer(NetworkRunner runner, PlayerRef player)
     {
+        int playerToken = GetPlayerToken(runner, player); // Get the player token
         var spawnPosition = new Vector3(0, 0, 0); // Set spawn position as needed
         var spawnRotation = Quaternion.identity; // Set spawn rotation as needed
 
-        var playerObject = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
-        //PlayersConnected.Add(player, playerObject.GetComponent<NetworkPlayer>()); // Add the player to the dictionary
+        Debug.Log("Spawning player with token: " + playerToken);
+
+        if (mapTokenIdWithNetworkPlayer.TryGetValue(playerToken, out NetworkPlayer networkPlayer))
+        {
+            Debug.Log("Player already exists in the dictionary. Player ID: " + playerToken);
+
+            networkPlayer.Object.AssignInputAuthority(player); // Set input authority for the player object
+        }
+        else
+        {
+            NetworkPlayer newNetworkPlayer = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
+            newNetworkPlayer.PlayerToken = playerToken; // Set the player token
+            mapTokenIdWithNetworkPlayer.Add(playerToken, newNetworkPlayer); // Add the player to the dictionary
+
+            Debug.Log("Spawning new player. Player ID: " + playerToken);
+        }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -91,9 +126,12 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
         Debug.Log("Disconnected from server: " + reason);
     }
 
-    void INetworkRunnerCallbacks.OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
+        Debug.Log("OnHostMigration started.");
+        await runner.Shutdown(shutdownReason: ShutdownReason.HostMigration);
 
+        FindObjectOfType<NetworkRunnerHandler>().StartHostMigration(hostMigrationToken);
     }
 
 
