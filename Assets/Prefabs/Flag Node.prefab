@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 593417121474788763}
   - component: {fileID: 2910110542233656289}
   - component: {fileID: 2755936632214536047}
+  - component: {fileID: 6275868218018849809}
   m_Layer: 7
   m_Name: Flag Node
   m_TagString: Flag
@@ -90,8 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beaconVisual: {fileID: 5074447950741301268}
-  teamColor: {r: 0.086507656, g: 0.3299011, b: 0.6792453, a: 1}
   followYOffset: 2.5
+  showBeaconWhenDropped: 1
   followCarrier: 0
 --- !u!114 &2910110542233656289
 MonoBehaviour:
@@ -123,6 +124,19 @@ MonoBehaviour:
   teamTag: 
   flagRenderer: {fileID: 3393776256883418673}
   yOffset: -2.5
+--- !u!114 &6275868218018849809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4084108495152842369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f22df350e79cc447b063c98f543ffef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamTag: TeamA
 --- !u!1 &4418133867346046444
 GameObject:
   m_ObjectHideFlags: 0

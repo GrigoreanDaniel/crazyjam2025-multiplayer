@@ -72,6 +72,18 @@ public class FlagPickupHandler : MonoBehaviour {
         isPickupAvailable = false;
         cooldownTimer = pickupCooldown;
 
+        var playerTeam = player.GetComponent<TeamIdentifier>()?.TeamTag;
+        var flagTeam = GetComponent<TeamIdentifier>()?.TeamTag;
+
+        Material mat = GetComponent<TeamFlag>().GetMaterial();
+        Color teamColor = mat.color; // already correct
+
+        if (playerTeam == flagTeam)
+            FlagUIFeedbackManager.Instance.ShowMessage("You picked up your flag!", teamColor);
+        else
+            FlagUIFeedbackManager.Instance.ShowMessage("You picked up enemy's flag!", teamColor);
+
+
         OnFlagPickedUp?.Invoke();
 
         PlayerFlagInput input = player.GetComponent<PlayerFlagInput>();

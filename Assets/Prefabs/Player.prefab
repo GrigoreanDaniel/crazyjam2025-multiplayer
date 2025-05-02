@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 496757505080508753}
   - component: {fileID: 6431310258960614353}
   - component: {fileID: 4615209602092206220}
+  - component: {fileID: 4343910490622783047}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -515,6 +516,19 @@ MonoBehaviour:
   cameraToRotate: {fileID: 9181562668376983591}
   rotationSpeed: 200
   cinemachineCamera: {fileID: 3908480749867287507}
+--- !u!114 &4343910490622783047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910839703351211959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f22df350e79cc447b063c98f543ffef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamTag: TeamA
 --- !u!1 &4082212738615772524
 GameObject:
   m_ObjectHideFlags: 3
@@ -1278,7 +1292,7 @@ PrefabInstance:
     - target: {fileID: 8909834552431982037, guid: 6a2f29b0a93954445ade1de7085d19d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8999999
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8909834552431982037, guid: 6a2f29b0a93954445ade1de7085d19d0,
         type: 3}

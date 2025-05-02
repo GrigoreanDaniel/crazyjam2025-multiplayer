@@ -3,6 +3,8 @@ using TMPro;
 using System.Collections;
 
 public class FlagUIFeedbackManager : MonoBehaviour {
+    public static FlagUIFeedbackManager Instance { get; private set; }
+
     [Header("UI Components")]
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private CanvasGroup canvasGroup;
@@ -13,18 +15,32 @@ public class FlagUIFeedbackManager : MonoBehaviour {
 
     private Coroutine currentRoutine;
 
-    public void ShowMessage(string message) {
+    private void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    public void ShowMessage(string message, Color color) {
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
-        currentRoutine = StartCoroutine(FadeMessageRoutine(message));
+        messageText.text = message;
+        messageText.color = color;
+
+        currentRoutine = StartCoroutine(FadeMessageRoutine());
     }
 
-    private IEnumerator FadeMessageRoutine(string message) {
-        messageText.text = message;
+    public void ShowMessage(string message) {
+        ShowMessage(message, Color.white); // fallback to white
+    }
+
+    private IEnumerator FadeMessageRoutine() {
+        float t = 0f;
 
         // Fade In
-        float t = 0f;
         while (t < fadeDuration) {
             t += Time.deltaTime;
             canvasGroup.alpha = Mathf.Lerp(0f, 1f, t / fadeDuration);
@@ -43,4 +59,5 @@ public class FlagUIFeedbackManager : MonoBehaviour {
 
         canvasGroup.alpha = 0f;
     }
+
 }
