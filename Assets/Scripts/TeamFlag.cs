@@ -9,16 +9,21 @@ public class TeamFlag : MonoBehaviour {
     private Quaternion spawnRotation;
     private TeamIdentifier teamIdentifier;
 
+    private string teamTag;
+
     private void Awake() {
         teamIdentifier = GetComponent<TeamIdentifier>();
     }
 
+    // Inside TeamFlag.cs
     public void InitializeFlag(string teamTag, Material teamMaterial) {
-        if (teamIdentifier != null)
-            teamIdentifier.OverrideTeam(teamTag); // Update the central team logic
+        this.teamTag = teamTag; // Internal value
 
-        spawnPosition = transform.position;
-        spawnRotation = transform.rotation;
+        // Ensure the TeamIdentifier is also updated
+        var identifier = GetComponent<TeamIdentifier>();
+        if (identifier != null) {
+            identifier.SetTeamTag(teamTag);
+        }
 
         if (flagRenderer != null && teamMaterial != null) {
             flagRenderer.material = teamMaterial;
@@ -26,6 +31,7 @@ public class TeamFlag : MonoBehaviour {
 
         transform.position = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
     }
+
 
     public string GetTeamTag() => teamIdentifier != null ? teamIdentifier.TeamTag : "";
 

@@ -17,7 +17,9 @@ public class BaseZoneManager : MonoBehaviour {
     [SerializeField] private Material teamAMaterial;
     [SerializeField] private Material teamBMaterial;
 
-    [SerializeField] private GameObject flagPrefab;
+    [SerializeField] private GameObject flagPrefab_TeamA;
+    [SerializeField] private GameObject flagPrefab_TeamB;
+
     [SerializeField] private Material teamAFlagMaterial;
     [SerializeField] private Material teamBFlagMaterial;
 
@@ -70,7 +72,9 @@ public class BaseZoneManager : MonoBehaviour {
         // Spawn Flag
         Transform flagMount = spawnedBase.transform.Find("CaptureZone"); // Or another defined mount
         if (flagMount != null) {
-            GameObject spawnedFlag = Instantiate(flagPrefab, flagMount.position, flagMount.rotation);
+            GameObject prefabToUse = teamTag == teamATag ? flagPrefab_TeamA : flagPrefab_TeamB;
+            GameObject spawnedFlag = Instantiate(prefabToUse, flagMount.position, flagMount.rotation);
+
             spawnedFlag.transform.SetParent(flagMount); // Optional for syncing visuals
 
             Material teamFlagMat = (teamTag == "TeamA") ? teamAFlagMaterial : teamBFlagMaterial;
@@ -80,10 +84,26 @@ public class BaseZoneManager : MonoBehaviour {
                 flag.InitializeFlag(teamTag, teamFlagMat);
             }
 
+            // This ensures the flag knows where to return
+            spawnedFlag.GetComponent<FlagReturnTimer>()?.SetSpawn(spawnedFlag.transform.position, spawnedFlag.transform.rotation);
+
+            //Debug.Log($"[BaseZoneManager] Spawning flag for {teamTag}, prefab name: {flagPrefab.name}");
+
+            var teamId = spawnedFlag.GetComponent<TeamIdentifier>();
+            Debug.Log($"[BaseZoneManager] Spawned Flag has TeamIdentifier: {teamId?.TeamTag}");
+
             FlagBeaconController beacon = spawnedFlag.GetComponentInChildren<FlagBeaconController>();
             if (beacon != null) {
                 beacon.SetBeaconColor(teamMat.color);
             }
+
+            // Make sure team is set
+            TeamIdentifier teamIdentifier = spawnedFlag.GetComponent<TeamIdentifier>();
+            if (teamIdentifier != null) {
+                //teamIdentifier.SetTeamTag(teamTag);  // This must match the intended team!
+                Debug.Log($"[FlagSpawn] Set team tag on flag: {teamTag}");
+            }
+
         }
 
         baseRef = spawnedBase;

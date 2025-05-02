@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2755936632214536047}
   - component: {fileID: 6275868218018849809}
   m_Layer: 7
-  m_Name: Flag Node
+  m_Name: Flag_TeamB
   m_TagString: Flag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f22df350e79cc447b063c98f543ffef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamTag: 
+  teamTag: TeamB
 --- !u!1 &4418133867346046444
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daaabe138fb244b4fbc158ffecf8df44, type: 2}
+  - {fileID: 2100000, guid: 28f073907d2ced243a5e6f856343c4ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daaabe138fb244b4fbc158ffecf8df44, type: 2}
+  - {fileID: 2100000, guid: f3a0c994805f3c748964528ebfc918b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

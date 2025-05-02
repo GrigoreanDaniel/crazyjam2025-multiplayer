@@ -48,7 +48,7 @@ public class PlayerJailHandler : MonoBehaviour{
         playerMovement.enabled = false;
 
         if (flagPickupHandler != null)
-            flagPickupHandler.DropFlag(transform.position);
+            flagPickupHandler.DropFlag(transform.position, gameObject);
 
         PlayerDizzyEffect dizzy = GetComponent<PlayerDizzyEffect>();
         if (dizzy != null && dizzyOverride > 0)

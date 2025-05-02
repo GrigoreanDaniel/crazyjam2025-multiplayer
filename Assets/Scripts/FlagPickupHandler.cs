@@ -64,8 +64,6 @@ public class FlagPickupHandler : MonoBehaviour {
             beaconController.AttachToCarrier(player);
         }
 
-        FindObjectOfType<FlagUIFeedbackManager>()?.ShowMessage("Flag Picked Up!");
-
         Debug.Log("ATTACHING crown to player: " + player.name);
 
         isFlagHeld = true;
@@ -78,11 +76,13 @@ public class FlagPickupHandler : MonoBehaviour {
         Material mat = GetComponent<TeamFlag>().GetMaterial();
         Color teamColor = mat.color; // already correct
 
-        if (playerTeam == flagTeam)
+        if (playerTeam == flagTeam) {
             FlagUIFeedbackManager.Instance.ShowMessage("You picked up your flag!", teamColor);
-        else
+            FlagUIFeedbackManager.Instance.EnableFlagIcon(teamColor);
+        } else {
             FlagUIFeedbackManager.Instance.ShowMessage("You picked up enemy's flag!", teamColor);
-
+            FlagUIFeedbackManager.Instance.EnableFlagIcon(teamColor);
+        }
 
         OnFlagPickedUp?.Invoke();
 
@@ -101,7 +101,7 @@ public class FlagPickupHandler : MonoBehaviour {
         FindObjectOfType<FlagReturnTimer>()?.CancelReturnCountdown();
     }
 
-    public void DropFlag(Vector3 dropPosition) {
+    public void DropFlag(Vector3 dropPosition, GameObject player) {
         if (!isFlagHeld) {
             Debug.LogWarning("Tried to drop flag, but isFlagHeld == false");
             return;
@@ -121,11 +121,12 @@ public class FlagPickupHandler : MonoBehaviour {
         isPickupAvailable = false;
         cooldownTimer = pickupCooldown;
 
+        FlagUIFeedbackManager.Instance.DisableFlagIcon();
+
         OnFlagAvailable?.Invoke();
 
         // Start return timer
-        FindObjectOfType<FlagReturnTimer>()?.StartReturnCountdown();
-
+        FindObjectOfType<FlagReturnTimer>()?.StartReturnCountdown(player);
     }
 
     public bool IsFlagHeld() {

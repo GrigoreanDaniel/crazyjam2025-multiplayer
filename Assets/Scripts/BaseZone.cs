@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 
 public class BaseZone : MonoBehaviour {
@@ -10,32 +11,30 @@ public class BaseZone : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Player")) return;
 
-        // Get flag handler from the global Flag Node
-        FlagPickupHandler flagHandler = FindObjectOfType<FlagPickupHandler>();
+        FlagPickupHandler flagHandler = other.GetComponentInChildren<FlagPickupHandler>();
+        if (flagHandler == null || !flagHandler.IsFlagHeld()) return;
 
-        if (flagHandler == null) {
-            Debug.LogWarning("No FlagPickupHandler found.");
-            return;
+        var playerTeam = other.GetComponent<TeamIdentifier>()?.TeamTag;
+        var flagTeam = flagHandler.GetComponent<TeamIdentifier>()?.TeamTag;
+
+        if (playerTeam != this.teamTag) {
+            // Only capture if it's an enemy flag
+            HandleFlagCapture(flagHandler);
+        } else {
+            Debug.Log("Player returned their own flag — no capture triggered.");
         }
-
-        // Check if flag is held (assumes public property or method exists)
-        bool flagIsHeld = flagHandler.IsFlagHeld();
-
-        if (!flagIsHeld) {
-            if (debugLogs) Debug.Log("Player entered base, but no flag is held.");
-            return;
-        }
-
-        HandleFlagCapture(flagHandler);
     }
 
+
     private void HandleFlagCapture(FlagPickupHandler flagHandler) {
-        FindObjectOfType<FlagUIFeedbackManager>()?.ShowMessage("Flag Captured at base!");
+        FlagUIFeedbackManager.Instance.ShowMessage("Flag captured at base!"); // maybe add color ?
+        FlagUIFeedbackManager.Instance.DisableFlagIcon();
+
 
         if (debugLogs) Debug.Log($"Flag captured at base: {teamTag}");
 
         // Optional: reset flag to spawn point
-        flagHandler.DropFlag(flagHandler.GetSpawnPosition());
+        flagHandler.DropFlag(flagHandler.GetSpawnPosition(), gameObject);
     }
 
     public void SetTeamTag(string tag) {

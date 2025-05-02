@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FlagUIFeedbackManager : MonoBehaviour {
     public static FlagUIFeedbackManager Instance { get; private set; }
@@ -8,6 +9,7 @@ public class FlagUIFeedbackManager : MonoBehaviour {
     [Header("UI Components")]
     [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private Image flagIconImage;
 
     [Header("Display Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
@@ -21,17 +23,26 @@ public class FlagUIFeedbackManager : MonoBehaviour {
             return;
         }
         Instance = this;
+
+        if (flagIconImage != null)
+            flagIconImage.enabled = false;
+
     }
 
-    public void ShowMessage(string message, Color color) {
-        if (currentRoutine != null)
-            StopCoroutine(currentRoutine);
-
+    public void ShowMessage(string message, Color flagColor) {
         messageText.text = message;
-        messageText.color = color;
+
+        if (flagIconImage != null) {
+            flagIconImage.color = flagColor;
+            flagIconImage.enabled = true;
+        }
+
+            if (currentRoutine != null)
+            StopCoroutine(currentRoutine);
 
         currentRoutine = StartCoroutine(FadeMessageRoutine());
     }
+
 
     public void ShowMessage(string message) {
         ShowMessage(message, Color.white); // fallback to white
@@ -58,6 +69,24 @@ public class FlagUIFeedbackManager : MonoBehaviour {
         }
 
         canvasGroup.alpha = 0f;
+        /*if (flagIconImage != null)
+            flagIconImage.enabled = false;*/
+
     }
+
+    public void EnableFlagIcon(Color color) {
+        if (flagIconImage != null) {
+            flagIconImage.enabled = true;
+            flagIconImage.color = color;
+        }
+    }
+
+    public void DisableFlagIcon() {
+        Debug.Log("Disabling Flag Icon");
+        if (flagIconImage != null) {
+            flagIconImage.enabled = false;
+        }
+    }
+
 
 }

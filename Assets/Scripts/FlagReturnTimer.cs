@@ -9,6 +9,8 @@ public class FlagReturnTimer : MonoBehaviour {
     [SerializeField] private GameObject crownObject;
     [SerializeField] private FlagBeaconController beaconController;
 
+    private string lastCarrierTeamTag;
+
     private Vector3 spawnPosition;
     private Quaternion spawnRotation;
     private Coroutine returnCoroutine;
@@ -19,12 +21,20 @@ public class FlagReturnTimer : MonoBehaviour {
         spawnRotation = transform.rotation;
     }
 
-    public void StartReturnCountdown() {
-        if (returnCoroutine != null) {
+    public void SetSpawn(Vector3 pos, Quaternion rot) {
+        spawnPosition = pos;
+        spawnRotation = rot;
+        Debug.Log("Setting spawn to: " + pos);
+    }
+
+    public void StartReturnCountdown(GameObject player) {
+        if (returnCoroutine != null)
             StopCoroutine(returnCoroutine);
-        }
+
+        lastCarrierTeamTag = player.GetComponent<TeamIdentifier>()?.TeamTag;
         returnCoroutine = StartCoroutine(ReturnAfterDelay());
     }
+
 
     public void CancelReturnCountdown() {
         if (returnCoroutine != null) {
@@ -35,19 +45,49 @@ public class FlagReturnTimer : MonoBehaviour {
 
     private IEnumerator ReturnAfterDelay() {
         yield return new WaitForSeconds(returnDelay);
+        Debug.Log($"[ReturnTimer] Returning flag to spawn: ({spawnPosition})");
 
         // Unparent flag if it's still on a player
-        crownObject.transform.SetParent(null);
-        crownObject.transform.position = spawnPosition;
-        crownObject.transform.rotation = spawnRotation;
+        if (crownObject != null) {
+            Debug.Log($"[ReturnTimer] Returning flag to spawn: {spawnPosition}");
+            crownObject.transform.SetParent(null);
+            crownObject.transform.position = spawnPosition;
+            Debug.Log($"[ReturnTimer] Actual crown position after move: {crownObject.transform.position}");
+            crownObject.transform.rotation = spawnRotation;
+        }
 
         if (beaconController != null) {
             beaconController.DetachFromCarrier(spawnPosition);
             beaconController.DisableBeacon();
         }
 
+        // Pop up message
+        Material teamMat = GetComponent<TeamFlag>()?.GetMaterial();
+        Color color = teamMat != null ? teamMat.color : Color.white;
 
-        FindObjectOfType<FlagUIFeedbackManager>()?.ShowMessage("Flag Returned to Base");
+        string flagTeam = GetComponent<TeamIdentifier>()?.TeamTag;
+        string localTeam = LocalPlayerTracker.Instance?.GetTeam();
+
+        Debug.Log($"[ReturnTimer] Returning flag. Flag Team: {flagTeam} | Local Player Team: {localTeam}");
+
+        if (flagTeam == localTeam) {
+            FlagUIFeedbackManager.Instance.ShowMessage("Your flag returned!", color);
+            FlagUIFeedbackManager.Instance.DisableFlagIcon();  // Fix: Move here!
+        } else {
+            FlagUIFeedbackManager.Instance.ShowMessage("Enemy's flag returned!", color);
+            // maybe no icon to disable — or also do it
+        }
+
+        var id = GetComponent<TeamIdentifier>();
+        Debug.Log($"[ReturnTimer] I'm on GameObject: {gameObject.name} | Flag Team: {id?.TeamTag}");
+
+        if (string.IsNullOrEmpty(localTeam)) {
+            Debug.LogWarning("LocalPlayerTracker team not set!");
+        }
+
+        // Disable the Flag Icon
+        FlagUIFeedbackManager.Instance.DisableFlagIcon();
+
         // Reset local state if needed (optional)
         Debug.Log("Flag auto-returned to spawn.");
     }
