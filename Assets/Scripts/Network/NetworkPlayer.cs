@@ -20,7 +20,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     private bool isGrounded;
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
-    public NetworkString<_16> playerNickName { get; set; }
+    [SerializeField] private NetworkString<_16> PlayerNickName { get; set; }
 
     // Start is called before the first frame update
     void Awake()
@@ -128,14 +128,14 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     private void OnPlayerNameChanged()
     {
-        Debug.Log($"Player name changed to {playerNickName} for player {gameObject.name}");
-        playerNameText.text = playerNickName.ToString();
+        Debug.Log($"Player name changed to {PlayerNickName} for player {gameObject.name}");
+        playerNameText.text = PlayerNickName.ToString();
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_SetPlayerName(string playerName, RpcInfo info = default)
     {
-        playerNickName = playerName;
-        Debug.Log($"[RPC] set nickname {playerNickName}");
+        PlayerNickName = playerName;
+        Debug.Log($"[RPC] set nickname {PlayerNickName}");
     }
 }

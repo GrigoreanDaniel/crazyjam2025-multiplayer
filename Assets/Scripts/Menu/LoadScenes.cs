@@ -13,8 +13,6 @@ public static class LoadScenes
         Game,
     }
 
-    private static Scene targetScene;
-
     public static void ChangeScene(Scene targetScene)
     {
         SceneManager.LoadScene(targetScene.ToString());
