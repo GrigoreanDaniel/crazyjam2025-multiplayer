@@ -4,10 +4,11 @@ using System;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+using ExitGames.Client.Photon.StructWrapping;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
-    [SerializeField] TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI playerNameText;
     public static NetworkPlayer LocalPlayer { get; private set; }
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
@@ -20,7 +21,10 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     private bool isGrounded;
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
-    [SerializeField] private NetworkString<_16> PlayerNickName { get; set; }
+    [SerializeField] public NetworkString<_16> PlayerNickName { get; set; }
+    //private ChangeDetector _changeDetector;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -34,15 +38,11 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void Spawned()
     {
-        if (!Object.HasInputAuthority)
-        {
-            Debug.Log("spawned remote Player.");
-            return;
-        }
-        else
+        if (Object.HasInputAuthority)
         {
             LocalPlayer = this;
             cinemachineBrain = FindObjectOfType<CinemachineBrain>();
+            //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
             if (cineMachinevirtualCamera != null)
             {
@@ -51,10 +51,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 cineMachinevirtualCamera.LookAt = transform;
             }
 
-            RPC_SetPlayerName(PlayerPrefs.GetString("PlayerName"));
+            PlayerNickName = PlayerPrefs.GetString("PlayerName");
+            RPC_SetPlayerName(PlayerNickName.ToString());
+
             Debug.Log("spawned local Player.");
         }
+
+        OnPlayerNameChanged();
+
         transform.name = $"P_{Object.Id}";
+
     }
 
     public void PlayerLeft(PlayerRef player)
@@ -126,6 +132,11 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         }
     }
 
+    static void OnPlayerNameChanged(ChangeDetector changed)
+    {
+        changed.Get<NetworkPlayer>().OnPlayerNameChanged();
+    }
+
     private void OnPlayerNameChanged()
     {
         Debug.Log($"Player name changed to {PlayerNickName} for player {gameObject.name}");
@@ -133,9 +144,14 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void RPC_SetPlayerName(string playerName, RpcInfo info = default)
+    public void RPC_SetPlayerName(string playerName)
     {
         PlayerNickName = playerName;
+
         Debug.Log($"[RPC] set nickname {PlayerNickName}");
     }
 }
+
+
+
+
