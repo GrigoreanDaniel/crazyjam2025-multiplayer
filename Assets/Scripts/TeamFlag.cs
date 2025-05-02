@@ -15,28 +15,26 @@ public class TeamFlag : MonoBehaviour {
         teamIdentifier = GetComponent<TeamIdentifier>();
     }
 
-    // Inside TeamFlag.cs
     public void InitializeFlag(string teamTag, Material teamMaterial) {
-        this.teamTag = teamTag; // Internal value
+        this.teamTag = teamTag;
 
-        // Ensure the TeamIdentifier is also updated
         var identifier = GetComponent<TeamIdentifier>();
         if (identifier != null) {
             identifier.SetTeamTag(teamTag);
+            Debug.Log($"[TeamFlag] Set TeamIdentifier to {teamTag} on {gameObject.name}");
         }
 
         if (flagRenderer != null && teamMaterial != null) {
             flagRenderer.material = teamMaterial;
         }
-
-        transform.position = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
     }
 
+    private void Start() {
+        // Adjust Y offset after parenting
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + yOffset, transform.localPosition.z);
+    }
 
     public string GetTeamTag() => teamIdentifier != null ? teamIdentifier.TeamTag : "";
-
     public Vector3 GetSpawnPosition() => spawnPosition;
-
     public Material GetMaterial() => flagRenderer.material;
-
 }

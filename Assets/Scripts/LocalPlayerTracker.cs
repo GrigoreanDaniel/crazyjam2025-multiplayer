@@ -14,9 +14,12 @@ public class LocalPlayerTracker : MonoBehaviour {
     }
     void Start() {
         var team = GetComponent<TeamIdentifier>()?.TeamTag;
-        LocalPlayerTracker.Instance?.SetTeam(team);
+        LocalPlayerTracker.Instance.SetTeam(team);
+
         Debug.Log($"[LocalTracker] Local player team set to: {team}");
+        Debug.Log("[Tracker] My final team is: " + team);  // fixed
     }
+
 
     public void SetTeam(string teamTag) {
         playerTeamTag = teamTag;

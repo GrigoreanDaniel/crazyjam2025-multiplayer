@@ -72,14 +72,14 @@ public class FlagReturnTimer : MonoBehaviour {
 
         if (flagTeam == localTeam) {
             FlagUIFeedbackManager.Instance.ShowMessage("Your flag returned!", color);
-            FlagUIFeedbackManager.Instance.DisableFlagIcon();  // Fix: Move here!
+            FlagUIFeedbackManager.Instance.DisableFlagIcon();
         } else {
             FlagUIFeedbackManager.Instance.ShowMessage("Enemy's flag returned!", color);
-            // maybe no icon to disable — or also do it
         }
 
+        Debug.Log($"[ReturnTimer] I'm on GameObject: {gameObject.name} | Flag Team: {flagTeam}");
+
         var id = GetComponent<TeamIdentifier>();
-        Debug.Log($"[ReturnTimer] I'm on GameObject: {gameObject.name} | Flag Team: {id?.TeamTag}");
 
         if (string.IsNullOrEmpty(localTeam)) {
             Debug.LogWarning("LocalPlayerTracker team not set!");

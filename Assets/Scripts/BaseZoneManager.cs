@@ -77,12 +77,23 @@ public class BaseZoneManager : MonoBehaviour {
 
             spawnedFlag.transform.SetParent(flagMount); // Optional for syncing visuals
 
+            // Force-override the team directly
+            var identifier = spawnedFlag.GetComponent<TeamIdentifier>();
+            identifier?.OverrideTeam(teamTag);
+
             Material teamFlagMat = (teamTag == "TeamA") ? teamAFlagMaterial : teamBFlagMaterial;
 
             TeamFlag flag = spawnedFlag.GetComponent<TeamFlag>();
             if (flag != null) {
                 flag.InitializeFlag(teamTag, teamFlagMat);
             }
+
+            TeamIdentifier idOverride = spawnedFlag.GetComponent<TeamIdentifier>();
+            if (idOverride != null) {
+                idOverride.OverrideTeam(teamTag); // FORCE override
+                Debug.Log($"[ForceOverride] Flag team force-set to: {teamTag}");
+            }
+
 
             // This ensures the flag knows where to return
             spawnedFlag.GetComponent<FlagReturnTimer>()?.SetSpawn(spawnedFlag.transform.position, spawnedFlag.transform.rotation);
@@ -100,7 +111,6 @@ public class BaseZoneManager : MonoBehaviour {
             // Make sure team is set
             TeamIdentifier teamIdentifier = spawnedFlag.GetComponent<TeamIdentifier>();
             if (teamIdentifier != null) {
-                //teamIdentifier.SetTeamTag(teamTag);  // This must match the intended team!
                 Debug.Log($"[FlagSpawn] Set team tag on flag: {teamTag}");
             }
 

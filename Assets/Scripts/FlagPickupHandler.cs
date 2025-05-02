@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class FlagPickupHandler : MonoBehaviour {
     [Header("Flag Settings")]
@@ -126,6 +127,10 @@ public class FlagPickupHandler : MonoBehaviour {
         OnFlagAvailable?.Invoke();
 
         // Start return timer
+        FindObjectOfType<FlagReturnTimer>()?.StartCoroutine(DelayedReturnStart(player.gameObject));
+    }
+    private IEnumerator DelayedReturnStart(GameObject player) {
+        yield return null; // Wait 1 frame
         FindObjectOfType<FlagReturnTimer>()?.StartReturnCountdown(player);
     }
 
