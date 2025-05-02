@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Fusion;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
@@ -90,6 +91,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
                 velocity.y += gravity * Runner.DeltaTime;
                 controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
             }
+
         }
 
         if (Object.HasStateAuthority)

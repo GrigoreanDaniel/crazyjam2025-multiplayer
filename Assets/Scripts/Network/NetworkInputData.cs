@@ -8,5 +8,7 @@ public struct NetworkInputData : INetworkInput
     public Vector2 movementInput;
     public float rotationInput;
 
+    public NetworkBool sonarPressed;
+    public NetworkBool decoyPressed;
 }
 

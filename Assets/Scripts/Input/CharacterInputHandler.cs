@@ -23,6 +23,9 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.movementInput = moveInputVector;
         networkInputData.isJumpPressed = Input.GetButton("Jump");
 
+        networkInputData.sonarPressed = Input.GetButton("Fire2"); //right click
+        networkInputData.decoyPressed = Input.GetButton("Fire3"); //left shift
+
         return networkInputData;
     }
 }

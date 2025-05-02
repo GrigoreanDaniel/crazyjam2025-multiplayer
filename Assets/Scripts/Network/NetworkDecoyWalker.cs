@@ -1,7 +1,7 @@
 using UnityEngine;
 using Fusion;
 
-public class DecoyWalker : MonoBehaviour {
+public class NetworkDecoyWalker :NetworkBehaviour {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float maxLifetime = 2f;
