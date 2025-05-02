@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class TrapZone : MonoBehaviour {
     [Header("Trap Settings")]
-    [SerializeField] private float trapDuration = 10f;
+    [SerializeField] private float trapDuration;
     [SerializeField] private bool applyDizzyEffect = false;
+    [SerializeField] private float dizzinessDuration = 2.5f;
 
     [Header("Optional Visuals")]
     [SerializeField] private GameObject trapVisualEffect;
@@ -20,19 +21,11 @@ public class TrapZone : MonoBehaviour {
         // TRIGGER JAIL via existing system
         PlayerJailHandler jail = other.GetComponent<PlayerJailHandler>();
         if (jail != null) {
-            jail.TriggerJail("Trap");
-        } else {
-            Debug.LogWarning("PlayerJailHandler not found on player!");
+            jail.TriggerJail("Trap", trapDuration, dizzinessDuration);
         }
 
-        // Optional dizzy effect
-        if (applyDizzyEffect) {
-            Debug.Log("Applying dizziness!");
-            PlayerDizzyEffect dizzy = other.GetComponent<PlayerDizzyEffect>();
-            if (dizzy != null)
-                dizzy.ApplyDizziness(trapDuration);
-            else
-                Debug.LogWarning("PlayerDizzyEffect not found on player!");
+        if (!applyDizzyEffect) {
+            Debug.Log("Dizzy effect is OFF for this trap.");
         }
 
         // Optional VFX & sound

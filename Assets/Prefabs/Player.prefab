@@ -333,8 +333,8 @@ Transform:
   - {fileID: 6035824400126901554}
   - {fileID: 1202173356245931495}
   - {fileID: 3745292500064993351}
-  - {fileID: 3072172850268994757}
   - {fileID: 1462517865524043076}
+  - {fileID: 9181562668376983591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &630270216283534915
@@ -512,6 +512,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7714b619426dc354ca7e9ae34d1eee04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraToRotate: {fileID: 9181562668376983591}
+  rotationSpeed: 200
+  cinemachineCamera: {fileID: 3908480749867287507}
 --- !u!1 &4082212738615772524
 GameObject:
   m_ObjectHideFlags: 3
@@ -1051,6 +1054,38 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &8176779527098160130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9181562668376983591}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9181562668376983591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8176779527098160130}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3072172850268994757}
+  m_Father: {fileID: 5284122720060058806}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8253981362503706909
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,7 +1119,7 @@ Transform:
   - {fileID: 9065541139565528467}
   - {fileID: 6089666128971582335}
   - {fileID: 3522024860215378395}
-  m_Father: {fileID: 5284122720060058806}
+  m_Father: {fileID: 9181562668376983591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3908480749867287507
 MonoBehaviour:

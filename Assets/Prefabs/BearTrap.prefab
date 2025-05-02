@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 2258638573486792145}
   m_Layer: 0
   m_Name: BearTrap
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,8 +386,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b16eb3a28eadd4a9f4b934afa8f8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapDuration: 10
-  applyDizzyEffect: 0
+  trapDuration: 3
+  applyDizzyEffect: 1
+  dizzinessDuration: 2.5
   trapVisualEffect: {fileID: 0}
   trapSound: {fileID: 0}
   audioSource: {fileID: 0}

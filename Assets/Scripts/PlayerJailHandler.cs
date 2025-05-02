@@ -39,31 +39,35 @@ public class PlayerJailHandler : MonoBehaviour{
         }
     }
 
-    public void TriggerJail(string reason = "Jail") {
+    public void TriggerJail(string reason = "Jail", float durationOverride = -1f, float dizzyOverride = -1f) {
         if (isJailed) return;
 
         jailReason = reason;
         isJailed = true;
-        jailTimer = jailDuration;
+        jailTimer = (durationOverride > 0) ? durationOverride : jailDuration;
         playerMovement.enabled = false;
 
         if (flagPickupHandler != null)
             flagPickupHandler.DropFlag(transform.position);
 
+        PlayerDizzyEffect dizzy = GetComponent<PlayerDizzyEffect>();
+        if (dizzy != null && dizzyOverride > 0)
+            dizzy.ApplyDizziness(dizzyOverride);
+
         if (jailUIManager != null)
-            jailUIManager.ShowJailUI(jailDuration, jailReason);
+            jailUIManager.ShowJailUI(jailTimer, jailReason);
     }
 
 
-    private void ReleaseFromJail(){
-
+    private void ReleaseFromJail() {
         isJailed = false;
         playerMovement.enabled = true;
-        if (jailUIManager != null){
 
+        
+        if (jailUIManager != null)
             jailUIManager.HideJailUI();
-        }
     }
+
 
     public void AssignFlagReference(FlagPickupHandler handler) {
         flagPickupHandler = handler;
