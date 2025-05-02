@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{d0567153-b056-48ef-a344-cf199fb8dfa8}">
 		<property name="color">
-			<value>Green</value>
+			<value>Magenta Light 2</value>
 		</property>
 		<property name="name">
 			<value>sfx_flag_collected</value>
@@ -49,6 +49,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{d758935d-09b7-4d6f-b641-b7fb1daf4961}">
+		<relationship name="masters">
+			<destination>{8dd16771-3a60-4ca6-935c-a38b623ef5b0}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{14913c3c-19ff-43bc-a431-993fb85dc4eb}</destination>
 		</relationship>

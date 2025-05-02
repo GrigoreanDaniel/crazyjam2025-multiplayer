@@ -5,7 +5,7 @@
 			<value>Red</value>
 		</property>
 		<property name="name">
-			<value>sfx_fox_step</value>
+			<value>sfx_fox_step_grass</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -49,6 +49,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{7224f3fd-d296-48b5-8065-fd2f76155d93}">
+		<relationship name="masters">
+			<destination>{8dd16771-3a60-4ca6-935c-a38b623ef5b0}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{8df96a84-8474-4bf4-abc2-9dcde8e0d2bb}</destination>
 		</relationship>
@@ -93,7 +96,7 @@
 	<object class="MixerBusPanner" id="{f294f3d7-9db8-4113-b663-7d3d9a67b95f}" />
 	<object class="MultiSound" id="{bd991635-1ea6-4567-ae33-4fa8ca56f883}">
 		<property name="length">
-			<value>0.38369614512471656</value>
+			<value>0.39500000000000002</value>
 		</property>
 		<relationship name="modulators">
 			<destination>{4e082feb-6adb-4398-b968-6808a07e61e6}</destination>
@@ -103,9 +106,6 @@
 		</relationship>
 		<relationship name="sounds">
 			<destination>{f63770dc-749a-4e32-91e7-d00e206a38dd}</destination>
-			<destination>{a4b1aa15-0671-4d7f-b83d-b6e6865f2a9c}</destination>
-			<destination>{5553c138-f886-4bc3-9870-0532fd6ccbe1}</destination>
-			<destination>{d30c062f-41d5-47f2-83e8-661bfb2cb483}</destination>
 			<destination>{48ed8e9f-5a11-45f9-9327-602b427a715c}</destination>
 			<destination>{0b6b5988-6610-419e-9fed-0bb006018992}</destination>
 		</relationship>
@@ -140,7 +140,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>1</value>
+			<value>0.416666687</value>
 		</property>
 	</object>
 	<object class="FadeCurve" id="{2f3fe34f-8a76-40e7-89d5-ab043965e748}">
@@ -154,21 +154,6 @@
 	<object class="SingleSound" id="{f63770dc-749a-4e32-91e7-d00e206a38dd}">
 		<relationship name="audioFile">
 			<destination>{e2af0860-c8d2-4489-b94a-a481657965af}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{a4b1aa15-0671-4d7f-b83d-b6e6865f2a9c}">
-		<relationship name="audioFile">
-			<destination>{9211a206-e642-4f3d-b0ad-539d6d26677b}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{5553c138-f886-4bc3-9870-0532fd6ccbe1}">
-		<relationship name="audioFile">
-			<destination>{ae6e0f28-da2b-4472-932b-d71c577dc08b}</destination>
-		</relationship>
-	</object>
-	<object class="SingleSound" id="{d30c062f-41d5-47f2-83e8-661bfb2cb483}">
-		<relationship name="audioFile">
-			<destination>{2973094b-1754-4c96-8b74-ed401c55b23a}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{48ed8e9f-5a11-45f9-9327-602b427a715c}">
@@ -192,18 +177,18 @@
 	<object class="SpatialiserEffect" id="{bf17b0cd-9a72-4578-8deb-5fc0059af042}" />
 	<object class="AutomationPoint" id="{7be3e11f-eb80-413e-a540-74aa5bdf24d0}">
 		<property name="position">
-			<value>0.32500000000000001</value>
+			<value>0.13500000000000001</value>
 		</property>
 		<property name="value">
 			<value>1</value>
 		</property>
 		<property name="curveShape">
-			<value>0.393589944</value>
+			<value>-0.273163825</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{97343487-3a3b-4026-b10b-adfb5532ee56}">
 		<property name="position">
-			<value>0.38369614512471656</value>
+			<value>0.39500000000000002</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -211,12 +196,6 @@
 	</object>
 	<object class="MixerBusFader" id="{e3e95217-43aa-4a13-9075-c049d091d96e}" />
 	<object class="ThreeEQEffect" id="{5fe3b8f7-496a-4452-a002-5185fb70b281}">
-		<property name="lowGain">
-			<value>-15</value>
-		</property>
-		<property name="midGain">
-			<value>-2</value>
-		</property>
 		<property name="highGain">
 			<value>-1</value>
 		</property>
