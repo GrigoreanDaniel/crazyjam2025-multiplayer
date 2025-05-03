@@ -8,7 +8,7 @@
 			<value>sfx_start_game</value>
 		</property>
 		<property name="outputFormat">
-			<value>0</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{4b785025-5eb8-454a-b19f-4f4605745640}</destination>
@@ -49,6 +49,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{e3a1c8d7-8ed4-4a91-b018-a0f51c8ba15a}">
+		<relationship name="masters">
+			<destination>{8dd16771-3a60-4ca6-935c-a38b623ef5b0}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{3dfd2613-507b-4c7e-966b-fed1b3b0d88e}</destination>
 		</relationship>
@@ -56,17 +59,24 @@
 			<destination>{4d139aab-ade8-4072-b4d6-a8124dd5551a}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{5e8ed193-0cac-4ea5-81e6-81b3ac8827f1}</destination>
+			<destination>{1aa09387-bb49-4c09-a0ee-1129d082aacf}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{40213769-aded-491e-b57c-5af87ab3a08f}" />
 	<object class="MarkerTrack" id="{fcee9f8e-d9ad-4db8-acfb-0a5ee8f49929}" />
 	<object class="GroupTrack" id="{b98dc4f7-2e95-4f53-9d27-ac0dbc1dd1a8}">
+		<relationship name="modules">
+			<destination>{80c1862a-a097-472f-8a6b-d7fc71a1d725}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{1a97a89b-4c7f-42b1-a1c2-809f9b2ce5c0}</destination>
 		</relationship>
 	</object>
-	<object class="Timeline" id="{635bbe35-2c40-4c4d-a955-69f5ffa9fecc}" />
+	<object class="Timeline" id="{635bbe35-2c40-4c4d-a955-69f5ffa9fecc}">
+		<relationship name="modules">
+			<destination>{80c1862a-a097-472f-8a6b-d7fc71a1d725}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{c3386ec5-a3e2-455a-806a-e7c9033f8900}">
 		<relationship name="effectChain">
 			<destination>{59c71c71-a7e0-4e0e-b677-e99b854ebee2}</destination>
@@ -84,7 +94,18 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{4d139aab-ade8-4072-b4d6-a8124dd5551a}" />
+	<object class="SingleSound" id="{80c1862a-a097-472f-8a6b-d7fc71a1d725}">
+		<property name="length">
+			<value>1.7651700680272109</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{91519ddf-0bb6-4884-87e0-e249514ad8da}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{1a97a89b-4c7f-42b1-a1c2-809f9b2ce5c0}">
+		<property name="volume">
+			<value>-5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>

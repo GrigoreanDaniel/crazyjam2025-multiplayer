@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3f25800d-8830-4c69-b2bc-5c49b34a7ad0}">
+		<property name="assetPath">
+			<value>sfx_mole_digging_1.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>10</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bea99459-23e2-448a-a816-8d8bdf6a79c6}</destination>
+		</relationship>
+	</object>
+</objects>

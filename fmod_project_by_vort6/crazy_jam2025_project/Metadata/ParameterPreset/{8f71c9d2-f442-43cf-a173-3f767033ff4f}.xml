@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{8f71c9d2-f442-43cf-a173-3f767033ff4f}">
+		<property name="name">
+			<value>mole_dig</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a09c599d-590e-4a8f-bcc8-1d9c93f11929}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{b35d87c0-4078-4958-8f16-d69e1ada3043}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{b35d87c0-4078-4958-8f16-d69e1ada3043}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+	</object>
+</objects>
