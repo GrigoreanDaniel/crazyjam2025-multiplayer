@@ -38,6 +38,8 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     public void StartHostMigration(HostMigrationToken hostMigrationToken)
     {
+        networkRunner = FindObjectOfType<NetworkRunner>();
+
         networkRunner = Instantiate(networkRunnerPrefab);
         networkRunner.name = "Network Runner - Migrated"; // Set the name of the NetworkRunner
         Debug.Log("NetworkRunner" + networkRunner.name + " instantiated for host migration.");
@@ -46,8 +48,6 @@ public class NetworkRunnerHandler : MonoBehaviour
 
         Debug.Log("NetworkRunner migration started");
     }
-
-
 
     INetworkSceneManager GetSceneManager(NetworkRunner runner)
     {
