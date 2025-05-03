@@ -5,7 +5,7 @@ public static class LoadScenes
 {
 
     //scene names
-    public enum Scene
+    public enum SceneName
     {
         MainMenu,
         Lobby,
@@ -13,7 +13,7 @@ public static class LoadScenes
         Game,
     }
 
-    public static void ChangeScene(Scene targetScene)
+    public static void ChangeScene(SceneName targetScene)
     {
         SceneManager.LoadScene(targetScene.ToString());
     }

@@ -1,13 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
+    [Header("UI Panels")]
+    [SerializeField] private GameObject PlayerDetailsPanel;
+    [SerializeField] private GameObject JoinSessionPanel;
+    [SerializeField] private GameObject CreateSessionPanel;
+    [SerializeField] private GameObject statusPanel;
+
+    [Space(10)]
+    [Header("Player Nickname")]
     [SerializeField] private TMP_InputField inputFieldPlayerName;
-    [SerializeField] private Button setNickNameButton;
+
+    [Space(10)]
+    [Header("Session Name")]
+    [SerializeField] private TMP_InputField sessionNameIF;
 
     // Start is called before the first frame update
     void Start()
@@ -17,13 +27,64 @@ public class MainMenuUIHandler : MonoBehaviour
 
     }
 
-    public void OnJoinGameClicked()
+    public void OnFindGameClicked()
     {
-        PlayerPrefs.SetString("PlayerName", inputFieldPlayerName.text);
-        PlayerPrefs.Save();
-        LoadScenes.ChangeScene(LoadScenes.Scene.Game);
+        SetNickname();
+
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
+
+        if (networkRunnerHandler != null)
+        {
+            networkRunnerHandler.OnJoinLobby();
+
+            HidePanels();
+            JoinSessionPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("NetworkRunnerHandler not found in the scene.");
+        }
+    }
+
+    public void OnCreateGameClicked()
+    {
+        SetNickname();
+
+        HidePanels();
+        CreateSessionPanel.SetActive(true);
 
     }
 
+    public void OnStartNewSessionClicked()
+    {
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
+
+        if (networkRunnerHandler != null)
+        {
+            networkRunnerHandler.CreateGame(sessionNameIF.text, LoadScenes.SceneName.Game.ToString());
+
+            HidePanels();
+
+            statusPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("NetworkRunnerHandler not found in the scene.");
+        }
+    }
+
+    private void HidePanels()
+    {
+        PlayerDetailsPanel.SetActive(false);
+        JoinSessionPanel.SetActive(false);
+        CreateSessionPanel.SetActive(false);
+        statusPanel.SetActive(false);
+    }
+
+    private void SetNickname()
+    {
+        PlayerPrefs.SetString("PlayerName", inputFieldPlayerName.text);
+        PlayerPrefs.Save();
+    }
 
 }

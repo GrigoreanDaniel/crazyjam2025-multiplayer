@@ -1,7 +1,7 @@
 {
     "Version": 1,
     "TypeId": "NetworkProjectConfig",
-    "PeerMode": 1,
+    "PeerMode": 0,
     "LagCompensation": {
         "Enabled": false,
         "HitboxBufferLengthInMs": 200,
@@ -33,7 +33,7 @@
         "ReliableDataTransferModes": 3
     },
     "HostMigration": {
-        "EnableAutoUpdate": true,
+        "EnableAutoUpdate": false,
         "UpdateDelay": 10
     },
     "EncryptionConfig": {

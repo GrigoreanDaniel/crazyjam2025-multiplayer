@@ -55,7 +55,13 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
             return;
         }
         {
-            //PlayersConnected.Remove(player);
+            int playerToken = GetPlayerToken(runner, player); // Get the player token
+            if (mapTokenIdWithNetworkPlayer.TryGetValue(playerToken, out NetworkPlayer networkPlayer))
+            {
+                Debug.Log("Removing Player from the dictionary. Player ID: " + playerToken);
+
+                mapTokenIdWithNetworkPlayer.Add(playerToken, networkPlayer);
+            }
         }
     }
     /// <summary>
@@ -126,12 +132,12 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
         Debug.Log("Disconnected from server: " + reason);
     }
 
-    public async void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    void INetworkRunnerCallbacks.OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
     {
-        Debug.Log("OnHostMigration started.");
+        /*Debug.Log("OnHostMigration started.");
         await runner.Shutdown(shutdownReason: ShutdownReason.HostMigration);
 
-        FindObjectOfType<NetworkRunnerHandler>().StartHostMigration(hostMigrationToken);
+        FindObjectOfType<NetworkRunnerHandler>().StartHostMigration(hostMigrationToken);*/
     }
 
 
