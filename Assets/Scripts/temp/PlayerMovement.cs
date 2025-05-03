@@ -40,8 +40,6 @@ public class PlayerMovement : MonoBehaviour{
 
         Vector3 inputDirection = new Vector3(x, 0f, z).normalized;
 
-
-
         if (inputDirection.magnitude >= 0.1f){
 
             // Get camera forward/right projected to horizontal plane

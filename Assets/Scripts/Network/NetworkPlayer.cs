@@ -10,12 +10,28 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 20f;
     [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
     CinemachineBrain cinemachineBrain;
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+
+    //Jail properties
+    [SerializeField] private JailZone redTeamJailZone;
+    [SerializeField] private JailZone blueTeamJailZone;
+    [SerializeField] private JailUIManager jailUI;
+    [SerializeField] private float jailDuration = 10f;
+
+    private bool isJailed = false;
+    private float jailTimer;
+
+    [Networked, OnChangedRender(nameof(OnTeamIndexChangedRender))]
+    public int TeamIndex { get; set; }
+
+    [SerializeField] private TeamData[] availableTeams; // Assign in inspector
+    public TeamData CurrentTeam { get; private set; }
+
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
     [SerializeField] public NetworkString<_16> PlayerNickName { get; set; }
@@ -30,12 +46,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         Cursor.visible = false;
 
         controller = GetComponent<CharacterController>();
+
+        jailUI = GameObject.Find("JailCanvas").GetComponent<JailUIManager>();
     }
 
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
         {
+            TeamIndex = Object.InputAuthority.RawEncoded % availableTeams.Length;
+
             LocalPlayer = this;
             cinemachineBrain = FindObjectOfType<CinemachineBrain>();
 
@@ -52,6 +72,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             Debug.Log("spawned local Player.");
         }
+        UpdateTeam(TeamIndex); // Update visuals/UI/etc. immediately
 
         OnPlayerNameChanged();
 
@@ -69,6 +90,18 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void FixedUpdateNetwork()
     {
+        if (!Object.HasStateAuthority) return;
+
+        if (isJailed)
+        {
+            jailTimer -= Runner.DeltaTime;
+            if (jailTimer <= 0f)
+            {
+                ReleaseFromJail();
+            }
+            return;
+        }
+
         Vector3 inputDirection = Vector3.zero;
 
         if (GetInput(out NetworkInputData networkInputData))
@@ -141,7 +174,64 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
         Debug.Log($"[RPC] set nickname {PlayerNickName}");
     }
+
+    public void JailPlayer()
+    {
+        if (isJailed) return;
+
+        isJailed = true;
+        jailTimer = jailDuration;
+        controller.enabled = false;
+
+        if (Object.HasInputAuthority)
+        {
+            jailUI.ShowCaughtUI(5, false);
+        }
+
+        // Move to opposing team's jail
+        TeamIdentifier teamId = GetComponent<TeamIdentifier>();
+        JailZone targetZone = teamId.Team.teamName == "Red" ? blueTeamJailZone : redTeamJailZone;
+        transform.position = targetZone.jailPoint.position;
+    }
+    private void ReleaseFromJail()
+    {
+        isJailed = false;
+        controller.enabled = true;
+
+        if (Object.HasInputAuthority)
+        {
+            jailUI.ShowReleasedUI(false);
+        }
+    }
+    private void OnTeamIndexChangedRender()
+    {
+        UpdateTeam(TeamIndex);
+    }
+    private void UpdateTeam(int index)
+    {
+        if (availableTeams == null || index < 0 || index >= availableTeams.Length)
+        {
+            Debug.LogWarning("Invalid team index or team list not set.");
+            return;
+        }
+
+        CurrentTeam = availableTeams[index];
+
+        // Assign to identifier so others can access team
+        var identifier = GetComponent<TeamIdentifier>();
+        if (identifier != null)
+        {
+            identifier.Team = CurrentTeam;
+        }
+
+        // Optional: Update visuals
+        GetComponentInChildren<Renderer>().material.color = CurrentTeam.teamColor;
+
+        Debug.Log($"[Team] Assigned team: {CurrentTeam.teamName} to player {Object.InputAuthority}");
+    }
+
 }
+
 
 
 

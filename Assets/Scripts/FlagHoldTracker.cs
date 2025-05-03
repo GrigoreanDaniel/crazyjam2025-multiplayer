@@ -39,7 +39,7 @@ public class FlagHoldTracker : MonoBehaviour {
             }
         }
         foreach (var team in teams) {
-            Debug.Log($"{team.teamName}: {teamScores[team]:0.0}s");
+            //Debug.Log($"{team.teamName}: {teamScores[team]:0.0}s");
         }
     }
 

@@ -41,7 +41,7 @@ public class PlayerSpawner : SimulationBehaviour, INetworkRunnerCallbacks
     /// <param name="player"></param>
     private void SpawnPlayer(NetworkRunner runner, PlayerRef player)
     {
-        var spawnPosition = new Vector3(0, 0, 0); // Set spawn position as needed
+        var spawnPosition = new Vector3(0, 10, 0); // Set spawn position as needed
         var spawnRotation = Quaternion.identity; // Set spawn rotation as needed
 
         var playerObject = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
