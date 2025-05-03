@@ -3,7 +3,7 @@ using UnityEngine;
 public class LocalPlayerTracker : MonoBehaviour {
     public static LocalPlayerTracker Instance { get; private set; }
 
-    private string playerTeamTag;
+    public TeamData MyTeam { get; private set; }
 
     private void Awake() {
         if (Instance != null && Instance != this) {
@@ -12,20 +12,11 @@ public class LocalPlayerTracker : MonoBehaviour {
         }
         Instance = this;
     }
-    void Start() {
-        var team = GetComponent<TeamIdentifier>()?.TeamTag;
-        LocalPlayerTracker.Instance.SetTeam(team);
 
-        Debug.Log($"[LocalTracker] Local player team set to: {team}");
-        Debug.Log("[Tracker] My final team is: " + team);  // fixed
-    }
-
-
-    public void SetTeam(string teamTag) {
-        playerTeamTag = teamTag;
-    }
-
-    public string GetTeam() {
-        return playerTeamTag;
+    private void Start() {
+        var teamComp = GetComponent<TeamIdentifier>();
+        if (teamComp != null) {
+            MyTeam = teamComp.Team;
+        }
     }
 }

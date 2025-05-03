@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJailHandler : MonoBehaviour{
+public class PlayerJailHandler : MonoBehaviour {
 
     [SerializeField] private JailUIManager jailUIManager;
     [SerializeField] private float jailDuration = 10f;
-    [SerializeField] private FlagPickupHandler flagPickupHandler;
+    //[SerializeField] private FlagPickupHandler flagPickupHandler;
 
     private bool isJailed = false;
     private float jailTimer = 0f;
@@ -14,25 +14,25 @@ public class PlayerJailHandler : MonoBehaviour{
 
     private PlayerMovement playerMovement; // No SerializeField, handled automatically
 
-    private void Awake(){
+    private void Awake() {
 
         // Auto-fetch PlayerMovement from the same GameObject
         playerMovement = GetComponent<PlayerMovement>();
         jailUIManager = FindObjectOfType<JailUIManager>();
 
-        if (playerMovement == null){
+        if (playerMovement == null) {
 
             Debug.LogError("PlayerMovement component not found on Player! Jail system won't work!");
         }
     }
 
-    private void Update(){
+    private void Update() {
 
         if (!isJailed) return;
 
         jailTimer -= Time.deltaTime;
 
-        if (jailTimer <= 0f){
+        if (jailTimer <= 0f) {
 
             ReleaseFromJail();
             jailUIManager.HideJailUI();
@@ -47,8 +47,8 @@ public class PlayerJailHandler : MonoBehaviour{
         jailTimer = (durationOverride > 0) ? durationOverride : jailDuration;
         playerMovement.enabled = false;
 
-        if (flagPickupHandler != null)
-            flagPickupHandler.DropFlag(transform.position, gameObject);
+        /*if (flagPickupHandler != null)
+            flagPickupHandler.DropFlag(transform.position, gameObject)*/;
 
         PlayerDizzyEffect dizzy = GetComponent<PlayerDizzyEffect>();
         if (dizzy != null && dizzyOverride > 0)
@@ -63,14 +63,14 @@ public class PlayerJailHandler : MonoBehaviour{
         isJailed = false;
         playerMovement.enabled = true;
 
-        
+
         if (jailUIManager != null)
             jailUIManager.HideJailUI();
     }
 
 
-    public void AssignFlagReference(FlagPickupHandler handler) {
+    /*public void AssignFlagReference(FlagPickupHandler handler) {
         flagPickupHandler = handler;
-    }
+    }*/
 
 }

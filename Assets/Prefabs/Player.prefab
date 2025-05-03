@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 6431310258960614353}
   - component: {fileID: 4615209602092206220}
   - component: {fileID: 4343910490622783047}
+  - component: {fileID: 579999688814043661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -371,8 +372,6 @@ MonoBehaviour:
   jailUIManager: {fileID: 7971965440462904003, guid: 98f8fdcff4f6fe14798bb43f981a1950,
     type: 3}
   jailDuration: 10
-  flagPickupHandler: {fileID: 2069847621009246185, guid: 7b8d0b44bbd59a8488ac926aca9a89b7,
-    type: 3}
 --- !u!143 &3629818209851189448
 CharacterController:
   m_ObjectHideFlags: 0
@@ -499,8 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2695604e2fcf745b5f2f4057680088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flagPickupHandler: {fileID: 2069847621009246185, guid: 7b8d0b44bbd59a8488ac926aca9a89b7,
-    type: 3}
 --- !u!114 &4615209602092206220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +525,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f22df350e79cc447b063c98f543ffef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamTag: TeamA
+  Team: {fileID: 11400000, guid: 6f237189ceaa3e745a60dbb97fcf4d98, type: 2}
+--- !u!114 &579999688814043661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910839703351211959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f53f7cd33cf0e44896d98720441202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedTeam: {fileID: 11400000, guid: 6f237189ceaa3e745a60dbb97fcf4d98, type: 2}
+  carryPoint: {fileID: 1462517865524043076}
+  beaconPrefab: {fileID: 5707579989809390435, guid: 8be01591b2d406a4781f79c6689f4fb1,
+    type: 3}
+  beaconYOffset: 17
+  flagOffset: {x: 0, y: 1.75, z: 0}
 --- !u!1 &4082212738615772524
 GameObject:
   m_ObjectHideFlags: 3
@@ -1283,6 +1298,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crown Mount Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705968453482660251, guid: 6a2f29b0a93954445ade1de7085d19d0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8909834552431982037, guid: 6a2f29b0a93954445ade1de7085d19d0,
         type: 3}
