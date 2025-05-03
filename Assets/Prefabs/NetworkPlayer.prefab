@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 2149662246910894683}
   - component: {fileID: 1027555055282688330}
   - component: {fileID: 602906273525242440}
+  - component: {fileID: 4873802982651764074}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -262,6 +263,7 @@ MonoBehaviour:
   - {fileID: 2149662246910894683}
   - {fileID: 1027555055282688330}
   - {fileID: 602906273525242440}
+  - {fileID: 4873802982651764074}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &427490093180962254
 MonoBehaviour:
@@ -275,11 +277,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217ac53e8962eeb4fb1eca94da44cca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNameText: {fileID: 0}
   moveSpeed: 6
   gravity: -9.81
   jumpHeight: 1.5
   rotationSpeed: 5
   cineMachinevirtualCamera: {fileID: 2453109892710991329}
+  _PlayerNickName:
+    _length: 0
+    _data:
+      Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _PlayerToken: 0
 --- !u!114 &-6730681433537860000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +356,21 @@ MonoBehaviour:
   showGizmos: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   cooldownDuration: 6
+--- !u!114 &4873802982651764074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583425924211564122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7a7f0c08a92ab47949f953545f7c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jailDuration: 10
+  jailMessagePanel: {fileID: 0}
+  jailTimerText: {fileID: 0}
 --- !u!1 &6364935096698897492
 GameObject:
   m_ObjectHideFlags: 0
