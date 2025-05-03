@@ -60,26 +60,6 @@ public class JailUIManager : MonoBehaviour {
                 UpdateTrapTimerUI();
             }
         }
-        /* if (isTrapped) {
-
-             // FIX: Prevent trap UI from flickering post-release
-             if (hasShownTrapReleasedUI)
-                 return;
-
-             trapTimeRemaining -= Time.deltaTime;
-
-             if (trapTimeRemaining <= 0.01f) {
-                 trapTimeRemaining = 0f;
-                 isTrapped = false;
-                 hasShownTrapReleasedUI = true;
-
-                 ShowReleasedUI(true);
-                 trapTimerContainer?.SetActive(false);
-                 UpdateTrapTimerUI();
-             } else {
-                 UpdateTrapTimerUI();
-             }
-         }*/
     }
 
 
