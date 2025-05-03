@@ -72,7 +72,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             CustomLobbyName = "OurLobbyID", // Set the custom lobby name
             SceneManager = sceneManager, // Set the scene manager
             ConnectionToken = connectionToken,
-            //PlayerCount = 6, // Set the maximum number of players
+            PlayerCount = 6, // Set the maximum number of players
         });
     }
 
