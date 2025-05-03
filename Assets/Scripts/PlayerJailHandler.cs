@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerJailHandler : MonoBehaviour {
 
-    [SerializeField] private JailUIManager jailUIManager;
+    [SerializeField] private NetworkJailUIManager jailUIManager;
     [SerializeField] private float jailDuration = 10f;
     //[SerializeField] private FlagPickupHandler flagPickupHandler;
 
@@ -18,7 +18,7 @@ public class PlayerJailHandler : MonoBehaviour {
 
         // Auto-fetch PlayerMovement from the same GameObject
         playerMovement = GetComponent<PlayerMovement>();
-        jailUIManager = FindObjectOfType<JailUIManager>();
+        jailUIManager = FindObjectOfType<NetworkJailUIManager>();
 
         if (playerMovement == null) {
 
