@@ -35,7 +35,7 @@ public class PlayerJailHandler : MonoBehaviour {
         if (jailTimer <= 0f) {
 
             ReleaseFromJail();
-            jailUIManager.HideJailUI();
+            jailUIManager.HideAll();
         }
     }
 
@@ -47,25 +47,25 @@ public class PlayerJailHandler : MonoBehaviour {
         jailTimer = (durationOverride > 0) ? durationOverride : jailDuration;
         playerMovement.enabled = false;
 
-        /*if (flagPickupHandler != null)
-            flagPickupHandler.DropFlag(transform.position, gameObject)*/;
-
         PlayerDizzyEffect dizzy = GetComponent<PlayerDizzyEffect>();
         if (dizzy != null && dizzyOverride > 0)
             dizzy.ApplyDizziness(dizzyOverride);
 
-        if (jailUIManager != null)
-            jailUIManager.ShowJailUI(jailTimer, jailReason);
-    }
+        bool isTrap = (jailReason == "Trap");
 
+        if (jailUIManager != null)
+            jailUIManager.ShowCaughtUI(jailTimer, isTrap);
+    }
 
     private void ReleaseFromJail() {
         isJailed = false;
         playerMovement.enabled = true;
 
+        bool isTrap = (jailReason == "Trap");
+        jailUIManager.ShowReleasedUI(isTrap);
 
         if (jailUIManager != null)
-            jailUIManager.HideJailUI();
+            jailUIManager.HideAll();
     }
 
 
