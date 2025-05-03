@@ -145,6 +145,9 @@ It will play the collect sfx and start the music drumming</value>
 		<property name="length">
 			<value>184.5</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{da523f66-2a25-45d3-b2bd-b471a9bd5efd}</destination>
+		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{95a196f9-30b7-4822-8b64-7c00fa6649be}</destination>
 		</relationship>
@@ -179,6 +182,9 @@ It will play the collect sfx and start the music drumming</value>
 		<property name="maximumTimeDelay">
 			<value>16500</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{18f89dbf-d4c7-458a-93dc-30950764f5e6}</destination>
+		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{f1e428c8-7796-43be-9b8f-654132adf60c}</destination>
 		</relationship>
@@ -278,6 +284,20 @@ It will play the collect sfx and start the music drumming</value>
 	</object>
 	<object class="MixerBusPanner" id="{a66d9047-c3a6-4ea2-b5b6-b11765e25208}" />
 	<object class="MixerBusFader" id="{54c24dae-a03b-4f60-aaed-11371e072391}" />
+	<object class="ADSRModulator" id="{da523f66-2a25-45d3-b2bd-b471a9bd5efd}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>300</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="ParameterCondition" id="{95a196f9-30b7-4822-8b64-7c00fa6649be}">
 		<property name="minimum">
 			<value>1</value>
@@ -295,6 +315,23 @@ It will play the collect sfx and start the music drumming</value>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e1ed9fea-3c53-4492-8c32-05a236b57912}" />
+	<object class="ADSRModulator" id="{18f89dbf-d4c7-458a-93dc-30950764f5e6}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>300</value>
+		</property>
+		<property name="releaseTime">
+			<value>8400</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="ParameterCondition" id="{f1e428c8-7796-43be-9b8f-654132adf60c}">
 		<property name="minimum">
 			<value>2</value>

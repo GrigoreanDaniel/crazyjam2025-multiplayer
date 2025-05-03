@@ -98,6 +98,9 @@
 		<property name="length">
 			<value>0.57514739229024947</value>
 		</property>
+		<relationship name="fadeOutCurve">
+			<destination>{2b60d5da-9323-4948-b9f7-f999ef884da8}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{7bf9fec9-6bd7-47f1-a5d8-000962689b72}</destination>
 			<destination>{60398805-60bc-435e-b749-a97cd59d411c}</destination>
@@ -129,6 +132,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{e990a236-73d0-4976-ab8f-342c19a3d78e}" />
 	<object class="MixerBusFader" id="{b0204dba-f884-43aa-8c87-53256af90f68}" />
+	<object class="FadeCurve" id="{2b60d5da-9323-4948-b9f7-f999ef884da8}">
+		<relationship name="startPoint">
+			<destination>{68a841dc-85f0-4ca9-ae3a-ec3361d304d4}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{a2d8c62d-6f92-48fa-8940-bdd4db365426}</destination>
+		</relationship>
+	</object>
 	<object class="SingleSound" id="{7bf9fec9-6bd7-47f1-a5d8-000962689b72}">
 		<relationship name="audioFile">
 			<destination>{e7c61056-4dda-4674-b1b8-cc4e562b1fee}</destination>
@@ -153,6 +164,25 @@
 	<object class="MixerBusPanner" id="{4696d3f2-a948-41c3-99a3-dd1f528078d1}" />
 	<object class="MixerBusFader" id="{22fa3aeb-cb62-4d1a-a8ae-c8e706013ad1}" />
 	<object class="SpatialiserEffect" id="{791052a2-75cb-4a68-a66b-d31ef32ca6f4}" />
+	<object class="AutomationPoint" id="{68a841dc-85f0-4ca9-ae3a-ec3361d304d4}">
+		<property name="position">
+			<value>0.38</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>0.25471893</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{a2d8c62d-6f92-48fa-8940-bdd4db365426}">
+		<property name="position">
+			<value>0.57514739229024947</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{3940dc00-1105-46fc-adb7-0901c507f480}" />
 	<object class="ThreeEQEffect" id="{7eca649f-9946-4c68-b5ee-89242c484baa}">
 		<property name="lowGain">
