@@ -1,13 +1,12 @@
+using System;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
     [Header("UI Panels")]
     [SerializeField] private GameObject PlayerDetailsPanel;
-    [SerializeField] private GameObject JoinSessionPanel;
+    [SerializeField] private GameObject SessionListPanel;
     [SerializeField] private GameObject CreateSessionPanel;
     [SerializeField] private GameObject statusPanel;
 
@@ -38,7 +37,9 @@ public class MainMenuUIHandler : MonoBehaviour
             networkRunnerHandler.OnJoinLobby();
 
             HidePanels();
-            JoinSessionPanel.SetActive(true);
+            SessionListPanel.SetActive(true);
+
+            FindObjectOfType<SessionListUIHandler>(true).SetStatusText("Looking active games...");
         }
         else
         {
@@ -49,10 +50,8 @@ public class MainMenuUIHandler : MonoBehaviour
     public void OnCreateGameClicked()
     {
         SetNickname();
-
         HidePanels();
         CreateSessionPanel.SetActive(true);
-
     }
 
     public void OnStartNewSessionClicked()
@@ -64,7 +63,6 @@ public class MainMenuUIHandler : MonoBehaviour
             networkRunnerHandler.CreateGame(sessionNameIF.text, LoadScenes.SceneName.Game.ToString());
 
             HidePanels();
-
             statusPanel.SetActive(true);
         }
         else
@@ -76,15 +74,21 @@ public class MainMenuUIHandler : MonoBehaviour
     private void HidePanels()
     {
         PlayerDetailsPanel.SetActive(false);
-        JoinSessionPanel.SetActive(false);
+        SessionListPanel.SetActive(false);
         CreateSessionPanel.SetActive(false);
         statusPanel.SetActive(false);
     }
 
+    ///
     private void SetNickname()
     {
         PlayerPrefs.SetString("PlayerName", inputFieldPlayerName.text);
         PlayerPrefs.Save();
     }
 
+    public void OnJoiningServer()
+    {
+        HidePanels();
+        statusPanel.SetActive(true);
+    }
 }

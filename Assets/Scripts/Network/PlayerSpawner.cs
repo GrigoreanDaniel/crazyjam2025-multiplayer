@@ -7,9 +7,21 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
+    [Header("Player Prefab")]
+    [Tooltip("Player prefab to spawn for each player.")]
     [SerializeField] private NetworkPlayer playerPrefab;
-    private readonly Dictionary<int, NetworkPlayer> mapTokenIdWithNetworkPlayer = new Dictionary<int, NetworkPlayer>(); // Dictionary to store players
+
+    private SessionListUIHandler sessionListUIHandler; // Reference to the SessionListUIHandler script
+
+    private Dictionary<int, NetworkPlayer> mapTokenIdWithNetworkPlayer; // Dictionary to store players
     private CharacterInputHandler characterInputHandler;
+
+    void Awake()
+    {
+        mapTokenIdWithNetworkPlayer = new Dictionary<int, NetworkPlayer>();
+
+        sessionListUIHandler = FindObjectOfType<SessionListUIHandler>(true); // Find the SessionListUIHandler in the scene
+    }
 
     private int GetPlayerToken(NetworkRunner runner, PlayerRef player)
     {
@@ -176,9 +188,31 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     }
 
-    void INetworkRunnerCallbacks.OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
+        Debug.Log("Session list updated. Number of sessions: " + sessionList.Count);
 
+        if (sessionListUIHandler == null)
+        {
+            Debug.LogError("SessionListUIHandler not found in the scene.");
+            return;
+        }
+
+        if (sessionList.Count == 0)
+        {
+            Debug.Log("No active game found.");
+            sessionListUIHandler.SetStatusText(" No active game was found"); // Call the method to update the session list UI
+        }
+        else
+        {
+            sessionListUIHandler.ClearList(); // Clear the existing session list UI
+
+            foreach (SessionInfo sessionInfo in sessionList)
+            {
+                sessionListUIHandler.AddToList(sessionInfo); // Add each session to the list UI
+                Debug.Log("Session found: " + sessionInfo.Name + " - Players Count: " + sessionInfo.PlayerCount); // Log the session information
+            }
+        }
     }
 
     void INetworkRunnerCallbacks.OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)

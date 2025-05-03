@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Fusion;
 using TMPro;
 using UnityEngine;
@@ -12,12 +9,20 @@ public class SessionListUIHandler : MonoBehaviour
     [SerializeField] private GameObject sessionItemListPrefab;
     [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
 
+    private void Awake()
+    {
+        ClearList();
+    }
+
     public void ClearList()
     {
-        foreach (Transform child in verticalLayoutGroup.transform)
+        foreach (RectTransform child in verticalLayoutGroup.transform)
         {
             Destroy(child.gameObject);
+
+            Debug.Log("Destroying child: " + child.gameObject.name);
         }
+
         statusText.gameObject.SetActive(false);
     }
 
@@ -29,13 +34,23 @@ public class SessionListUIHandler : MonoBehaviour
         sessionInfoListUIItem.OnJoinSessionClicked += OnJoinSessionClicked;
     }
 
-    private void OnJoinSessionClicked(SessionInfo info)
+    private void OnJoinSessionClicked(SessionInfo sessionInfo)
     {
+        NetworkRunnerHandler networkRunnerHandler = FindObjectOfType<NetworkRunnerHandler>();
 
+        if (networkRunnerHandler != null)
+        {
+            networkRunnerHandler.JoinGame(sessionInfo, LoadScenes.SceneName.Game.ToString());
+
+            MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
+            mainMenuUIHandler.OnJoiningServer();
+        }
     }
 
     public void SetStatusText(string text)
     {
+        ClearList();
+
         statusText.text = text;
         statusText.gameObject.SetActive(true);
     }
