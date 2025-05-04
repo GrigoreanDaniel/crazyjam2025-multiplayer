@@ -42,7 +42,8 @@ public class Flag : MonoBehaviour {
     }
 
 
-    public void Drop() {
+    public void Drop()
+    {
         if (currentCarrier == null) return;
 
         FlagEvents.OnFlagDropped?.Invoke(this, currentCarrier);
@@ -51,12 +52,23 @@ public class Flag : MonoBehaviour {
         currentCarrier = null;
         isAtBase = false;
 
+        // Snap to ground
+        int groundLayerMask = LayerMask.GetMask("Ground");
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 5f, groundLayerMask))
+        {
+            transform.position = hit.point + Vector3.up * 0.2f;
+        }
+
+
         // Start auto-return countdown
         if (autoReturnCoroutine != null)
             StopCoroutine(autoReturnCoroutine);
 
         autoReturnCoroutine = StartCoroutine(AutoReturnAfterDelay());
     }
+
 
     public void ReturnToBase() {
         var handler = FlagEvents.OnFlagReturned;
