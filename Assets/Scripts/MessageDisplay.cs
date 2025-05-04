@@ -1,5 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine.UI;
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -29,7 +33,18 @@ public class MessageDisplayer : MonoBehaviour {
         TrapRed,
         TrapGreen,
         JailTimer,
-        TrapTimer
+        TrapTimer,
+        TeamNameLeft,
+        TeamNameRight,
+        TeamIconLeft,
+        TeamIconRight,
+        ScoreBarLeft,
+        ScoreBarRight,
+        ScoreTimerLeft,
+        ScoreTimerRight,
+        RoundTimer,
+        CrownLeft,
+        CrownRight
     }
 
     [Header("Assign your individual message GameObjects here:")]
@@ -61,6 +76,19 @@ public class MessageDisplayer : MonoBehaviour {
     [SerializeField] private GameObject JailTimerText;
     [SerializeField] private GameObject TrapTimerText;
 
+    [SerializeField] private TMP_Text TeamNameLeft;
+    [SerializeField] private TMP_Text TeamNameRight;
+    [SerializeField] private Image TeamIconLeft;
+    [SerializeField] private Image TeamIconRight;
+    [SerializeField] private Slider ScoreBarLeft;
+    [SerializeField] private Slider ScoreBarRight;
+    [SerializeField] private TMP_Text ScoreTimerLeft;
+    [SerializeField] private TMP_Text ScoreTimerRight;
+    [SerializeField] private TMP_Text RoundTimer;
+    [SerializeField] private GameObject CrownLeft;
+    [SerializeField] private GameObject CrownRight;
+
+
     // Active message tracking
     private GameObject currentMessageObject;
     private TimerText currentTimerText;
@@ -91,6 +119,29 @@ public class MessageDisplayer : MonoBehaviour {
             currentMessageObject = null;
             currentTimerText = null;
         }
+    }
+
+    public void SetTeamUI(TeamData leftTeam, TeamData rightTeam) {
+        TeamNameLeft.text = leftTeam.displayName;
+        TeamNameRight.text = rightTeam.displayName;
+
+        TeamIconLeft.sprite = leftTeam.icon;
+        TeamIconRight.sprite = rightTeam.icon;
+
+        TeamNameLeft.color = leftTeam.teamColor;
+        TeamNameRight.color = rightTeam.teamColor;
+    }
+
+    public void UpdateScoreUI(float leftScore, float rightScore, float leftTime, float rightTime, float roundTime, bool leftLeads) {
+        if (ScoreBarLeft != null) ScoreBarLeft.value = leftScore / 100f;
+        if (ScoreBarRight != null) ScoreBarRight.value = rightScore / 100f;
+
+        if (ScoreTimerLeft != null) ScoreTimerLeft.text = FormatTime(leftTime);
+        if (ScoreTimerRight != null) ScoreTimerRight.text = FormatTime(rightTime);
+        if (RoundTimer != null) RoundTimer.text = FormatTime(roundTime);
+
+        if (CrownLeft != null) CrownLeft.SetActive(leftLeads);
+        if (CrownRight != null) CrownRight.SetActive(!leftLeads);
     }
 
     /// <summary>

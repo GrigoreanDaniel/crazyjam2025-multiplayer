@@ -61,10 +61,11 @@ public class Flag : MonoBehaviour {
     public void ReturnToBase() {
         var handler = FlagEvents.OnFlagReturned;
         if (handler != null) {
+            // Safely create a list copy
             var subscribers = handler.GetInvocationList();
-            foreach (var d in subscribers) {
+            for (int i = 0; i < subscribers.Length; i++) {
                 try {
-                    ((Action<Flag>)d)(this);
+                    ((Action<Flag>)subscribers[i])(this);
                 } catch (Exception e) {
                     Debug.LogWarning($"[Flag.cs] FlagReturned handler failed: {e.TargetSite?.DeclaringType?.Name} threw '{e.Message}'");
                 }
@@ -81,8 +82,6 @@ public class Flag : MonoBehaviour {
             autoReturnCoroutine = null;
         }
     }
-
-
 
     private bool IsPickupAllowed(PlayerFlagCarrier carrier) {
         TeamIdentifier flagTeam = GetComponent<TeamIdentifier>();
