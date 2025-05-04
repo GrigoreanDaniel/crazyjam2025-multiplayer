@@ -3,8 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -88,6 +86,9 @@ public class MessageDisplayer : MonoBehaviour {
     [SerializeField] private GameObject CrownLeft;
     [SerializeField] private GameObject CrownRight;
 
+    [SerializeField] private TMP_Text RoundStartCountdownText;
+    [SerializeField] private TMP_Text RoundWinMessageText;
+    [SerializeField] private TMP_Text FinalWinMessage_Text;
 
     // Active message tracking
     private GameObject currentMessageObject;
@@ -243,6 +244,45 @@ public class MessageDisplayer : MonoBehaviour {
     private IEnumerator AutoHide(GameObject obj, float delay) {
         yield return new WaitForSeconds(delay);
         if (obj) obj.SetActive(false);
+    }
+
+    public IEnumerator ShowRoundStartCountdown(float delayBetween = 1f)
+    {
+        RoundStartCountdownText.gameObject.SetActive(true);
+
+        for (int i = 3; i > 0; i--)
+        {
+            RoundStartCountdownText.text = $"Round starts in {i}!";
+            yield return new WaitForSeconds(delayBetween);
+        }
+
+        RoundStartCountdownText.gameObject.SetActive(false);
+    }
+
+    public IEnumerator ShowRoundWinner(string teamName)
+    {
+        if (RoundWinMessageText == null)
+            yield break;
+
+        RoundWinMessageText.text = $"Round won by {teamName}!";
+        RoundWinMessageText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f); // show for 2 seconds
+
+        RoundWinMessageText.gameObject.SetActive(false);
+    }
+
+    public IEnumerator ShowFinalMatchWinner(string teamName)
+    {
+        if (FinalWinMessage_Text == null)
+            yield break;
+
+        FinalWinMessage_Text.text = $"{teamName} won the match!";
+        FinalWinMessage_Text.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(4f);
+
+        FinalWinMessage_Text.gameObject.SetActive(false);
     }
 
     /// <summary>

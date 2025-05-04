@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using System;
 
-public class FlagHoldTracker : MonoBehaviour {
+public class FlagHoldTracker : MonoBehaviour
+{
 
     [SerializeField] private List<TeamData> teams;
     [SerializeField] private float scorePerSecond = 1f;
@@ -31,22 +32,27 @@ public class FlagHoldTracker : MonoBehaviour {
     private List<Flag> allFlags = new();
 
     private bool roundEnded = false;
+    private bool isResetting = false;
 
-    private void Awake() {
-        foreach (var team in teams) {
+    private void Awake()
+    {
+        foreach (var team in teams)
+        {
             teamScores[team] = 0f;
             isHoldingFlag[team] = false;
             teamRoundsWon[team] = 0;
         }
 
-        foreach (var point in FindObjectsOfType<TeamSpawnPoint>()) {
+        foreach (var point in FindObjectsOfType<TeamSpawnPoint>())
+        {
             if (!spawnPoints.ContainsKey(point.Team))
                 spawnPoints[point.Team] = new List<Transform>();
             spawnPoints[point.Team].Add(point.transform);
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         StartCoroutine(WaitAndFetchFlags());
         roundTimer = roundDuration;
 
@@ -54,68 +60,121 @@ public class FlagHoldTracker : MonoBehaviour {
             messageDisplayer.SetTeamUI(leftTeam, rightTeam);
     }
 
-    private IEnumerator WaitAndFetchFlags() {
+    private IEnumerator WaitAndFetchFlags()
+    {
         yield return new WaitForSeconds(0.1f);
         allFlags = new List<Flag>(FindObjectsOfType<Flag>());
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         FlagEvents.OnFlagPickedUp += HandlePickup;
         FlagEvents.OnFlagDropped += HandleDrop;
         FlagEvents.OnFlagReturned += HandleReturn;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         FlagEvents.OnFlagPickedUp -= HandlePickup;
         FlagEvents.OnFlagDropped -= HandleDrop;
         FlagEvents.OnFlagReturned -= HandleReturn;
     }
 
-    private void Update() {
-        if (!roundEnded) {
+    private void Update()
+    {
+        // Inside Update
+        if (!roundEnded)
+        {
             roundTimer -= Time.deltaTime;
-            roundTimer = Mathf.Max(0, roundTimer);
 
-            // Score update
-            foreach (var kvp in isHoldingFlag) {
-                if (kvp.Value) {
+            foreach (var kvp in isHoldingFlag)
+            {
+                if (kvp.Value)
+                {
                     teamScores[kvp.Key] += scorePerSecond * Time.deltaTime;
-                    if (!roundEnded && teamScores[kvp.Key] >= winScore) {
+
+                    if (teamScores[kvp.Key] >= winScore && !roundEnded)
+                    {
                         roundEnded = true;
                         teamRoundsWon[kvp.Key]++;
                         Debug.Log($"{kvp.Key.teamName} won the round!");
+
+                        bool isMatchWin = teamRoundsWon[kvp.Key] >= roundsToWin;
+
+                        if (messageDisplayer != null)
+                        {
+                            if (isMatchWin)
+                                StartCoroutine(messageDisplayer.ShowFinalMatchWinner(kvp.Key.displayName));
+                            else
+                                StartCoroutine(messageDisplayer.ShowRoundWinner(kvp.Key.displayName));
+                        }
+
+                        if (isMatchWin)
+                        {
+                            Debug.Log($"{kvp.Key.teamName} wins the MATCH!");
+                            enabled = false;
+                            return;
+                        }
+
                         StartCoroutine(ResetRound());
+
+                        return;
                     }
                 }
             }
 
-            // Check end by timer
-            if (roundTimer <= 0f && !roundEnded) {
+            if (roundTimer <= 0f && !roundEnded)
+            {
                 roundEnded = true;
 
                 TeamData winner = null;
                 float topScore = -1f;
-                foreach (var kvp in teamScores) {
-                    if (kvp.Value > topScore) {
+                foreach (var kvp in teamScores)
+                {
+                    if (kvp.Value > topScore)
+                    {
                         winner = kvp.Key;
                         topScore = kvp.Value;
                     }
                 }
 
-                if (winner != null) {
+                if (winner != null)
+                {
                     teamRoundsWon[winner]++;
                     Debug.Log($"{winner.teamName} won the round (timeout)!");
+
+                    bool isMatchWin = teamRoundsWon[winner] >= roundsToWin;
+
+                    if (messageDisplayer != null)
+                    {
+                        if (isMatchWin)
+                            StartCoroutine(messageDisplayer.ShowFinalMatchWinner(winner.displayName));
+                        else
+                            StartCoroutine(messageDisplayer.ShowRoundWinner(winner.displayName));
+                    }
+
+                    if (isMatchWin)
+                    {
+                        Debug.Log($"{winner.teamName} wins the MATCH!");
+                        enabled = false;
+                        return;
+                    }
+
                     StartCoroutine(ResetRound());
+
                 }
+
             }
         }
+
 
         // Track hold times
         if (isHoldingFlag[leftTeam]) leftHoldTime += Time.deltaTime;
         if (isHoldingFlag[rightTeam]) rightHoldTime += Time.deltaTime;
 
         // Update new UI
-        if (messageDisplayer != null) {
+        if (messageDisplayer != null)
+        {
             float leftScore = teamScores[leftTeam];
             float rightScore = teamScores[rightTeam];
             bool leftLeads = leftScore > rightScore;
@@ -132,35 +191,48 @@ public class FlagHoldTracker : MonoBehaviour {
         }
     }
 
-    private void HandlePickup(Flag flag, PlayerFlagCarrier carrier) {
+    private void HandlePickup(Flag flag, PlayerFlagCarrier carrier)
+    {
         TeamData flagOwner = flag.GetComponent<TeamIdentifier>()?.Team;
         TeamData carrierTeam = carrier.Team;
 
-        if (flagOwner != null && carrierTeam != null && flagOwner != carrierTeam) {
+        if (flagOwner != null && carrierTeam != null && flagOwner != carrierTeam)
+        {
             isHoldingFlag[carrierTeam] = true;
         }
     }
 
-    private void HandleDrop(Flag flag, PlayerFlagCarrier carrier) {
+    private void HandleDrop(Flag flag, PlayerFlagCarrier carrier)
+    {
         if (carrier.Team != null)
             isHoldingFlag[carrier.Team] = false;
     }
 
-    private void HandleReturn(Flag flag) {
+    private void HandleReturn(Flag flag)
+    {
         foreach (var team in isHoldingFlag.Keys)
             isHoldingFlag[team] = false;
     }
 
-    private IEnumerator ResetRound() {
-        Debug.Log("Next round starting in 3 seconds...");
-        yield return new WaitForSeconds(3f);
+    private IEnumerator ResetRound()
+    {
+        if (isResetting) yield break; // prevents multiple triggers
+        isResetting = true;
 
+        Debug.Log("Next round starting in 3 seconds...");
+
+        // Show "Next round in 3…" or similar
+        if (messageDisplayer != null)
+            yield return StartCoroutine(messageDisplayer.ShowRoundStartCountdown());
+
+        // Reset states
         roundEnded = false;
         roundTimer = roundDuration;
         leftHoldTime = 0f;
         rightHoldTime = 0f;
 
-        foreach (var team in teams) {
+        foreach (var team in teams)
+        {
             teamScores[team] = 0f;
             isHoldingFlag[team] = false;
         }
@@ -170,7 +242,8 @@ public class FlagHoldTracker : MonoBehaviour {
 
         RebuildSpawnPointMap();
 
-        foreach (var playerObj in PlayerSpawner.AllPlayers) {
+        foreach (var playerObj in PlayerSpawner.AllPlayers)
+        {
             if (playerObj == null) continue;
 
             var carrier = playerObj.GetComponent<PlayerFlagCarrier>();
@@ -191,12 +264,16 @@ public class FlagHoldTracker : MonoBehaviour {
 
         allFlags.Clear();
         PlayerSpawner.AllPlayers.Clear();
+        isResetting = false;
     }
 
-    private void RebuildSpawnPointMap() {
+
+    private void RebuildSpawnPointMap()
+    {
         spawnPoints.Clear();
 
-        foreach (var point in FindObjectsOfType<TeamSpawnPoint>()) {
+        foreach (var point in FindObjectsOfType<TeamSpawnPoint>())
+        {
             if (!spawnPoints.ContainsKey(point.Team))
                 spawnPoints[point.Team] = new List<Transform>();
             spawnPoints[point.Team].Add(point.transform);
