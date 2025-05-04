@@ -26,6 +26,8 @@ public class CharacterInputHandler : MonoBehaviour
         networkInputData.sonarPressed = Input.GetButton("Fire2"); //right click
         networkInputData.decoyPressed = Input.GetButton("Fire3"); //left shift
 
+        networkInputData.isAttackPressed = Input.GetButton("Fire1"); //left click
+
         return networkInputData;
     }
 }

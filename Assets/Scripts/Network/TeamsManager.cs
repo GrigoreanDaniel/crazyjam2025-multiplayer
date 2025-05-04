@@ -4,8 +4,8 @@ public class TeamManager : MonoBehaviour
 {
     public static TeamManager Instance { get; private set; }
 
-    public TeamData redTeam;
-    public TeamData blueTeam;
+    public TeamData[] AvailableTeams;
+    private int _nextTeamIndex = 0;
 
     private void Awake()
     {
@@ -13,14 +13,16 @@ public class TeamManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public TeamData GetTeamForPlayer(int playerIndex)
+    public int GetNextTeamIndex()
     {
-        // Example: alternate team assignment
-        return playerIndex % 2 == 0 ? redTeam : blueTeam;
+        int teamIndex = _nextTeamIndex;
+        _nextTeamIndex = (_nextTeamIndex + 1) % AvailableTeams.Length;
+        return teamIndex;
     }
-
-    public TeamData GetTeamForIndex(int index)
+    public TeamData GetTeamData(int index)
     {
-        return index == 0 ? redTeam : blueTeam;
+        if (index >= 0 && index < AvailableTeams.Length)
+            return AvailableTeams[index];
+        return null;
     }
 }
