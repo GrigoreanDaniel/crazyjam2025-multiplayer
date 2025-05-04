@@ -11,6 +11,7 @@ public static class LoadScenes
         Lobby,
         Loading,
         Game,
+        NetworkedPrototype
     }
 
     public static void ChangeScene(SceneName targetScene)
