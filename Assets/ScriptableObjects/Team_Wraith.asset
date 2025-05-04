@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Team_Wraith
   m_EditorClassIdentifier: 
   teamName: Wraith
-  teamColor: {r: 0.090196066, g: 0.121317096, b: 0.44313726, a: 0}
+  teamColor: {r: 0.44313726, g: 0.090196066, b: 0.09365218, a: 1}
   flagIcon: {fileID: 21300000, guid: 10cb89fee6ef5294b9bbeef1b4439218, type: 3}
   displayName: Wraith
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 778f4cdedee380d49a89c432b0acb7d6, type: 3}
