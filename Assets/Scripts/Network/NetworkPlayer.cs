@@ -7,6 +7,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
     public static NetworkPlayer LocalPlayer { get; private set; }
+    [Networked] public int TeamId { get; set; }
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
