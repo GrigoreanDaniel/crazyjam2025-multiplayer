@@ -7,31 +7,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
     public static NetworkPlayer LocalPlayer { get; private set; }
+    [Networked] public int TeamId { get; set; }
     [SerializeField] private float moveSpeed = 6f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
-    [SerializeField] private float rotationSpeed = 20f;
+    [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private CinemachineVirtualCamera cineMachinevirtualCamera;
     CinemachineBrain cinemachineBrain;
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
-
-    //Jail properties
-    [SerializeField] private JailZone redTeamJailZone;
-    [SerializeField] private JailZone blueTeamJailZone;
-    [SerializeField] private JailUIManager jailUI;
-    [SerializeField] private float jailDuration = 10f;
-
-    private bool isJailed = false;
-    private float jailTimer;
-
-    [Networked, OnChangedRender(nameof(OnTeamIndexChangedRender))]
-    public int TeamIndex { get; set; }
-
-    [SerializeField] private TeamData[] availableTeams; // Assign in inspector
-    public TeamData CurrentTeam { get; private set; }
-
 
     [Networked, OnChangedRender(nameof(OnPlayerNameChanged))]
     [SerializeField] public NetworkString<_16> PlayerNickName { get; set; }
@@ -46,8 +31,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         Cursor.visible = false;
 
         controller = GetComponent<CharacterController>();
-
-        jailUI = GameObject.Find("JailCanvas").GetComponent<JailUIManager>();
     }
 
     public override void Spawned()
@@ -56,6 +39,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         {
             LocalPlayer = this;
             cinemachineBrain = FindObjectOfType<CinemachineBrain>();
+
 
             if (cineMachinevirtualCamera != null)
             {
@@ -69,16 +53,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             Debug.Log("spawned local Player.");
         }
-
-        if (Object.HasStateAuthority)
-        {
-            // Assign team only on the State Authority
-            int teamCount = TeamManager.Instance.AvailableTeams.Length;
-            int nextTeam = TeamManager.Instance.GetNextTeamIndex(); // We’ll write this method below
-            TeamIndex = nextTeam;
-        }
-
-        UpdateTeam(TeamIndex); // Update visuals/UI/etc. immediately
 
         OnPlayerNameChanged();
 
@@ -96,26 +70,16 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void FixedUpdateNetwork()
     {
-        if (!Object.HasStateAuthority) return;
-
-        if (isJailed)
-        {
-            jailTimer -= Runner.DeltaTime;
-            if (jailTimer <= 0f)
-            {
-                ReleaseFromJail();
-            }
-            return;
-        }
-
         Vector3 inputDirection = Vector3.zero;
 
         if (GetInput(out NetworkInputData networkInputData))
         {
+            // Handle horizontal movement
             inputDirection = networkInputData.movementInput.normalized;
 
             if (inputDirection.magnitude != 0f)
             {
+                // Handle jumping
                 if (isGrounded && networkInputData.isJumpPressed)
                 {
                     velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -154,11 +118,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
             velocity.y += gravity * Runner.DeltaTime;
             controller.Move(new Vector3(0, velocity.y, 0) * Runner.DeltaTime);
         }
-
-        if (networkInputData.isAttackPressed)
-        {
-            TryAttack();
-        }
     }
 
     public override void Render()
@@ -183,110 +142,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
         Debug.Log($"[RPC] set nickname {PlayerNickName}");
     }
-
-    public void JailPlayer()
-    {
-        if (isJailed) return;
-
-        isJailed = true;
-        jailTimer = jailDuration;
-        controller.enabled = false;
-
-        if (Object.HasInputAuthority)
-        {
-            jailUI.ShowCaughtUI(5, false);
-        }
-
-        // Move to opposing team's jail
-        TeamIdentifier teamId = GetComponent<TeamIdentifier>();
-        JailZone targetZone = teamId.Team.teamName == "Red" ? blueTeamJailZone : redTeamJailZone;
-        transform.position = targetZone.jailPoint.position;
-    }
-    private void ReleaseFromJail()
-    {
-        isJailed = false;
-        controller.enabled = true;
-
-        if (Object.HasInputAuthority)
-        {
-            jailUI.ShowReleasedUI(false);
-        }
-    }
-    private void OnTeamIndexChangedRender()
-    {
-        UpdateTeam(TeamIndex);
-    }
-
-    private void OnTeamChanged()
-    {
-        TeamData team = TeamManager.Instance.GetTeamData(TeamIndex);
-
-        if (team != null)
-        {
-            GetComponent<TeamIdentifier>().Team = team;
-            GetComponent<Renderer>().material.color = team.teamColor;
-        }
-    }
-    private void UpdateTeam(int index)
-    {
-        if (availableTeams == null || index < 0 || index >= availableTeams.Length)
-        {
-            Debug.LogWarning("Invalid team index or team list not set.");
-            return;
-        }
-
-        CurrentTeam = availableTeams[index];
-
-        // Assign to identifier so others can access team
-        var identifier = GetComponent<TeamIdentifier>();
-        if (identifier != null)
-        {
-            identifier.Team = CurrentTeam;
-        }
-
-        // Optional: Update visuals
-        GetComponentInChildren<Renderer>().material.color = CurrentTeam.teamColor;
-
-        Debug.Log($"[Team] Assigned team: {CurrentTeam.teamName} to player {Object.InputAuthority}");
-    }
-
-    private void TryAttack()
-    {
-        Debug.Log("Attacking");
-        // Define attack radius and layer mask
-        float attackRange = 2f;
-        LayerMask hitMask = LayerMask.GetMask("Body");
-
-        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange, hitMask);
-
-        foreach (var hit in hits)
-        {
-            if (hit.gameObject == this.gameObject) continue;
-
-            var otherPlayer = hit.GetComponentInParent<NetworkPlayerCollider>();
-            if (otherPlayer == null) continue;
-
-            var myTeam = GetComponent<TeamIdentifier>()?.Team;
-            var otherTeam = otherPlayer.GetComponentInParent<TeamIdentifier>()?.Team;
-
-            if (myTeam != null && otherTeam != null && myTeam != otherTeam)
-            {
-                if (HasStateAuthority)
-                {
-                    Debug.Log($"[ATTACK] {otherPlayer.name} jailed by {name}");
-                    otherPlayer.GetComponentInParent<NetworkPlayer>().JailPlayer();
-                }
-                break;
-            }
-        }
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 2f);
-    }
 }
-
 
 
 
