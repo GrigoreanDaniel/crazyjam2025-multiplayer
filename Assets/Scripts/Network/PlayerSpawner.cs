@@ -84,7 +84,7 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
     private void SpawnPlayer(NetworkRunner runner, PlayerRef player)
     {
         int playerToken = GetPlayerToken(runner, player); // Get the player token
-        var spawnPosition = new Vector3(0, 50, 0); // Set spawn position as needed
+        var spawnPosition = new Vector3(0, 10, 0); // Set spawn position as needed
         var spawnRotation = Quaternion.identity; // Set spawn rotation as needed
 
         Debug.Log("Spawning player with token: " + playerToken);

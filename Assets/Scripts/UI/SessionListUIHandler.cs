@@ -40,7 +40,7 @@ public class SessionListUIHandler : MonoBehaviour
 
         if (networkRunnerHandler != null)
         {
-            networkRunnerHandler.JoinGame(sessionInfo, LoadScenes.SceneName.Game.ToString());
+            networkRunnerHandler.JoinGame(sessionInfo, LoadScenes.SceneName.NetworkedPrototype.ToString());
 
             MainMenuUIHandler mainMenuUIHandler = FindObjectOfType<MainMenuUIHandler>();
             mainMenuUIHandler.OnJoiningServer();

@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 602906273525242440}
   - component: {fileID: 4873802982651764074}
   - component: {fileID: -1963957796300512797}
+  - component: {fileID: 6173942037069506034}
   m_Layer: 7
   m_Name: NetworkPlayer
   m_TagString: Player
@@ -265,6 +266,7 @@ MonoBehaviour:
   - {fileID: 1027555055282688330}
   - {fileID: 602906273525242440}
   - {fileID: 4873802982651764074}
+  - {fileID: 6173942037069506034}
   - {fileID: 6993144558278371240}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &427490093180962254
@@ -375,7 +377,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4583425924211564122}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c7a7f0c08a92ab47949f953545f7c1c, type: 3}
   m_Name: 
@@ -394,6 +396,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: {fileID: 0}
+--- !u!114 &6173942037069506034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583425924211564122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825db728deba3654caef82bd689eadbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redTeamJailZone: {fileID: 0}
+  blueTeamJailZone: {fileID: 0}
+  jailDuration: 10
 --- !u!1 &6364935096698897492
 GameObject:
   m_ObjectHideFlags: 0

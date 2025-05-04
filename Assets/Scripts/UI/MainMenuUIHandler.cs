@@ -60,7 +60,7 @@ public class MainMenuUIHandler : MonoBehaviour
 
         if (networkRunnerHandler != null)
         {
-            networkRunnerHandler.CreateGame(sessionNameIF.text, LoadScenes.SceneName.Game.ToString());
+            networkRunnerHandler.CreateGame(sessionNameIF.text, LoadScenes.SceneName.NetworkedPrototype.ToString());
 
             HidePanels();
             statusPanel.SetActive(true);
