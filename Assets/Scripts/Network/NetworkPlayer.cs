@@ -8,6 +8,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private TextMeshProUGUI playerNameText;
     public static NetworkPlayer LocalPlayer { get; private set; }
     [SerializeField] private float moveSpeed = 6f;
+    private bool movementEnabled = true;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 1.5f;
     [SerializeField] private float rotationSpeed = 20f;
@@ -22,9 +23,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
     [SerializeField] private JailZone blueTeamJailZone;
     [SerializeField] private JailUIManager jailUI;
     [SerializeField] private float jailDuration = 10f;
-
-    private bool isJailed = false;
-    private float jailTimer;
 
     [Networked, OnChangedRender(nameof(OnTeamIndexChangedRender))]
     public int TeamIndex { get; set; }
@@ -95,17 +93,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
     public override void FixedUpdateNetwork()
     {
-        if (!Object.HasStateAuthority) return;
-
-        if (isJailed)
-        {
-            jailTimer -= Runner.DeltaTime;
-            if (jailTimer <= 0f)
-            {
-                Rpc_ShowReleasedUI();
-            }
-            return;
-        }
+        if (!Object.HasStateAuthority || !movementEnabled) return;
 
         Vector3 inputDirection = Vector3.zero;
 
@@ -183,72 +171,6 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         Debug.Log($"[RPC] set nickname {PlayerNickName}");
     }
 
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_RequestJail()
-    {
-        if (isJailed) return;
-
-        isJailed = true;
-        controller.enabled = false;
-        Debug.Log($"[Jail] Host received jail request for {PlayerNickName}");
-
-        // Move to opposing team's jail
-        TeamIdentifier teamId = GetComponent<TeamIdentifier>();
-        JailZone targetZone = teamId.Team.teamName == "Red" ? blueTeamJailZone : redTeamJailZone;
-        transform.position = targetZone.jailPoint.position;
-    }
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_RequestJailTarget(NetworkId targetPlayerId)
-    {
-        Debug.Log($"[RPC] Request to jail player with ID {targetPlayerId} received");
-
-        var targetObject = Runner.FindObject(targetPlayerId);
-        if (targetObject == null)
-        {
-            Debug.LogWarning($"[RPC] No object found with ID {targetPlayerId}");
-            return;
-        }
-
-        var targetPlayer = targetObject.GetComponent<NetworkPlayer>();
-        if (targetPlayer == null)
-        {
-            Debug.LogWarning($"[RPC] Object with ID {targetPlayerId} is not a NetworkPlayer");
-            return;
-        }
-
-        // Double-check that attacker and target are on opposing teams
-        var myTeam = GetComponent<TeamIdentifier>()?.Team;
-        var theirTeam = targetPlayer.GetComponent<TeamIdentifier>()?.Team;
-
-        if (myTeam != null && theirTeam != null && myTeam != theirTeam)
-        {
-            Debug.Log($"[RPC] Jailing target player {targetPlayer.name}");
-            targetPlayer.Rpc_RequestJail();
-            targetPlayer.Rpc_ShowCaughtUI();
-        }
-    }
-
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
-    public void Rpc_ShowCaughtUI()
-    {
-        jailTimer = jailDuration;
-
-        Debug.Log("[JailUITrigger] Showing Caught UI via RPC");
-        jailUI.ShowCaughtUI(jailDuration, false);
-    }
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
-    private void Rpc_ShowReleasedUI()
-    {
-        isJailed = false;
-        controller.enabled = true;
-
-        Debug.Log("[JailUITrigger] Showing Released UI via RPC");
-        jailUI.ShowReleasedUI(false);
-
-    }
     private void OnTeamIndexChangedRender()
     {
         UpdateTeam(TeamIndex);
@@ -300,7 +222,7 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
         {
             if (hit.gameObject == this.gameObject) continue;
 
-            var otherPlayer = hit.GetComponentInParent<NetworkPlayerCollider>();
+            var otherPlayer = hit.GetComponentInParent<NetworkPlayer>();
             if (otherPlayer == null) continue;
 
             var myTeam = GetComponent<TeamIdentifier>()?.Team;
@@ -308,23 +230,24 @@ public class NetworkPlayer : NetworkBehaviour, IPlayerLeft
 
             if (myTeam != null && otherTeam != null && myTeam != otherTeam)
             {
-                if (HasStateAuthority)
-                {
-                    Debug.Log($"[ATTACK] Sending jail request for {otherPlayer.name}");
-
-                    var otherNetworkPlayer = otherPlayer.GetComponentInParent<NetworkPlayer>();
-
-                    // Use our own player object (this) to send the request to the host
-                    Rpc_RequestJailTarget(otherNetworkPlayer.Object.Id);
-
-                }
+                otherPlayer.RPC_JailPlayer();
             }
         }
     }
-    private void OnDrawGizmosSelected()
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.StateAuthority)]
+    public void RPC_JailPlayer()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 2f);
+        var jailManager = GetComponent<PlayerJailManager>();
+        if (jailManager != null)
+        {
+            jailManager.JailPlayer();
+        }
+    }
+    public void SetMovementEnabled(bool enabled)
+    {
+        movementEnabled = enabled;
+        Debug.Log($"[Movement] Movement set to {enabled} for {name}");
     }
 }
 

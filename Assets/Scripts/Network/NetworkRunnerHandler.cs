@@ -31,7 +31,7 @@ public class NetworkRunnerHandler : MonoBehaviour
             {
                 var clientTask = InitializeNetworkRunner(
                 networkRunner,
-                GameMode.Shared,
+                GameMode.AutoHostOrClient,
                 GameManager.Instance.GetPlayerConnectionToken(), // Get the player connection token
                 "testSession",
                 NetAddress.Any(),
@@ -102,13 +102,31 @@ public class NetworkRunnerHandler : MonoBehaviour
 
     public void CreateGame(string sessionName, string sceneName)
     {
+        string scenePath = $"Assets/Scenes/{sceneName}.unity";
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
+
+        if (buildIndex == -1)
+        {
+            Debug.LogError($"Scene '{sceneName}' not found in Build Settings. Check the path: {scenePath}");
+            return;
+        }
+
         Debug.Log($"Create session {sessionName} scene {sceneName} build index {SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}")}");
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Shared, GameManager.Instance.GetPlayerConnectionToken(), sessionName, NetAddress.Any(), SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}")), null); // Initialize the NetworkRunner for hosting a game
+        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Host, GameManager.Instance.GetPlayerConnectionToken(), sessionName, NetAddress.Any(), SceneRef.FromIndex(buildIndex), null); // Initialize the NetworkRunner for hosting a game
     }
 
     public void JoinGame(SessionInfo sessionInfo, string sceneName)
     {
+        string scenePath = $"Assets/Scenes/{sceneName}.unity";
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(scenePath);
+
+        if (buildIndex == -1)
+        {
+            Debug.LogError($"Scene '{sceneName}' not found in Build Settings. Check the path: {scenePath}");
+            return;
+        }
+
         Debug.Log($"Join session {sessionInfo.Name} scene {sceneName} build index {SceneUtility.GetBuildIndexByScenePath($"scenes/{sceneName}")} (sceneref method: {SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}"))}");
-        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Shared, GameManager.Instance.GetPlayerConnectionToken(), sessionInfo.Name, NetAddress.Any(), SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath($"Scenes/{sceneName}")), null); // Initialize the NetworkRunner for joining a game
+        var clientTask = InitializeNetworkRunner(networkRunner, GameMode.Client, GameManager.Instance.GetPlayerConnectionToken(), sessionInfo.Name, NetAddress.Any(), SceneRef.FromIndex(buildIndex), null); // Initialize the NetworkRunner for hosting a game
     }
 }
