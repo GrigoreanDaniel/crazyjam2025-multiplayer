@@ -101,7 +101,9 @@ MonoBehaviour:
   moveSpeed: 6
   gravity: -9.81
   jumpHeight: 1.5
-  controller: {fileID: 3973561835668103260}
+  rotationSpeed: 20
+  cameraTransform: {fileID: 0}
+  moleDigAbility: {fileID: 0}
 --- !u!143 &3973561835668103260
 CharacterController:
   m_ObjectHideFlags: 0
@@ -140,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 95486579
+  SortKey: 203525371
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
