@@ -45,7 +45,6 @@ public class PlayerFlagCarrier : MonoBehaviour {
 
         if (activeBeacon != null)
             Destroy(activeBeacon);
-        //FindObjectOfType<FlagMessageUI>()?.HideMessage();
     }
 
     public void ReturnFlag() {

@@ -12,6 +12,9 @@ public class FlagHoldTracker : MonoBehaviour {
     [SerializeField] private float roundDuration = 300f;
 
     [SerializeField] private MessageDisplayer messageDisplayer;
+    public TeamData LeftTeam => leftTeam;
+    public TeamData RightTeam => rightTeam;
+
     [SerializeField] private TeamData leftTeam;
     [SerializeField] private TeamData rightTeam;
 
@@ -46,6 +49,9 @@ public class FlagHoldTracker : MonoBehaviour {
     private void Start() {
         StartCoroutine(WaitAndFetchFlags());
         roundTimer = roundDuration;
+
+        if (messageDisplayer != null)
+            messageDisplayer.SetTeamUI(leftTeam, rightTeam);
     }
 
     private IEnumerator WaitAndFetchFlags() {
@@ -112,7 +118,8 @@ public class FlagHoldTracker : MonoBehaviour {
         if (messageDisplayer != null) {
             float leftScore = teamScores[leftTeam];
             float rightScore = teamScores[rightTeam];
-            bool leftLeads = leftScore >= rightScore;
+            bool leftLeads = leftScore > rightScore;
+            bool scoresAreEqual = Mathf.Approximately(leftScore, rightScore);
 
             messageDisplayer.UpdateScoreUI(
                 leftScore,
@@ -120,7 +127,7 @@ public class FlagHoldTracker : MonoBehaviour {
                 leftHoldTime,
                 rightHoldTime,
                 roundTimer,
-                leftLeads
+                !scoresAreEqual && leftLeads // Only show crown if there's a leader
             );
         }
     }

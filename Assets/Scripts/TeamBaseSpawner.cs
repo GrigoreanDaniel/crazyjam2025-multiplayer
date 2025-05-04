@@ -10,26 +10,34 @@ public class TeamBaseSpawner : MonoBehaviour {
         public List<Transform> spawnPoints;
     }
 
-
+    [SerializeField] private FlagHoldTracker flagHoldTracker;
     [SerializeField] private List<TeamSpawnGroup> spawnGroups;
 
     private void Start() {
+        if (flagHoldTracker == null) {
+            Debug.LogError("[TeamBaseSpawner] FlagHoldTracker reference is missing!");
+            return;
+        }
+
+        var activeTeams = new HashSet<TeamData> {
+        flagHoldTracker.LeftTeam,
+        flagHoldTracker.RightTeam
+    };
+
         foreach (var group in spawnGroups) {
+            if (!activeTeams.Contains(group.Team)) continue;
+
             if (group.spawnPoints.Count == 0 || group.basePrefab == null) continue;
 
             Transform chosenPoint = group.spawnPoints[Random.Range(0, group.spawnPoints.Count)];
             GameObject baseInstance = Instantiate(group.basePrefab, chosenPoint.position, chosenPoint.rotation);
 
-            // After spawning the base
             var spawnPoints = baseInstance.GetComponentsInChildren<TeamSpawnPoint>();
             foreach (var point in spawnPoints) {
-                point.SetTeam(group.Team); // You'll need a public method on TeamSpawnPoint
+                point.SetTeam(group.Team);
             }
 
-
-            // Find a Transform inside base to use as flag anchor
-            Transform flagAnchor = baseInstance.transform.Find("FlagAnchor"); // or use a public field if not named
-            
+            Transform flagAnchor = baseInstance.transform.Find("FlagAnchor");
             if (group.flagPrefab != null && flagAnchor != null) {
                 GameObject flagInstance = Instantiate(group.flagPrefab, flagAnchor.position, flagAnchor.rotation);
 
@@ -43,19 +51,18 @@ public class TeamBaseSpawner : MonoBehaviour {
 
                 if (flagTeamId != null)
                     flagTeamId.Team = group.Team;
-
             }
-            // Optional: color the base to match team
+
             Renderer[] renderers = baseInstance.GetComponentsInChildren<Renderer>();
             foreach (var rend in renderers) {
                 if (rend.material.HasProperty("_Color"))
                     rend.material.color = group.Team.teamColor;
             }
 
-            // Optional: assign TeamIdentifier if not already assigned in prefab
             var teamId = baseInstance.GetComponent<TeamIdentifier>();
             if (teamId != null)
                 teamId.Team = group.Team;
         }
     }
+
 }

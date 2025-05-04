@@ -122,14 +122,16 @@ public class MessageDisplayer : MonoBehaviour {
     }
 
     public void SetTeamUI(TeamData leftTeam, TeamData rightTeam) {
+
         TeamNameLeft.text = leftTeam.displayName;
         TeamNameRight.text = rightTeam.displayName;
 
         TeamIconLeft.sprite = leftTeam.icon;
         TeamIconRight.sprite = rightTeam.icon;
 
-        TeamNameLeft.color = leftTeam.teamColor;
-        TeamNameRight.color = rightTeam.teamColor;
+        Debug.Log($"Setting team names: {leftTeam.displayName} | {rightTeam.displayName}");
+        Debug.Log($"Left Text Assigned: {TeamNameLeft != null}, Right Text Assigned: {TeamNameRight != null}");
+
     }
 
     public void UpdateScoreUI(float leftScore, float rightScore, float leftTime, float rightTime, float roundTime, bool leftLeads) {
@@ -140,8 +142,10 @@ public class MessageDisplayer : MonoBehaviour {
         if (ScoreTimerRight != null) ScoreTimerRight.text = FormatTime(rightTime);
         if (RoundTimer != null) RoundTimer.text = FormatTime(roundTime);
 
+        bool scoresAreEqual = Mathf.Approximately(leftScore, rightScore);
+
         if (CrownLeft != null) CrownLeft.SetActive(leftLeads);
-        if (CrownRight != null) CrownRight.SetActive(!leftLeads);
+        if (CrownRight != null) CrownRight.SetActive(!leftLeads && !scoresAreEqual);
     }
 
     /// <summary>
@@ -267,9 +271,20 @@ public class MessageDisplayer : MonoBehaviour {
             case MessageType.JailGreen: return JailGreenIcon;
             case MessageType.TrapNeutral: return TrapNeutralIcon;
             case MessageType.TrapRed: return TrapRedIcon;
-            case MessageType.TrapGreen: return TrapGreenIcon;
-            case MessageType.JailTimer: return JailTimerText;
-            case MessageType.TrapTimer: return TrapTimerText;
+            case MessageType.TrapGreen: return TrapGreenIcon; // Icons end here
+            case MessageType.JailTimer: return JailTimerText; // Timer starts here
+            case MessageType.TrapTimer: return TrapTimerText; // Timer ends here
+            case MessageType.TeamNameLeft: return TeamNameLeft?.gameObject;// NEW UI Elements
+            case MessageType.TeamNameRight: return TeamNameRight?.gameObject;
+            case MessageType.TeamIconLeft: return TeamIconLeft?.gameObject;
+            case MessageType.TeamIconRight: return TeamIconRight?.gameObject;
+            case MessageType.ScoreBarLeft: return ScoreBarLeft?.gameObject;
+            case MessageType.ScoreBarRight: return ScoreBarRight?.gameObject;
+            case MessageType.ScoreTimerLeft: return ScoreTimerLeft?.gameObject;
+            case MessageType.ScoreTimerRight: return ScoreTimerRight?.gameObject;
+            case MessageType.RoundTimer: return RoundTimer?.gameObject;
+            case MessageType.CrownLeft: return CrownLeft;
+            case MessageType.CrownRight: return CrownRight;
             default: return null;
         }
     }
