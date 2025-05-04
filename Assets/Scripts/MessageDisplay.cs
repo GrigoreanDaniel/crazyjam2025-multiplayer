@@ -48,25 +48,32 @@ public class MessageDisplayer : MonoBehaviour {
     [Header("Assign your individual message GameObjects here:")]
     [SerializeField] private GameObject CaughtMessage;
     [SerializeField] private GameObject ReleasedMessage;
+
     [SerializeField] private GameObject TrapMessage;
     [SerializeField] private GameObject TrapReleaseMessage;
+
     [SerializeField] private GameObject PickUpEnemyFlagMessage;
     [SerializeField] private GameObject PickedUpFriendlyFlag;
+
     [SerializeField] private GameObject EnemyFlagStolen;
     [SerializeField] private GameObject FriendlyFlagReturned;
+
     [SerializeField] private GameObject EnemyFlagReturned;
     [SerializeField] private GameObject FriendlyFlagStolen;
 
     [SerializeField] private GameObject PickUpEnemyFlagBlueTeamIcon;
     [SerializeField] private GameObject PickUpEnemyFlagRedTeamIcon;
+
     [SerializeField] private GameObject EnemyFlagStolenIcon;
     [SerializeField] private GameObject FriendlyFlagStolenIcon;
+
     [SerializeField] private GameObject EnemyFlagReturnedIcon;
     [SerializeField] private GameObject FriendlyFlagReturnedIcon;
 
     [SerializeField] private GameObject JailNeutralIcon;
     [SerializeField] private GameObject JailRedIcon;
     [SerializeField] private GameObject JailGreenIcon;
+
     [SerializeField] private GameObject TrapNeutralIcon;
     [SerializeField] private GameObject TrapRedIcon;
     [SerializeField] private GameObject TrapGreenIcon;
@@ -76,19 +83,27 @@ public class MessageDisplayer : MonoBehaviour {
 
     [SerializeField] private TMP_Text TeamNameLeft;
     [SerializeField] private TMP_Text TeamNameRight;
+
     [SerializeField] private Image TeamIconLeft;
     [SerializeField] private Image TeamIconRight;
+
     [SerializeField] private Slider ScoreBarLeft;
     [SerializeField] private Slider ScoreBarRight;
+
     [SerializeField] private TMP_Text ScoreTimerLeft;
     [SerializeField] private TMP_Text ScoreTimerRight;
+
     [SerializeField] private TMP_Text RoundTimer;
+
     [SerializeField] private GameObject CrownLeft;
     [SerializeField] private GameObject CrownRight;
 
     [SerializeField] private TMP_Text RoundStartCountdownText;
     [SerializeField] private TMP_Text RoundWinMessageText;
     [SerializeField] private TMP_Text FinalWinMessage_Text;
+
+    [SerializeField] private TMP_Text RoundsWonLeft_Text;
+    [SerializeField] private TMP_Text RoundsWonRight_Text;
 
     // Active message tracking
     private GameObject currentMessageObject;
@@ -283,6 +298,15 @@ public class MessageDisplayer : MonoBehaviour {
         yield return new WaitForSeconds(4f);
 
         FinalWinMessage_Text.gameObject.SetActive(false);
+    }
+
+    public void UpdateRoundsWon(int leftWins, int rightWins)
+    {
+        if (RoundsWonLeft_Text != null)
+            RoundsWonLeft_Text.text = $"Rounds Won: {leftWins}";
+
+        if (RoundsWonRight_Text != null)
+            RoundsWonRight_Text.text = $"Rounds Won: {rightWins}";
     }
 
     /// <summary>

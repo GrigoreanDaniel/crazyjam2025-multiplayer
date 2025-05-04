@@ -82,7 +82,6 @@ public class FlagHoldTracker : MonoBehaviour
 
     private void Update()
     {
-        // Inside Update
         if (!roundEnded)
         {
             roundTimer -= Time.deltaTime;
@@ -104,9 +103,14 @@ public class FlagHoldTracker : MonoBehaviour
                         if (messageDisplayer != null)
                         {
                             if (isMatchWin)
+                            {
+                                messageDisplayer.UpdateRoundsWon(teamRoundsWon[leftTeam], teamRoundsWon[rightTeam]);
                                 StartCoroutine(messageDisplayer.ShowFinalMatchWinner(kvp.Key.displayName));
+                            }
                             else
+                            {
                                 StartCoroutine(messageDisplayer.ShowRoundWinner(kvp.Key.displayName));
+                            }
                         }
 
                         if (isMatchWin)
@@ -117,7 +121,6 @@ public class FlagHoldTracker : MonoBehaviour
                         }
 
                         StartCoroutine(ResetRound());
-
                         return;
                     }
                 }
@@ -148,9 +151,14 @@ public class FlagHoldTracker : MonoBehaviour
                     if (messageDisplayer != null)
                     {
                         if (isMatchWin)
+                        {
+                            messageDisplayer.UpdateRoundsWon(teamRoundsWon[leftTeam], teamRoundsWon[rightTeam]);
                             StartCoroutine(messageDisplayer.ShowFinalMatchWinner(winner.displayName));
+                        }
                         else
+                        {
                             StartCoroutine(messageDisplayer.ShowRoundWinner(winner.displayName));
+                        }
                     }
 
                     if (isMatchWin)
@@ -161,12 +169,9 @@ public class FlagHoldTracker : MonoBehaviour
                     }
 
                     StartCoroutine(ResetRound());
-
                 }
-
             }
         }
-
 
         // Track hold times
         if (isHoldingFlag[leftTeam]) leftHoldTime += Time.deltaTime;
@@ -186,10 +191,13 @@ public class FlagHoldTracker : MonoBehaviour
                 leftHoldTime,
                 rightHoldTime,
                 roundTimer,
-                !scoresAreEqual && leftLeads // Only show crown if there's a leader
+                !scoresAreEqual && leftLeads
             );
+
+            messageDisplayer.UpdateRoundsWon(teamRoundsWon[leftTeam], teamRoundsWon[rightTeam]);
         }
     }
+
 
     private void HandlePickup(Flag flag, PlayerFlagCarrier carrier)
     {
