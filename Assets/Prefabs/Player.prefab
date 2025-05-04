@@ -308,8 +308,8 @@ GameObject:
   - component: {fileID: 8538954772868816201}
   - component: {fileID: 2331622532293162676}
   - component: {fileID: 496757505080508753}
-  - component: {fileID: 6431310258960614353}
   - component: {fileID: 4615209602092206220}
+  - component: {fileID: 6431310258960614353}
   - component: {fileID: 4343910490622783047}
   - component: {fileID: 579999688814043661}
   m_Layer: 0
@@ -486,18 +486,6 @@ MonoBehaviour:
   digFX: {fileID: 0}
   digAudio: {fileID: 0}
   sonarComponent: {fileID: 7556269831467372232}
---- !u!114 &6431310258960614353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910839703351211959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc2695604e2fcf745b5f2f4057680088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4615209602092206220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +501,18 @@ MonoBehaviour:
   cameraToRotate: {fileID: 9181562668376983591}
   rotationSpeed: 200
   cinemachineCamera: {fileID: 3908480749867287507}
+--- !u!114 &6431310258960614353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910839703351211959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2695604e2fcf745b5f2f4057680088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4343910490622783047
 MonoBehaviour:
   m_ObjectHideFlags: 0

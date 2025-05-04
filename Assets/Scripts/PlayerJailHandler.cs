@@ -1,41 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerJailHandler : MonoBehaviour {
 
     [SerializeField] private JailUIManager jailUIManager;
     [SerializeField] private float jailDuration = 10f;
-    //[SerializeField] private FlagPickupHandler flagPickupHandler;
 
     private bool isJailed = false;
     private float jailTimer = 0f;
-    private string jailReason = "Jail"; // default
+    private string jailReason = "Jail"; // Default: non-trap
 
-    private PlayerMovement playerMovement; // No SerializeField, handled automatically
+    private PlayerMovement playerMovement;
 
     private void Awake() {
-
-        // Auto-fetch PlayerMovement from the same GameObject
         playerMovement = GetComponent<PlayerMovement>();
-        jailUIManager = FindObjectOfType<JailUIManager>();
+        jailUIManager = FindFirstObjectByType<JailUIManager>();
 
-        if (playerMovement == null) {
+        if (playerMovement == null)
+            Debug.LogError("[PlayerJailHandler] No PlayerMovement component found!");
 
-            Debug.LogError("PlayerMovement component not found on Player! Jail system won't work!");
-        }
+        if (jailUIManager == null)
+            Debug.LogWarning("[PlayerJailHandler] No JailUIManager found in scene.");
     }
 
     private void Update() {
-
         if (!isJailed) return;
 
         jailTimer -= Time.deltaTime;
 
         if (jailTimer <= 0f) {
-
             ReleaseFromJail();
-            //jailUIManager.HideAll();
         }
     }
 
@@ -43,34 +36,30 @@ public class PlayerJailHandler : MonoBehaviour {
         if (isJailed) return;
 
         jailReason = reason;
-        isJailed = true;
-        jailTimer = (durationOverride > 0) ? durationOverride : jailDuration;
-        playerMovement.enabled = false;
-
-        PlayerDizzyEffect dizzy = GetComponent<PlayerDizzyEffect>();
-        if (dizzy != null && dizzyOverride > 0)
-            dizzy.ApplyDizziness(dizzyOverride);
-
         bool isTrap = (jailReason == "Trap");
 
-        if (jailUIManager != null)
-            jailUIManager.ShowCaughtUI(jailTimer, isTrap);
+        // Trap uses different duration
+        float defaultDuration = isTrap ? 3f : jailDuration;
+        jailTimer = (durationOverride > 0f) ? durationOverride : defaultDuration;
+
+        isJailed = true;
+        playerMovement.enabled = false;
+
+        // Optional dizziness
+        var dizzy = GetComponent<PlayerDizzyEffect>();
+        if (dizzy != null && dizzyOverride > 0f)
+            dizzy.ApplyDizziness(dizzyOverride);
+
+        // UI logic
+        jailUIManager?.ShowCaughtUI(jailTimer, isTrap);
     }
+
 
     private void ReleaseFromJail() {
         isJailed = false;
         playerMovement.enabled = true;
 
         bool isTrap = (jailReason == "Trap");
-        jailUIManager.ShowReleasedUI(isTrap);
-
-        /*if (jailUIManager != null)
-            jailUIManager.HideAll();*/
+        jailUIManager?.ShowReleasedUI(jailTimer, isTrap);
     }
-
-
-    /*public void AssignFlagReference(FlagPickupHandler handler) {
-        flagPickupHandler = handler;
-    }*/
-
 }

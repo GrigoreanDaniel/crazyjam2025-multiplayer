@@ -61,7 +61,8 @@ public class Flag : MonoBehaviour {
     public void ReturnToBase() {
         var handler = FlagEvents.OnFlagReturned;
         if (handler != null) {
-            foreach (var d in handler.GetInvocationList()) {
+            var subscribers = handler.GetInvocationList();
+            foreach (var d in subscribers) {
                 try {
                     ((Action<Flag>)d)(this);
                 } catch (Exception e) {
@@ -69,7 +70,6 @@ public class Flag : MonoBehaviour {
                 }
             }
         }
-
 
         transform.SetParent(null);
         currentCarrier = null;
@@ -81,6 +81,7 @@ public class Flag : MonoBehaviour {
             autoReturnCoroutine = null;
         }
     }
+
 
 
     private bool IsPickupAllowed(PlayerFlagCarrier carrier) {

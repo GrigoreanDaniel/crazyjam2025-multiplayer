@@ -1,10 +1,13 @@
 using UnityEngine;
-using System;
 
 public class FlagAnnouncer : MonoBehaviour {
-    public static Action<string, TeamData> OnLocalMessage;  // Message, team (for color/icon)
-    public static Action<string, TeamData> OnAllyMessage;   // Message, team
-    public static Action<string, TeamData> OnEnemyMessage;  // Message, team
+    private MessageDisplayer _messageDisplayer;
+
+    private void Awake() {
+        _messageDisplayer = FindObjectOfType<MessageDisplayer>();
+        if (_messageDisplayer == null)
+            Debug.LogWarning("[FlagAnnouncer] No MessageDisplayer found in scene.");
+    }
 
     private void OnEnable() {
         FlagEvents.OnFlagPickedUp += HandleFlagPickedUp;
@@ -19,34 +22,44 @@ public class FlagAnnouncer : MonoBehaviour {
     }
 
     private void HandleFlagPickedUp(Flag flag, PlayerFlagCarrier carrier) {
-        TeamData flagTeam = flag.GetComponent<TeamIdentifier>().Team;
-        TeamData carrierTeam = carrier.Team;
+        var flagTeam = flag.GetComponent<TeamIdentifier>()?.Team;
+        var carrierTeam = carrier.Team;
 
         if (flagTeam == null || carrierTeam == null) return;
 
+        if (_messageDisplayer == null) return;
+
         if (carrierTeam == flagTeam) {
             // Picked up own flag
-            OnLocalMessage?.Invoke("You picked up your flag!", carrierTeam);
-            OnAllyMessage?.Invoke("Your flag has returned!", carrierTeam);
-            OnEnemyMessage?.Invoke("Enemy's flag returned!", flagTeam);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.FriendlyFlagReturned, 2.5f);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.FriendlyFlagReturnedIcon, 2.5f);
         } else {
             // Picked up enemy flag
-            OnLocalMessage?.Invoke("You picked up enemy's flag!", flagTeam);
-            OnAllyMessage?.Invoke("Enemy's flag stolen!", flagTeam);
-            OnEnemyMessage?.Invoke("The enemy has your flag!", flagTeam);
-            Debug.Log("Picked up enemy flag! Should display UI message.");
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.EnemyFlagStolen, 2.5f);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.EnemyFlagStolenIcon, 2.5f);
         }
-
     }
 
     private void HandleFlagDropped(Flag flag, PlayerFlagCarrier carrier) {
-        // Optional: could notify here if desired
+        // You can optionally show a dropped flag message if desired
+        // e.g., _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.FlagDropped, 2f);
     }
 
     private void HandleFlagReturned(Flag flag) {
-        TeamData flagTeam = flag.GetComponent<TeamIdentifier>().Team;
+        TeamData flagTeam = flag.GetComponent<TeamIdentifier>()?.Team;
+        if (flagTeam == null) return;
 
-        OnAllyMessage?.Invoke("Your flag has returned!", flagTeam);
-        OnEnemyMessage?.Invoke("Enemy's flag returned!", flagTeam);
+        // Determine who is local player team
+        var localPlayer = FindAnyObjectByType<PlayerFlagInput>();
+        TeamData localTeam = localPlayer?.Team;
+
+        if (localTeam == flagTeam) {
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.FriendlyFlagReturned, 2f);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.FriendlyFlagReturnedIcon, 2f);
+        } else {
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.EnemyFlagReturned, 2f);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.EnemyFlagReturnedIcon, 2f);
+        }
     }
+
 }

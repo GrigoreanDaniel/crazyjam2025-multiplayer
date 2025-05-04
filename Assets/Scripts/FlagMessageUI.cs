@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,3 +45,4 @@ public class FlagMessageUI : MonoBehaviour {
         flagIcon.gameObject.SetActive(false);
     }
 }
+*/

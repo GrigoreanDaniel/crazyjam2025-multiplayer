@@ -1,82 +1,53 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class JailUIManager : MonoBehaviour {
-
-    [Header("Caught UI")]
-    [SerializeField] private GameObject caughtMessage;
-    [SerializeField] private GameObject jailIconRed;
-
-    [Header("Released UI")]
-    [SerializeField] private GameObject releasedMessage;
-    [SerializeField] private GameObject jailIconGreen;
-
-    [Header("Trap Specific UI")]
-    [SerializeField] private GameObject trapCaughtMessage;
-    [SerializeField] private GameObject trapIconRed;
-    [SerializeField] private GameObject trapReleasedMessage;
-    [SerializeField] private GameObject trapIconGreen;
-
-    [SerializeField] private GameObject jailIconNeutral;
-    [SerializeField] private GameObject trapIconNeutral;
-
-    [Header("Timer Display")]
-    [SerializeField] private TMP_Text jailTimerText;
-    [SerializeField] private TMP_Text trapTimerText;
-    [SerializeField] private GameObject jailTimerContainer;
-    [SerializeField] private GameObject trapTimerContainer;
-
-    private float jailTimeRemaining = 0f;
-    private bool isJailed = false;
-
-    private float trapTimeRemaining = 0f;
-    private bool isTrapped = false;
-
-    private bool hasShownTrapReleasedUI = false;
 
     private MessageDisplayer _messageDisplayer;
 
     private void Start() {
         _messageDisplayer = FindFirstObjectByType<MessageDisplayer>();
+
+        if (_messageDisplayer == null)
+            Debug.LogWarning("[JailUIManager] MessageDisplayer not found in scene.");
     }
 
-    // Called when jailed by enemy or manually
-    public void ShowCaughtUI(float duration, bool isTrap) {
+    public void ShowCaughtUI(float totalDuration, bool isTrap) {
+        if (_messageDisplayer == null) return;
+
         if (isTrap) {
-            _messageDisplayer.ShowMessage(MessageDisplayer.MessageType.Trap, duration);
+            float neutralDuration = 5f;
+            float introDuration = 2f;
+
+            // Stage 1: Quick red message
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.Trap, introDuration);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.TrapRed, introDuration);
+
+            // Stage 2: Persistent neutral + timer
+            _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.TrapNeutral, neutralDuration);
+            _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.TrapTimer, neutralDuration);
         } else {
-            _messageDisplayer.ShowMessage(MessageDisplayer.MessageType.Caught, duration);
+            float neutralDuration = 100f;
+            float introDuration = 2f;
+
+            // Stage 1: Quick red message
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.Caught, introDuration);
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.JailRed, introDuration);
+
+            // Stage 2: Persistent neutral + timer
+            _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.JailNeutral, neutralDuration);
+            _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.JailTimer, neutralDuration);
         }
     }
 
+    public void ShowReleasedUI(float duration, bool isTrap) {
+        if (_messageDisplayer == null) return;
 
+        float releaseDuration = 2f;
 
-    private IEnumerator HideCaughtUIAfterSeconds(float delay) {
-        yield return new WaitForSeconds(delay);
-        caughtMessage?.SetActive(false);
-        jailIconRed?.SetActive(false);
-        trapCaughtMessage?.SetActive(false);
-        trapIconRed?.SetActive(false);
-    }
-
-
-
-    // Called when released or time ends
-    public void ShowReleasedUI(bool isTrap) {
-        if (isTrap) {
-            trapIconRed?.SetActive(false);
-            trapCaughtMessage?.SetActive(false);
-            trapIconGreen?.SetActive(true);
-            trapReleasedMessage?.SetActive(true);
-            trapIconNeutral?.SetActive(false);
-        } else {
-            jailIconRed?.SetActive(false);
-            caughtMessage?.SetActive(false);
-            jailIconGreen?.SetActive(true);
-            releasedMessage?.SetActive(true);
-            jailIconNeutral?.SetActive(false);
-        }
+        _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.Released, releaseDuration);
+        if (isTrap)
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.TrapGreen, releaseDuration);
+        else
+            _messageDisplayer.ShowSingleMessage(MessageDisplayer.MessageType.JailGreen, releaseDuration);
     }
 }
