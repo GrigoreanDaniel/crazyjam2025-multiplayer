@@ -36,53 +36,19 @@ public class JailUIManager : MonoBehaviour {
 
     private bool hasShownTrapReleasedUI = false;
 
+    private MessageDisplayer _messageDisplayer;
+
     private void Start() {
-        HideAll();
+        _messageDisplayer = FindFirstObjectByType<MessageDisplayer>();
     }
-
-    private void Update() {
-        if (isJailed) {
-            jailTimeRemaining -= Time.deltaTime;
-            if (jailTimeRemaining <= 0f) {
-                isJailed = false;
-                ShowReleasedUI(false); // Not trap
-            } else {
-                UpdateJailTimerUI();
-            }
-        }
-
-        if (isTrapped) {
-            trapTimeRemaining -= Time.deltaTime;
-            if (trapTimeRemaining <= 0f) {
-                isTrapped = false;
-                ShowReleasedUI(true); // Is trap
-            } else {
-                UpdateTrapTimerUI();
-            }
-        }
-    }
-
 
     // Called when jailed by enemy or manually
     public void ShowCaughtUI(float duration, bool isTrap) {
         if (isTrap) {
-            isTrapped = true; 
-            trapTimeRemaining = duration;
-            trapTimerContainer?.SetActive(true);
-            trapCaughtMessage?.SetActive(true);
-            trapIconRed?.SetActive(true);
-            trapIconNeutral?.SetActive(true);
-            hasShownTrapReleasedUI = false; // Reset for new trap event
+            _messageDisplayer.ShowMessage(MessageDisplayer.MessageType.Trap, duration);
         } else {
-            isJailed = true;
-            jailTimeRemaining = duration;
-            jailTimerContainer?.SetActive(true);
-            caughtMessage?.SetActive(true);
-            jailIconRed?.SetActive(true);
-            jailIconNeutral?.SetActive(true);
+            _messageDisplayer.ShowMessage(MessageDisplayer.MessageType.Caught, duration);
         }
-
-        StartCoroutine(HideCaughtUIAfterSeconds(2f));
     }
 
 
@@ -112,45 +78,5 @@ public class JailUIManager : MonoBehaviour {
             releasedMessage?.SetActive(true);
             jailIconNeutral?.SetActive(false);
         }
-
-        StartCoroutine(HideReleasedUIAfterSeconds(2f));
     }
-
-    private IEnumerator HideReleasedUIAfterSeconds(float delay) {
-        yield return new WaitForSeconds(delay);
-        HideAll();
-    }
-
-    public void HideAll() {
-        caughtMessage?.SetActive(false);
-        jailIconRed?.SetActive(false);
-        releasedMessage?.SetActive(false);
-        jailIconGreen?.SetActive(false);
-        jailIconNeutral?.SetActive(false);
-
-        trapCaughtMessage?.SetActive(false);
-        trapIconRed?.SetActive(false);
-        trapReleasedMessage?.SetActive(false);
-        trapIconGreen?.SetActive(false);
-        trapIconNeutral?.SetActive(false);
-        
-        jailTimerContainer?.SetActive(false);
-        trapTimerContainer?.SetActive(false);
-    }
-
-    private void UpdateJailTimerUI() {
-        if (jailTimerText != null) {
-            int minutes = Mathf.FloorToInt(jailTimeRemaining / 60f);
-            int seconds = Mathf.FloorToInt(jailTimeRemaining % 60f);
-            jailTimerText.text = $"{minutes:D1}:{seconds:D2}";
-        }
-    }
-
-    private void UpdateTrapTimerUI() {
-        if (trapTimerText != null) {
-            int displayTime = Mathf.Max(0, Mathf.FloorToInt(trapTimeRemaining + 0.01f));
-            trapTimerText.text = displayTime.ToString(); // Only seconds
-        }
-    }
-
 }

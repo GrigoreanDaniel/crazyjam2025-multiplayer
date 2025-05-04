@@ -50,15 +50,15 @@ public class EnvironmentSpawner : MonoBehaviour {
             raycastHeight,
             Random.Range(-areaSize.z / 2f, areaSize.z / 2f)
         );
-        Debug.Log("Trying spawn from: " + basePos);
+        //Debug.Log("Trying spawn from: " + basePos);
         if (Physics.Raycast(basePos, Vector3.down, out RaycastHit hit, raycastHeight * 2f)) {
             Vector3 finalPos = hit.point;
 
             // Collision check (optional)
             if (useCollisionCheck && Physics.CheckSphere(finalPos, collisionRadius, ~groundLayer))
                 return false;
-            Debug.DrawRay(basePos, Vector3.down * raycastHeight * 2f, Color.red, 2f);
-            Debug.Log("Raycast hit at: " + hit.point + " | Hit object: " + hit.collider.name);
+            //Debug.DrawRay(basePos, Vector3.down * raycastHeight * 2f, Color.red, 2f);
+            //Debug.Log("Raycast hit at: " + hit.point + " | Hit object: " + hit.collider.name);
 
             GameObject instance = Instantiate(prefab, finalPos, Quaternion.Euler(0, Random.Range(0f, 360f), 0), transform);
 
@@ -67,7 +67,7 @@ public class EnvironmentSpawner : MonoBehaviour {
 
             return true;
         }
-        Debug.LogWarning("Raycast missed. No ground hit from: " + basePos);
+        //Debug.LogWarning("Raycast missed. No ground hit from: " + basePos);
         return false;
     }
 

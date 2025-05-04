@@ -35,7 +35,7 @@ public class PlayerJailHandler : MonoBehaviour {
         if (jailTimer <= 0f) {
 
             ReleaseFromJail();
-            jailUIManager.HideAll();
+            //jailUIManager.HideAll();
         }
     }
 
@@ -64,8 +64,8 @@ public class PlayerJailHandler : MonoBehaviour {
         bool isTrap = (jailReason == "Trap");
         jailUIManager.ShowReleasedUI(isTrap);
 
-        if (jailUIManager != null)
-            jailUIManager.HideAll();
+        /*if (jailUIManager != null)
+            jailUIManager.HideAll();*/
     }
 
 

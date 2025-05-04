@@ -96,4 +96,23 @@ public class Flag : MonoBehaviour {
         autoReturnCoroutine = null;
     }
 
+    public void ForceResetToBase() {
+        if (currentCarrier != null) {
+            currentCarrier.DropFlag();  // Cleanly detach
+            currentCarrier = null;
+        }
+
+        isAtBase = true;
+
+        transform.SetParent(null);
+        transform.position = basePosition.position;
+        transform.rotation = basePosition.rotation; // Optional, but good to reset
+
+        if (autoReturnCoroutine != null)
+            StopCoroutine(autoReturnCoroutine);
+        autoReturnCoroutine = null;
+
+        gameObject.SetActive(true); // Ensure visibility
+    }
+
 }
