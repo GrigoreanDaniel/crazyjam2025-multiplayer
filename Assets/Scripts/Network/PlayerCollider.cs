@@ -5,15 +5,25 @@ public class NetworkPlayerCollider : NetworkBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        var otherPlayer = other.GetComponent<NetworkPlayer>();
-        var myTeam = GetComponent<TeamIdentifier>()?.Team;
-        var otherTeam = otherPlayer?.GetComponent<TeamIdentifier>()?.Team;
+        if (!HasStateAuthority) return;
+        /*
+        var otherPlayerCollider = other.GetComponent<NetworkPlayerCollider>();
+        if (otherPlayerCollider == null) return;
 
-        if (otherPlayer != null && myTeam != null && otherTeam != null && myTeam != otherTeam)
+        var myTeam = GetComponentInParent<TeamIdentifier>()?.Team;
+        var otherTeam = otherPlayerCollider.GetComponentInParent<TeamIdentifier>()?.Team;
+
+        if (myTeam == null || otherTeam == null || myTeam == otherTeam) return;
+
+        Debug.Log($"[Trigger] {name} (team: {myTeam.name}) touched {otherPlayerCollider.name} (team: {otherTeam.name})");
+
+        // Jail the other player (enemy)
+        var otherNetworkPlayer = otherPlayerCollider.GetComponentInParent<NetworkPlayer>();
+        if (otherNetworkPlayer != null)
         {
-            Debug.Log("There was contact!");
-            if (HasStateAuthority)
-                otherPlayer.JailPlayer();
+            Debug.Log($"Sending {otherNetworkPlayer.name} to jail");
+            otherNetworkPlayer.JailPlayer();
         }
+        */
     }
 }

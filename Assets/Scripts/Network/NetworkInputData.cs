@@ -10,5 +10,6 @@ public struct NetworkInputData : INetworkInput
 
     public NetworkBool sonarPressed;
     public NetworkBool decoyPressed;
+    public bool isAttackPressed;
 }
 

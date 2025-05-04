@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9016797965586998405}
   - component: {fileID: 2397072624349254792}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CameraRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6265834563246419660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Aim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 7925787039351856828}
   - component: {fileID: 1142071169974078227}
   - component: {fileID: 507791405895689332}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 602906273525242440}
   - component: {fileID: 4873802982651764074}
   - component: {fileID: -1963957796300512797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: NetworkPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 6254878830340989057}
   - component: {fileID: 1495438507166987560}
   - component: {fileID: 1408764596318737655}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeshCylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4969487163631558882}
   - component: {fileID: 2453109892710991329}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +586,8 @@ GameObject:
   - component: {fileID: 4134614358211035821}
   - component: {fileID: 218666272953086699}
   - component: {fileID: 6993144558278371240}
-  m_Layer: 0
+  - component: {fileID: 4397170315886020509}
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,3 +692,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde9b174c9af2304cb920ab525d83a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4397170315886020509
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7993762259311288661}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
