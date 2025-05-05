@@ -414,7 +414,7 @@ MonoBehaviour:
   sonarRadius: 20
   revealDuration: 3
   cooldownDuration: 10
-  activateKey: 113
+  activateKey: 101
   pulseGizmoColor: {r: 0, g: 1, b: 1, a: 0.25}
 --- !u!114 &3760005486028848564
 MonoBehaviour:
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   digDuration: 5
   cooldownDuration: 10
-  digKey: 114
+  digKey: 101
   digVisuals: {fileID: 496757505080508753}
 --- !u!114 &496757505080508753
 MonoBehaviour:

@@ -70,10 +70,8 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
-
     public void SetFillImage(Image image)
     {
-        fillImage = image;
+        this.fillImage = image;
     }
-
 }

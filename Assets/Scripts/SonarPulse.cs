@@ -15,8 +15,10 @@ public class SonarPulse : MonoBehaviour, IAbility {
     private bool isOnCooldown = false;
     private float cooldownTimer = 0f;
 
-    private void Update() {
-        if (Input.GetKeyDown(activateKey) && !isOnCooldown) {
+    private void Update()
+    {
+        if (Input.GetKeyDown(activateKey) && !isOnCooldown)
+        {
             StartCoroutine(ActivateSonarPulse());
         }
 
@@ -25,42 +27,36 @@ public class SonarPulse : MonoBehaviour, IAbility {
             cooldownTimer -= Time.deltaTime;
             if (cooldownTimer <= 0f)
             {
-                isOnCooldown = false;
                 cooldownTimer = 0f;
+                isOnCooldown = false;
             }
         }
     }
+
     public float GetCooldownNormalized() => isOnCooldown ? cooldownTimer / cooldownDuration : 0f;
 
-    private IEnumerator ActivateSonarPulse() {
-        
+    private IEnumerator ActivateSonarPulse()
+    {
         cooldownTimer = cooldownDuration;
         isOnCooldown = true;
 
         // Detect players
         Collider[] hits = Physics.OverlapSphere(transform.position, sonarRadius);
-        foreach (Collider hit in hits) {
-            if (hit.CompareTag("Player") && hit.gameObject != this.gameObject) {
+        foreach (Collider hit in hits)
+        {
+            if (hit.CompareTag("Player") && hit.gameObject != this.gameObject)
+            {
                 Debug.Log($"[Sonar] Revealed: {hit.name}");
                 StartCoroutine(TemporarilyReveal(hit.gameObject));
             }
         }
 
-        // Show radius briefly
+        // Optional: brief visual pulse delay
         yield return new WaitForSeconds(0.5f);
-        //showGizmo = false;
 
-        // Start cooldown
-        yield return new WaitForSeconds(cooldownDuration - 0.5f);
-
-        while (cooldownTimer > 0f)
-        {
-            cooldownTimer -= Time.deltaTime;
-            yield return null;
-        }
-
-        isOnCooldown = false;
+        // Cooldown now handled by Update()
     }
+
 
     private IEnumerator TemporarilyReveal(GameObject target) {
         Renderer renderer = target.GetComponentInChildren<Renderer>();

@@ -98,5 +98,5 @@ public class PlayerAbilityUIBinder : MonoBehaviour
 
     public Image GetBlueFillImage() => blueFillImage;
     public Image GetPurpleFillImage() => purpleFillImage;
-
+    public TeamData GetBlueTeam() => blueTeam;
 }
