@@ -281,6 +281,8 @@ GameObject:
   - component: {fileID: 427490093180962254}
   - component: {fileID: -6730681433537860000}
   - component: {fileID: 2149662246910894683}
+  - component: {fileID: 4109315396820477598}
+  - component: {fileID: 2230683111636305457}
   m_Layer: 0
   m_Name: NetworkPlayerFox
   m_TagString: Player
@@ -374,6 +376,12 @@ MonoBehaviour:
   jumpHeight: 1.5
   rotationSpeed: 5
   cineMachinevirtualCamera: {fileID: 2453109892710991329}
+  redTeamJailZone: {fileID: 0}
+  blueTeamJailZone: {fileID: 0}
+  jailUI: {fileID: 0}
+  jailDuration: 10
+  _TeamIndex: 0
+  availableTeams: []
   _PlayerNickName:
     _length: 0
     _data:
@@ -394,6 +402,7 @@ MonoBehaviour:
   moveInputVector: {x: 0, y: 0}
   isJumpPressed:
     _value: 0
+  identifier: 
 --- !u!114 &2149662246910894683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +420,38 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &4109315396820477598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583425924211564122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5954ba45f9f15a645a0dca0c4ec09ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decoyWalkerPrefab: {fileID: 1985590811032793982, guid: 40ce8b93c0423554ca66b0080410e3b8,
+    type: 3}
+  activateKey: 101
+  cooldownDuration: 40
+  spawnOffset: {x: 0, y: 0, z: 1.5}
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &2230683111636305457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4583425924211564122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185c3c8c4c68fc6499c72ffc4ae1b018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identifier: Fox
 --- !u!1 &6364935096698897492
 GameObject:
   m_ObjectHideFlags: 0

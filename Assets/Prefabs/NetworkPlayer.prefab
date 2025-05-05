@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 0}
   moveSpeed: 6
-  gravity: -9.81
+  gravity: -9.8
   jumpHeight: 1.5
   rotationSpeed: 5
   cineMachinevirtualCamera: {fileID: 2453109892710991329}
