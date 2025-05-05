@@ -1,0 +1,1118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8506318006944146343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui_gameplay/sfx_defeat
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui_gameplay/sfx_defeat
+  Guid:
+    Data1: -1348324645
+    Data2: 1225911880
+    Data3: -1208249421
+    Data4: 145838179
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8322698661272082929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_select
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_select
+  Guid:
+    Data1: -2049318183
+    Data2: 1205139559
+    Data3: -264067664
+    Data4: 685068930
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22
+--- !u!114 &-7657246955764164686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/crazy_jam2025_project/Build/Desktop/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: fmod_project_by_vort6/crazy_jam2025_project/Build/Desktop/Master.strings.bank
+  Name: crazy_jam2025_project/Build/Desktop/Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638820334342617901
+  FileSizes:
+  - Name: 
+    Value: 2862
+  Exists: 1
+--- !u!114 &-7543133911487258640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_navigation
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_navigation
+  Guid:
+    Data1: -2005290950
+    Data2: 1323366219
+    Data3: -1921302111
+    Data4: -854209963
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22
+--- !u!114 &-6862652564825145908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mus_gameplay/tension
+  m_EditorClassIdentifier: 
+  Name: tension
+  StudioPath: 
+  Min: 1
+  Max: 2
+  Default: 1
+  ID:
+    data1: 3872015683
+    data2: 521487834
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-5616770858437954584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_ground_impact
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_ground_impact
+  Guid:
+    Data1: 37569258
+    Data2: 1089063447
+    Data3: -1423351396
+    Data4: -1581140877
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 664
+--- !u!114 &-5449473936125719093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui_gameplay/sfx_victory
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui_gameplay/sfx_victory
+  Guid:
+    Data1: -1382030737
+    Data2: 1183314641
+    Data3: 613204407
+    Data4: 1721365840
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5021689163015907943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_running_grass
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_running_grass
+  Guid:
+    Data1: 808217945
+    Data2: 1095756331
+    Data3: 1013561254
+    Data4: 137864420
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 455
+--- !u!114 &-4538299338632167048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_running_grass
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_running_grass
+  Guid:
+    Data1: 1920796665
+    Data2: 1321848341
+    Data3: -1826267992
+    Data4: 975924908
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 455
+--- !u!114 &-4422469593143617934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_jump
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_jump
+  Guid:
+    Data1: -1968135763
+    Data2: 1078078390
+    Data3: -1395356771
+    Data4: -202086796
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 575
+--- !u!114 &-4407025349356938929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/music/ui/mus_theme
+  m_EditorClassIdentifier: 
+  Path: event:/music/ui/mus_theme
+  Guid:
+    Data1: -1258555040
+    Data2: 1314172698
+    Data3: 252967558
+    Data4: 1762151293
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 87500
+--- !u!114 &-4107217897697168230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/gameplay_normal
+  m_EditorClassIdentifier: 
+  Path: snapshot:/gameplay_normal
+  Guid:
+    Data1: 1239151384
+    Data2: 1298707487
+    Data3: -127899464
+    Data4: -611589755
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-3994646212526116943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/punishments/sfx_rescued_or_released
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/punishments/sfx_rescued_or_released
+  Guid:
+    Data1: -434975094
+    Data2: 1192565095
+    Data3: -751765587
+    Data4: -1694212412
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1450
+--- !u!114 &-3675940533507502879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/owl/sfx_owl_damage
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/owl/sfx_owl_damage
+  Guid:
+    Data1: -1127457718
+    Data2: 1269341315
+    Data3: 662161548
+    Data4: -70141636
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-2228435131718460063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/owl/sfx_owl_step
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/owl/sfx_owl_step
+  Guid:
+    Data1: 245655705
+    Data2: 1282438902
+    Data3: -842103655
+    Data4: 1717668270
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 300
+--- !u!114 &-2166139382017543441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_ground_impact
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_ground_impact
+  Guid:
+    Data1: -4653127
+    Data2: 1106665973
+    Data3: 858482564
+    Data4: -1827421719
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 664
+--- !u!114 &-1043914063516942029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_silent_glide
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_silent_glide
+  Guid:
+    Data1: 1567771475
+    Data2: 1229883013
+    Data3: 109275571
+    Data4: 410452894
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-842075123260098738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_step_grass
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_step_grass
+  Guid:
+    Data1: 1431038406
+    Data2: 1253019835
+    Data3: -844568181
+    Data4: 1975614634
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 395
+--- !u!114 &-607542492766414851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sfx_owl_flight/flying
+  m_EditorClassIdentifier: 
+  Name: flying
+  StudioPath: 
+  Min: 1
+  Max: 3
+  Default: 1
+  ID:
+    data1: 2501444469
+    data2: 1925241040
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-26117688280221978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sfx_mole_digging/mole_dig
+  m_EditorClassIdentifier: 
+  Name: mole_dig
+  StudioPath: 
+  Min: 1
+  Max: 4
+  Default: 1
+  ID:
+    data1: 905443114
+    data2: 3418121772
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: -7657246955764164686}
+  - {fileID: 4315579687261753183}
+  EditorEvents:
+  - {fileID: 664476861174024869}
+  - {fileID: 2645856283696107412}
+  - {fileID: -4107217897697168230}
+  - {fileID: 1836497816077401864}
+  - {fileID: 3074323010427076703}
+  - {fileID: -7543133911487258640}
+  - {fileID: 1615445826498585906}
+  - {fileID: -3675940533507502879}
+  - {fileID: -1043914063516942029}
+  - {fileID: 3918313588365139486}
+  - {fileID: -5021689163015907943}
+  - {fileID: 7430455623318362591}
+  - {fileID: -4407025349356938929}
+  - {fileID: -5449473936125719093}
+  - {fileID: 1447259407483106310}
+  - {fileID: 6961047295870367794}
+  - {fileID: -3994646212526116943}
+  - {fileID: 3522380669636851905}
+  - {fileID: 99698063794990252}
+  - {fileID: -2228435131718460063}
+  - {fileID: 4142568121781184130}
+  - {fileID: 2955593820718561275}
+  - {fileID: -4422469593143617934}
+  - {fileID: 3229344840753914988}
+  - {fileID: 8188184164532127997}
+  - {fileID: -2166139382017543441}
+  - {fileID: -842075123260098738}
+  - {fileID: 102033533721531624}
+  - {fileID: -8322698661272082929}
+  - {fileID: -8506318006944146343}
+  - {fileID: 3775801143265346587}
+  - {fileID: -5616770858437954584}
+  - {fileID: 8225831911013616080}
+  - {fileID: 617389911804206418}
+  - {fileID: -4538299338632167048}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 4315579687261753183}
+  StringsBanks:
+  - {fileID: -7657246955764164686}
+  cacheTime: 638820502490874795
+  cacheVersion: 131624
+--- !u!114 &99698063794990252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_start_game
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_start_game
+  Guid:
+    Data1: -1163210088
+    Data2: 1250378737
+    Data3: 2005723582
+    Data4: 1135845100
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1765
+--- !u!114 &102033533721531624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/punishments/sfx_detained
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/punishments/sfx_detained
+  Guid:
+    Data1: 1239498951
+    Data2: 1232335372
+    Data3: -795075159
+    Data4: -1499458801
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1800
+--- !u!114 &617389911804206418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/ambience/sfx_ambience
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/ambience/sfx_ambience
+  Guid:
+    Data1: -1927943696
+    Data2: 1139001546
+    Data3: 680436358
+    Data4: -943172714
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 112400
+--- !u!114 &664476861174024869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_digging
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_digging
+  Guid:
+    Data1: 1013343497
+    Data2: 1304605308
+    Data3: -3541333
+    Data4: -930974940
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -26117688280221978}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1720
+--- !u!114 &1447259407483106310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/ui/sfx_back
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/ui/sfx_back
+  Guid:
+    Data1: -1150451855
+    Data2: 1214484287
+    Data3: 1250144698
+    Data4: 2023551196
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22
+--- !u!114 &1615445826498585906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_step_solid_ground
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_step_solid_ground
+  Guid:
+    Data1: -922686146
+    Data2: 1141880220
+    Data3: 325349048
+    Data4: -1118273645
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 235
+--- !u!114 &1836497816077401864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_jump
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_jump
+  Guid:
+    Data1: 1248042784
+    Data2: 1229435411
+    Data3: -136772427
+    Data4: 1069578962
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 575
+--- !u!114 &2645856283696107412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/mole/sfx_mole_damage
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/mole/sfx_mole_damage
+  Guid:
+    Data1: 1586656790
+    Data2: 1328942567
+    Data3: 671596217
+    Data4: -38631800
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &2955593820718561275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: snapshot:/pause
+  m_EditorClassIdentifier: 
+  Path: snapshot:/pause
+  Guid:
+    Data1: 88761500
+    Data2: 1225894840
+    Data3: 1457427870
+    Data4: -1678531986
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &3074323010427076703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/punishments/sfx_trap
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/punishments/sfx_trap
+  Guid:
+    Data1: 1212143658
+    Data2: 1288424386
+    Data3: 446377381
+    Data4: -842145166
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1911
+--- !u!114 &3229344840753914988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_damage
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_damage
+  Guid:
+    Data1: -448339025
+    Data2: 1087269141
+    Data3: -116039807
+    Data4: -762294064
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3522380669636851905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/music/music_gameplay/mus_gameplay
+  m_EditorClassIdentifier: 
+  Path: event:/music/music_gameplay/mus_gameplay
+  Guid:
+    Data1: -94638188
+    Data2: 1213193033
+    Data3: 181302415
+    Data4: 1732369623
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6862652564825145908}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 184500
+--- !u!114 &3775801143265346587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_step_grass
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_step_grass
+  Guid:
+    Data1: 411908833
+    Data2: 1161450573
+    Data3: 1225854906
+    Data4: -1119079192
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 395
+--- !u!114 &3918313588365139486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/interactions/sfx_flag_collected
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/interactions/sfx_flag_collected
+  Guid:
+    Data1: -799641261
+    Data2: 1223667798
+    Data3: 433013923
+    Data4: -1461733217
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2622
+--- !u!114 &4142568121781184130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/owl/sfx_owl_flight
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/owl/sfx_owl_flight
+  Guid:
+    Data1: -797467751
+    Data2: 1076964098
+    Data3: 1799872650
+    Data4: -1013148795
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -607542492766414851}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1498
+--- !u!114 &4315579687261753183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/crazy_jam2025_project/Build/Desktop/Master.bank
+  m_EditorClassIdentifier: 
+  Path: fmod_project_by_vort6/crazy_jam2025_project/Build/Desktop/Master.bank
+  Name: crazy_jam2025_project/Build/Desktop/Master
+  StudioPath: bank:/Master
+  lastModified: 638820502490874795
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6961047295870367794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/environment/punishments/sfx_rescued_or_released_trap
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/environment/punishments/sfx_rescued_or_released_trap
+  Guid:
+    Data1: -754872199
+    Data2: 1218306063
+    Data3: 535057286
+    Data4: -95385050
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1824
+--- !u!114 &7430455623318362591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/owl/sfx_sonar
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/owl/sfx_sonar
+  Guid:
+    Data1: 1141522781
+    Data2: 1158667050
+    Data3: -348885620
+    Data4: 1780234841
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8020
+--- !u!114 &8188184164532127997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_fox_step_solid_ground
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_fox_step_solid_ground
+  Guid:
+    Data1: -466488391
+    Data2: 1251331542
+    Data3: 97960332
+    Data4: -974771408
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 235
+--- !u!114 &8225831911013616080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/sfx/characters_3d/fox/sfx_decoy_ping
+  m_EditorClassIdentifier: 
+  Path: event:/sfx/characters_3d/fox/sfx_decoy_ping
+  Guid:
+    Data1: -2092832019
+    Data2: 1281532875
+    Data3: -1119932539
+    Data4: -170054801
+  Banks:
+  - {fileID: 4315579687261753183}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 370
