@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance { get; private set; }
+    //public static AudioManager Instance { get; private set; }
 
     [SerializeField] EventReference musicEventMenu; // Reference to the music event in FMOD
     [SerializeField] EventReference musicEventGame; // Reference to the music event in FMOD
@@ -18,9 +18,9 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); return; }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        /* if (Instance != null) { Destroy(gameObject); return; }
+         Instance = this;
+         DontDestroyOnLoad(gameObject);*/
 
     }
 
@@ -33,6 +33,8 @@ public class AudioManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == LoadScenes.SceneName.NetworkedPrototype.ToString())
         {
+            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            musicInstance.release();
             PlayMusic(musicEventGame);
         }
     }
