@@ -15,7 +15,7 @@ public class JailUIManager : MonoBehaviour {
         if (_messageDisplayer == null) return;
 
         if (isTrap) {
-            float neutralDuration = 5f;
+            float neutralDuration = 10f;
             float introDuration = 2f;
 
             // Stage 1: Quick red message
@@ -26,7 +26,7 @@ public class JailUIManager : MonoBehaviour {
             _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.TrapNeutral, neutralDuration);
             _messageDisplayer.QueueMessage(MessageDisplayer.MessageType.TrapTimer, neutralDuration);
         } else {
-            float neutralDuration = 100f;
+            float neutralDuration = 20f;
             float introDuration = 2f;
 
             // Stage 1: Quick red message

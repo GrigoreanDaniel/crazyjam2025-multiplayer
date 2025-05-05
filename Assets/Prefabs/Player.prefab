@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jailUIManager: {fileID: 7971965440462904003, guid: 98f8fdcff4f6fe14798bb43f981a1950,
     type: 3}
-  jailDuration: 10
+  jailDuration: 20
 --- !u!143 &3629818209851189448
 CharacterController:
   m_ObjectHideFlags: 0

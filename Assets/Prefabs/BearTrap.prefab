@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b16eb3a28eadd4a9f4b934afa8f8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapDuration: 5
+  trapDuration: 10
   applyDizzyEffect: 0
   dizzinessDuration: 0
   trapVisualEffect: {fileID: 0}
