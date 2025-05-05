@@ -62,18 +62,6 @@ public class PlayerSpawner : MonoBehaviour {
                     var cooldownUI = uiInstance.GetComponent<AbilityCooldownUI>();
                     if (cooldownUI != null)
                         cooldownUI.Setup(instance);
-
-                    var binder = uiInstance.GetComponent<PlayerAbilityUIBinder>();
-                    if (binder != null)
-                    {
-                        Image correctImage = team == binder.GetBlueTeam()
-                            ? binder.GetBlueFillImage()
-                            : binder.GetPurpleFillImage();
-
-                        cooldownUI.SetFillImage(correctImage);
-                    }
-
-
                 }
 
             }
