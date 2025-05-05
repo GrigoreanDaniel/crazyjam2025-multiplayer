@@ -26,7 +26,8 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == LoadScenes.SceneName.MainMenu.ToString())
+        if (SceneManager.GetActiveScene().name == LoadScenes.SceneName.Lobby.ToString() ||
+            SceneManager.GetActiveScene().name == LoadScenes.SceneName.MainMenu.ToString())
         {
             PlayMusic(musicEventMenu);
         }
