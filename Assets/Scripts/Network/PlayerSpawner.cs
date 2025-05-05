@@ -48,13 +48,14 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (player == runner.LocalPlayer)
+        if (runner.LocalPlayer != player)
+            return;
+        else
         {
             // Spawn the player prefab for the new player
             SpawnPlayer(runner, player);
-            Debug.Log("we are server. Player joined: " + player);
+            Debug.Log("player joined: " + player);
         }
-
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -94,6 +95,7 @@ public class PlayerSpawner : MonoBehaviour, INetworkRunnerCallbacks
             NetworkPlayer newNetworkPlayer = runner.Spawn(playerPrefab, spawnPosition, spawnRotation, player); //Spawn the player
             newNetworkPlayer.PlayerToken = playerToken; // Set the player token
             mapTokenIdWithNetworkPlayer.Add(playerToken, newNetworkPlayer); // Add the player to the dictionary
+            runner.SetPlayerObject(player, newNetworkPlayer.Object);
 
             Debug.Log("Spawning new player. Player ID: " + playerToken);
         }
