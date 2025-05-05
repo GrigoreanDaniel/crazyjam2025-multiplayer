@@ -26,6 +26,9 @@ public class AbilityCooldownUI : MonoBehaviour
 
         if (abilityScript == null)
             Debug.LogWarning("[AbilityCooldownUI] No ability script found.");
+
+        if (fillImage != null)
+            fillImage.fillAmount = 0f;
     }
 
     private void Update()
@@ -46,6 +49,31 @@ public class AbilityCooldownUI : MonoBehaviour
     public void Setup(GameObject player)
     {
         this.playerObject = player;
+
+        // Try to grab ability script
+        abilityScript = player.GetComponent<IAbility>();
+        if (abilityScript == null)
+            abilityScript = TryFindAbilityScript();
+
+        if (abilityScript == null)
+            Debug.LogWarning("[CooldownUI] No ability found on player!");
+
+        // OPTIONAL: make sure only the correct fill image is active
+        if (fillImage != null)
+        {
+            // Deactivate all siblings, only show this one
+            Transform parent = fillImage.transform.parent;
+            foreach (Transform child in parent)
+            {
+                child.gameObject.SetActive(child == fillImage.transform);
+            }
+        }
+    }
+
+
+    public void SetFillImage(Image image)
+    {
+        fillImage = image;
     }
 
 }

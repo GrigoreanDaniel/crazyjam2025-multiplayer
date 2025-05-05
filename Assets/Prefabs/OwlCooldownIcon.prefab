@@ -117,6 +117,8 @@ MonoBehaviour:
   foxPurpleIcon: {fileID: 21300000, guid: 83010ffc45799e54ba53cf389dc3970e, type: 3}
   moleBlueIcon: {fileID: 21300000, guid: 6418946f4d478554d8a6a01efab786d0, type: 3}
   molePurpleIcon: {fileID: 21300000, guid: ffb33769f70eb8442be9440b0b7e9d04, type: 3}
+  blueFillImage: {fileID: 7759335005806507410}
+  purpleFillImage: {fileID: 6928914254908455076}
   playerObject: {fileID: 3910839703351211959, guid: a572557770dee5d4a81e74cc75b69f91,
     type: 3}
   blueTeam: {fileID: 11400000, guid: 96bce282d69c52442a35b783bb2f02a4, type: 2}

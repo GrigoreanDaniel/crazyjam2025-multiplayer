@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSpawner : MonoBehaviour {
 
@@ -33,13 +34,20 @@ public class PlayerSpawner : MonoBehaviour {
         }
 
         var spawnPoint = spawnManager.GetRandomSpawnPointForTeam(team);
+
         if (spawnPoint != null) {
+
             Debug.Log($"Spawning player for {team.teamName} at: {spawnPoint.position}");
+
             if (playerPrefab != null) {
+
                 Vector3 pos = spawnPoint.position + Vector3.up * 1.5f;
                 var instance = Instantiate(playerPrefab, pos, spawnPoint.rotation);
+
                 AllPlayers.Add(instance);  // Track the live instance
+
                 Debug.Log($"[PlayerSpawner] Instantiated player: {instance.name} at {pos}");
+                
                 // NEW: Hook to UI cooldown
                 if (abilityUIPrefab != null)
                 {
@@ -47,12 +55,24 @@ public class PlayerSpawner : MonoBehaviour {
 
                     // Optional: assign this to a specific canvas if needed
                     Canvas mainCanvas = FindObjectOfType<Canvas>(); // Or reference your HUD canvas directly
+                    
                     if (mainCanvas != null)
                         uiInstance.transform.SetParent(mainCanvas.transform, false);
 
                     var cooldownUI = uiInstance.GetComponent<AbilityCooldownUI>();
                     if (cooldownUI != null)
                         cooldownUI.Setup(instance);
+
+                    var binder = uiInstance.GetComponent<PlayerAbilityUIBinder>();
+                    if (binder != null)
+                    {
+                        Image correctImage = team == binder.blueTeam
+                            ? binder.GetBlueFillImage()
+                            : binder.GetPurpleFillImage();
+
+                        cooldownUI.SetFillImage(correctImage);
+                    }
+
                 }
 
             }

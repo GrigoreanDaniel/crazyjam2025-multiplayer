@@ -19,15 +19,23 @@ public class SonarPulse : MonoBehaviour, IAbility {
         if (Input.GetKeyDown(activateKey) && !isOnCooldown) {
             StartCoroutine(ActivateSonarPulse());
         }
+
+        if (isOnCooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0f)
+            {
+                isOnCooldown = false;
+                cooldownTimer = 0f;
+            }
+        }
     }
-    public float GetCooldownNormalized()
-    {
-        return isOnCooldown ? cooldownTimer / cooldownDuration : 0f;
-    }
+    public float GetCooldownNormalized() => isOnCooldown ? cooldownTimer / cooldownDuration : 0f;
 
     private IEnumerator ActivateSonarPulse() {
-        isOnCooldown = true;
+        
         cooldownTimer = cooldownDuration;
+        isOnCooldown = true;
 
         // Detect players
         Collider[] hits = Physics.OverlapSphere(transform.position, sonarRadius);

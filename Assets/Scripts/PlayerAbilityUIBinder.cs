@@ -20,10 +20,14 @@ public class PlayerAbilityUIBinder : MonoBehaviour
     [SerializeField] private Sprite moleBlueIcon;
     [SerializeField] private Sprite molePurpleIcon;
 
+    [Header("Team Fill Images")]
+    [SerializeField] private Image blueFillImage;
+    [SerializeField] private Image purpleFillImage;
+
     [Header("Target Player")]
     [SerializeField] private GameObject playerObject;
 
-    [SerializeField] private TeamData blueTeam;
+    [SerializeField] public TeamData blueTeam;
 
     private IAbility activeAbility;
     private TeamData myTeam;
@@ -91,5 +95,8 @@ public class PlayerAbilityUIBinder : MonoBehaviour
                 break;
         }
     }
+
+    public Image GetBlueFillImage() => blueFillImage;
+    public Image GetPurpleFillImage() => purpleFillImage;
 
 }
