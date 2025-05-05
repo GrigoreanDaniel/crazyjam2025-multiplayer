@@ -11,8 +11,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] EventReference musicEventMenu; // Reference to the music event in FMOD
     [SerializeField] EventReference musicEventGame; // Reference to the music event in FMOD
     [SerializeField] float rate;
-    [SerializeField] GameObject GameObjectReference; // Pitch of the music
-                                                     // [SerializeField] EventReference sfxEvent; // Reference to the SFX event in FMOD  
+    // [SerializeField] EventReference sfxEvent; // Reference to the SFX event in FMOD  
 
 
     private EventInstance musicInstance;
