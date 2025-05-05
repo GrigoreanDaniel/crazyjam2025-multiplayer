@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuUIHandler : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class MainMenuUIHandler : MonoBehaviour
     [SerializeField] private GameObject SessionListPanel;
     [SerializeField] private GameObject CreateSessionPanel;
     [SerializeField] private GameObject statusPanel;
+
+    [Space(10)]
+    [Header("Return Button")]
+    [SerializeField] private Button ReturnButton;
 
     [Space(10)]
     [Header("Player Nickname")]
@@ -91,4 +96,11 @@ public class MainMenuUIHandler : MonoBehaviour
         HidePanels();
         statusPanel.SetActive(true);
     }
+
+    public void OnReturnButtonClicked()
+    {
+        HidePanels();
+        PlayerDetailsPanel.SetActive(true);
+    }
+
 }
