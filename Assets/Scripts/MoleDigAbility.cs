@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoleDigAbility : MonoBehaviour {
+public class MoleDigAbility : MonoBehaviour, IAbility {
     [Header("Dig Parameters")]
     [SerializeField, Tooltip("How long the player stays underground.")]
     private float digDuration = 5f;
@@ -23,6 +23,11 @@ public class MoleDigAbility : MonoBehaviour {
     private void Update() {
         HandleInput();
         UpdateTimers();
+    }
+
+    public float GetCooldownNormalized()
+    {
+        return isOnCooldown ? cooldownTimer / cooldownDuration : 0f;
     }
 
     private void HandleInput() {

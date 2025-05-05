@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 6431310258960614353}
   - component: {fileID: 4343910490622783047}
   - component: {fileID: 579999688814043661}
+  - component: {fileID: -5071590422139282260}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -422,7 +423,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3910839703351211959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5954ba45f9f15a645a0dca0c4ec09ca1, type: 3}
   m_Name: 
@@ -459,7 +460,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3910839703351211959}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e86ed6dc63844214bb3899c31111860a, type: 3}
   m_Name: 
@@ -544,6 +545,19 @@ MonoBehaviour:
     type: 3}
   beaconYOffset: 17
   flagOffset: {x: 0, y: 1.75, z: 0}
+--- !u!114 &-5071590422139282260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910839703351211959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98bceec96026b8448905cf6081b309c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityType: 0
 --- !u!1 &4082212738615772524
 GameObject:
   m_ObjectHideFlags: 3

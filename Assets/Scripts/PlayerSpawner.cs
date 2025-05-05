@@ -6,6 +6,8 @@ public class PlayerSpawner : MonoBehaviour {
 
     [SerializeField] private GameObject playerPrefab; // Optional, in case you want to instantiate
     [SerializeField] private TeamData team;           // Assigned in inspector
+    [SerializeField] private AbilityCooldownUI abilityCooldownUI;
+    [SerializeField] private GameObject abilityUIPrefab;
 
     public static List<GameObject> AllPlayers = new();
 
@@ -38,7 +40,23 @@ public class PlayerSpawner : MonoBehaviour {
                 var instance = Instantiate(playerPrefab, pos, spawnPoint.rotation);
                 AllPlayers.Add(instance);  // Track the live instance
                 Debug.Log($"[PlayerSpawner] Instantiated player: {instance.name} at {pos}");
-            } else {
+                // NEW: Hook to UI cooldown
+                if (abilityUIPrefab != null)
+                {
+                    GameObject uiInstance = Instantiate(abilityUIPrefab);
+
+                    // Optional: assign this to a specific canvas if needed
+                    Canvas mainCanvas = FindObjectOfType<Canvas>(); // Or reference your HUD canvas directly
+                    if (mainCanvas != null)
+                        uiInstance.transform.SetParent(mainCanvas.transform, false);
+
+                    var cooldownUI = uiInstance.GetComponent<AbilityCooldownUI>();
+                    if (cooldownUI != null)
+                        cooldownUI.Setup(instance);
+                }
+
+            }
+            else {
                 Debug.LogError("Player prefab is null!");
             }
         } else {

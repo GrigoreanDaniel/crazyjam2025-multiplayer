@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SonarPulse : MonoBehaviour {
+public class SonarPulse : MonoBehaviour, IAbility {
     [Header("Sonar Settings")]
     [Range(1f, 50f)]
     [SerializeField] private float sonarRadius = 10f;
@@ -12,18 +11,23 @@ public class SonarPulse : MonoBehaviour {
 
     [Header("Gizmo Settings")]
     [SerializeField] private Color pulseGizmoColor = new Color(0f, 1f, 1f, 0.25f);
+
     private bool isOnCooldown = false;
-    //private bool showGizmo = false;
+    private float cooldownTimer = 0f;
 
     private void Update() {
         if (Input.GetKeyDown(activateKey) && !isOnCooldown) {
             StartCoroutine(ActivateSonarPulse());
         }
     }
+    public float GetCooldownNormalized()
+    {
+        return isOnCooldown ? cooldownTimer / cooldownDuration : 0f;
+    }
 
     private IEnumerator ActivateSonarPulse() {
         isOnCooldown = true;
-        //showGizmo = true;
+        cooldownTimer = cooldownDuration;
 
         // Detect players
         Collider[] hits = Physics.OverlapSphere(transform.position, sonarRadius);
@@ -40,6 +44,13 @@ public class SonarPulse : MonoBehaviour {
 
         // Start cooldown
         yield return new WaitForSeconds(cooldownDuration - 0.5f);
+
+        while (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.deltaTime;
+            yield return null;
+        }
+
         isOnCooldown = false;
     }
 
